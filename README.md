@@ -28,7 +28,7 @@ Docker中文指南
 	
 	- 1.1.   [用户指南说明](/userguide/README.md)
 	- 1.2.   [使用Docker Hub](/userguide/dockerhub.md)
-	- 1.3.   [在Docker中运行"hello Word"应用](/userguide/dockerizing.md) 
+	- 1.3.   [在Docker中运行应用](/userguide/dockerizing.md) 
 
 
 
