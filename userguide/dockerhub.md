@@ -25,4 +25,28 @@ Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同
 
 ![](../images/register-web.png)
 
+####通过命令行
+
+你可以创建一个Docker Hub账号通过命令行`docker login`命令
+
+	$ sudo docker login
+
+####确认你的邮箱
+
+一旦你填写表格，查看你的电子邮件，欢迎信息，确认来激活您的账户。
+
+![](../images/register-confirm.png)
+
+获取通过命令行`docker login`命令：
+
+	$ sudo docker login
+
+你的Docker账户现在已经激活，你可以使用了。
+
+###下一步
+
+下一步，让我们开始学习如何在docker中运行"hello word"的应用。
+
+阅读[Docker中运行应用](dockerizing.md)
+
 	
