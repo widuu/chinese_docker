@@ -51,4 +51,4 @@ docker已经存在EPEL源中。这些指令支持redhat和centos。它可能会�
 
 好！
 
-现在你可以去查看用户指南。
+现在你可以去查看[用户指南](../userguide/README.md)。

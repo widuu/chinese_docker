@@ -66,7 +66,7 @@ Fedora 19 and 20附带docker 0.11版本，在Fedora 20上docker已经更新到�
 	
 	$ systemctl start docker
 
-下一步阅读用户指南
+下一步阅读[用户指南](../userguide/README.md)
 	
 
 

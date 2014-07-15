@@ -43,4 +43,4 @@ docker包会创建一个新的群组叫做docker,用户、非root用户，需要
 
 好！
 
-继续阅读用户指南。
+继续阅读[用户指南](../userguide/README.md)。

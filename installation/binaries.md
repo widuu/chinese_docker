@@ -62,4 +62,4 @@ docker进程模式要是特定的内核。详情，请检查您的发行版安�
 	# run a container and open an interactive shell in the container
 	$ sudo ./docker run -i -t ubuntu /bin/bash
 
-继续阅读用户指南
+继续阅读[用户指南](../userguide/README.md)

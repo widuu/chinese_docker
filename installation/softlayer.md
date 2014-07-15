@@ -20,4 +20,4 @@ IBM SoftLayer
 
 ###What next?
 
-然后可以读取用户指南。
+然后可以读取[用户指南](../userguide/README.md)。
