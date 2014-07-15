@@ -37,6 +37,12 @@ Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同
 
 ![](../images/register-confirm.png)
 
+####登陆
+
+在完成确认过程之后，您可以使用web控制台登陆
+
+![](../images/login-web.png)
+
 获取通过命令行`docker login`命令：
 
 	$ sudo docker login
