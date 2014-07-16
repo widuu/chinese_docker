@@ -1,48 +1,18 @@
 Docker中文指南
 ===
 
->Docker已经升级到了1.11版本，以前翻译的docker已经很陈旧了，很多东西都用不了，所以这次重新翻译docker文档。
-
-* 安装篇
-
-	 - 1.1.  [Mac OS X](/installation/macos.md)
- 	 - 1.2.  [Ubuntu](/installation/ubuntu.md)
- 	 - 1.3.  [Red Hat Enterprise Linux](/installation/ubuntu.md)
- 	 - 1.4.  [CentOS](/installation/centos.md)
- 	 - 1.5.  [Debain](/installation/debain.md)
- 	 - 1.6.  [Gentoo](/installation/gentoo.md)
- 	 - 1.7.  [Google Cloud Platform](/installation/google.md)
- 	 - 1.8.  [Rackspace Cloud](/installation/rackspace.md)
- 	 - 1.9.  [Amazon EC2](/installation/amazon.md)
- 	 - 1.10. [IBM Softlayer](/installation/softlayer.md)
- 	 - 1.11. [Arch Linux](/installation/archlinux.md)
- 	 - 1.12. [FrugalWare](/installation/frugalware.md)
- 	 - 1.13. [Fedora](/installation/fedora.md)
- 	 - 1.14. [openSUSE](/installation/opensuse.md)
- 	 - 1.15. [CRUX Linux](/installation/crux.md)
- 	 - 1.16. [Microsoft Windows](/installation/windows.md)
- 	 - 1.17. [Binaries](/installation/binaries.md)
-
----
-* 用户指南
-	
-	- 1.1.   [用户指南说明](/userguide/README.md)
-	- 1.2.   [使用Docker Hub](/userguide/dockerhub.md)
-	- 1.3.   [在Docker中运行应用](/userguide/dockerizing.md) 
+ docker正式版已经推出，做的改动非常多，以前版本的docker翻译已经不能用了，所以现在重新开始希望有兴趣的朋友一起加入！
 
 
+gitHub地址：http://github.com/widuu/chinese_docker
 
 
+blog地址：[http://www.widuu.com](http://www.widuu.com)
 
+新浪微博:[http://weibo.com/widuu](http://weibo.com/widuu)
 
+Docker中文社区:[https://www.dockboard.org](https://www.dockboard.org)
 
-
-
----
-
-####本文由widuu提供中文翻译，本人blog地址：[http://www.widuu.com](http://www.widuu.com)!
-
----
 
 ##授权许可
 
