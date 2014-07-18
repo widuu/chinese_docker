@@ -24,3 +24,4 @@
 	* [使用容器](userguide/usingdocker.md)
 	* [使用docker镜像](userguide/dockerimages.md)
 	* [连接容器](userguide/dockerlinks.md)
+	* [管理容器数据](userguide/dockervolumes.md)
