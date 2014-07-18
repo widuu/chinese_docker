@@ -23,3 +23,4 @@
 	* [在Docker中运行应用](userguide/dockerizing.md) 
 	* [使用容器](userguide/usingdocker.md)
 	* [使用docker镜像](userguide/dockerimages.md)
+	* [连接容器](userguide/dockerlinks.md)
