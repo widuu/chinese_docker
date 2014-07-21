@@ -25,3 +25,4 @@
 	* [使用docker镜像](userguide/dockerimages.md)
 	* [连接容器](userguide/dockerlinks.md)
 	* [管理容器数据](userguide/dockervolumes.md)
+	* [使用Docker Hub](userguide/dockerrepos.md)
