@@ -1,4 +1,4 @@
-在mac os上安装Docker
+在mac os上安装Docker（2）
 ===
 
 >注意：Note:Docker 支持mac os  X 10.6 及更高的版本
@@ -22,8 +22,8 @@ docker引擎使用的是Linux内核的特性，所以在OSＸ上运行docker我�
 或者手动初始化Boot2Docker,打开终端并运行：
 
 	$ boot2docker init
-	$ boot2docker start
-	$ export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
+    $ boot2docker start
+    $ export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
 
 一旦你初始化虚拟机，您可以`boot2docker stop`和`boot2docker start`来控制。
 
@@ -68,3 +68,8 @@ Boot2Docker管理工具提供了一些默认命令:
 	$ ./boot2docker
 	Usage: ./boot2docker [<options>]
 	{help|init|up|ssh|save|down|poweroff|reset|restart|config|status|info|ip|delete|download|version} [<args>]
+
+
+
+
+
