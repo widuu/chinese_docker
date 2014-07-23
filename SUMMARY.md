@@ -32,3 +32,11 @@
 	* [存储库](docker-hub/repos.md)
 	* [自动构建](docker-hub/builds.md)
 * [官方案例](examples/nodejs_web_app.md)
+	* [Docker中运行MongoDB](examples/mongodb.md)
+	* [Docker中运行Redis服务](examples/running_redis_service.md)
+	* [Docker中运行PostgreSQL](examples/postgresql_service.md)
+	* [Docker中运行Riak服务](examples/running_riak_service.md)
+	* [Docker中运行SSH进程服务](examples/running_ssh_service.md)
+	* [Docker中运行CouchDB服务](examples/couchdb_data_volumes.md)
+	* [Docker中运行Apt-Cacher-ng服务](examples/apt-cacher-ng.md)
+	
