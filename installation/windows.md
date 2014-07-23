@@ -3,7 +3,7 @@ Microsoft Windows 安装docker
 
 ###我的感言
 
->docker越做越好，用户的体验度和操作的便利性也是越来越好，这点可以看我以前写的docker教程,http://www.widuu.com/docker/，由于正式版出来之后，许多新的特性和安装方式都有所改变，我决定花时间重写docker中文文档。慢慢来，有时间久翻译一点。
+>docker越做越好，用户的体验度和操作的便利性也是越来越好，这点可以看我以前写的docker教程,[http://www.widuu.com/docker/](http://www.widuu.com/docker/)，由于正式版出来之后，许多新的特性和安装方式都有所改变，我决定花时间重写docker中文文档。慢慢来，有时间久翻译一点。
 
 #windows
 
