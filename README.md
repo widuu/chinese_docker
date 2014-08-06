@@ -15,6 +15,8 @@ blog地址：[http://www.widuu.com](http://www.widuu.com)
 
 Docker中文社区:[https://www.dockboard.org](https://www.dockboard.org)
 
+河北Linux用户组:[http://www.heblug.org/](http://www.heblug.org/)
+
 
 ##授权许可
 
