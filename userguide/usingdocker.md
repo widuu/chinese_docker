@@ -22,7 +22,7 @@
 
 这时候我们使用`docker version`命令来返回安装的docker客户端和进程信息。
 
-这个命令不仅给您返回了您使用的docker客户端版本信息，还反悔了docker的编程语言GO版本信息。
+这个命令不仅给您返回了您使用的docker客户端版本信息，还返回了docker的编程语言GO版本信息。
 
 	Client version: 0.8.0
 	Go version (client): go1.2

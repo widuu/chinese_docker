@@ -4,7 +4,7 @@ Docker中文指南
  docker正式版已经推出，做的改动非常多，以前版本的docker翻译已经不能用了，所以现在重新开始希望有兴趣的朋友一起加入！
 
 
-[文章目录](SUMMARY.md)
+[文章目录](./SUMMARY.md)
 
 gitHub地址：[http://github.com/widuu/chinese_docker](http://github.com/widuu/chinese_docker)
 
@@ -14,6 +14,8 @@ blog地址：[http://www.widuu.com](http://www.widuu.com)
 新浪微博:[http://weibo.com/widuu](http://weibo.com/widuu)
 
 Docker中文社区:[https://www.dockboard.org](https://www.dockboard.org)
+
+河北Linux用户组:[http://www.heblug.org/](http://www.heblug.org/)
 
 
 ##授权许可
