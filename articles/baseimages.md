@@ -36,9 +36,13 @@
 
 在 Docker 的注册中，有一个使用空的 tar 文件创建的特殊的版本库，叫 scratch ：
 
-    $ tar cv --files-from /dev/null | docker import - scratch
+        $ tar cv --files-from /dev/null | docker import - scratch
 
 你可以用 *** docker pull *** 把它拉取下来。然后你就可以基于它来做新的最小
 的容器了：
+
+        FROM scratch
+        COPY true-asm /true
+        CMD ["/true"]
 
 上面的 Dockerfile 来自外部的一个最小镜像：[tianon/true](https://github.com/tianon/dockerfiles/tree/master/true)。
