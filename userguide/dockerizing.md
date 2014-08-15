@@ -19,7 +19,7 @@ Docker在容器内运行应用程序。在一个容器内运行一个应用程�
 
 当你指定一个镜像，docker会查看这个镜像是否有一次加载到你的docker主机上，如果没有发现，docker就会在镜像仓库[Docker Hub](https://hub.docker.com/)下载公共镜像。
 
-接下来，我们告诉docker在我们的心容器内运行什么命令：
+接下来，我们告诉docker在我们的新容器内运行什么命令：
 
 	/bin/echo 'Hello world'
 
