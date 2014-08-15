@@ -5,7 +5,7 @@
    * [Ubuntu](./installation/ubuntu.md)
    * [Red Hat Enterprise Linux](./installation/ubuntu.md)
    * [CentOS](./installation/centos.md)
-   * [Debain](./installation/debain.md)
+   * [Debain](./installation/debian.md)
    * [Gentoo](./installation/gentoo.md)
    * [Google Cloud Platform](./installation/google.md)
    * [Rackspace Cloud](./installation/rackspace.md)
