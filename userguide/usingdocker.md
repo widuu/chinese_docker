@@ -230,4 +230,4 @@ Docker可以配置绑定网络端口。在最后一个例子中`-P`标示，是`
 
 直到现在我们使用镜像，我们从Docker Hub下载，现在我们建设和分享我们的镜像。
 
-阅读[使用镜像](userguide/dockerimages.md)
+阅读[使用镜像](dockerimages.md)
