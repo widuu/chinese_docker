@@ -1,7 +1,7 @@
 Ubuntu
 ===
 
-Docker支持一下的ubuntu版本
+Docker支持以下的ubuntu版本
 
 + Ubuntu Trusty 14.04 (LTS) (64-bit)
 + Ubuntu Precise 12.04 (LTS) (64-bit)
