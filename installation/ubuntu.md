@@ -7,7 +7,7 @@ Docker支持以下的ubuntu版本
 + Ubuntu Precise 12.04 (LTS) (64-bit)
 + Ubuntu Raring 13.04 and Saucy 13.10 (64 bit)
 
-如何你打算使用UFW防火墙，请阅读docker和UFW
+如何你打算使用[UFW防火墙](https://help.ubuntu.com/community/UFW)，请阅读 [*docker和UFW*](#docker-and-ufw)
 
 ##Ubuntu Trusty 14.04 (LTS) (64-bit)
 
