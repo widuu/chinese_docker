@@ -13,3 +13,21 @@
 
 ###快速指南
 
+这是一个 `docker` 网络有关的命令行选项，它会帮助你在下边查找到你想要查看的选项。
+
+一些网络命令行选项只能在 `docker`服务启动时提供，一旦运行，不能改变：
+
++ -b BRIDGE or --bridge=BRIDGE — 下边查看创建自己的网桥
++ --bip=CIDR — 查看定制docker0
++ -H SOCKET... 或 --host=SOCKET... 这听起来像涉及到容器网络，但是它实际上是另一个方面的作用：它告诉 `Docker` 服务通过什么途径来接收命令像"运行容器"和“通知容器”。
++ --icc=true|false — 查看容器之间的通信
++ --ip=IP_ADDRESS — 查看绑定容器端口
++ --ip-forward=true|false — 查看容器之间的通信
++ --iptables=true|false — 查看容器之间的通信
++ --mtu=BYTES — 查看定制docker0
+
+这里有两个网络选项，可以提供在启动时或者当 `docker run` 运行调用。当提供了启动时，如果没有指定选项的值， `docker run` 会自动设置默认值。
+
++ --dns=IP_ADDRESS... — 查看设置DNS
++ --dns-search=DOMAIN... --查看设置DNS
+
