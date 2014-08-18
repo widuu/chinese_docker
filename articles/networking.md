@@ -31,3 +31,17 @@
 + --dns=IP_ADDRESS... — 查看设置DNS
 + --dns-search=DOMAIN... --查看设置DNS
 
+
+最后，几个网络选项只能在`docker run`时调用，因为他们指定给一个容器一些特性：
+
++ -h HOSTNAME or --hostname=HOSTNAME — 查看配置DNS和如何设置容器网络
++ --link=CONTAINER_NAME:ALIAS — 配置DNS和容器之间的通信
++ --net=bridge|none|container:NAME_or_ID|host — 查看如何设置容器网络
++ -p SPEC or --publish=SPEC — 查看绑定容器端口
++ -P or --publish-all=true|false — 查看绑定容器端口
+
+以下部分解决上述所有的提到的主题，从简单到复杂的。
+
+###配置DNS
+
+docker如何给每一个容器提供一个主机名和DNS配置，无需构建一个定制的镜像和主机写在里面，
