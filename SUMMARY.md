@@ -4,7 +4,7 @@
 * [安装篇](./README.md)
    * [Mac OS X](./installation/macos.md)
    * [Ubuntu](./installation/ubuntu.md)
-   * [Red Hat Enterprise Linux](./installation/ubuntu.md)
+   * [Red Hat Enterprise Linux](./installation/redhat.md)
    * [CentOS](./installation/centos.md)
    * [Debain](./installation/debian.md)
    * [Gentoo](./installation/gentoo.md)
