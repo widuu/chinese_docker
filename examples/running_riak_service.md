@@ -1,7 +1,7 @@
 在Docker中使用Riak服务
 ===
 
-这个例子的目的是向您展示如何构建一个预装Riak的docker形象。
+这个例子的目的是向您展示如何构建一个预装Riak的docker镜象。
 
 ###创建Dockerfile
 
