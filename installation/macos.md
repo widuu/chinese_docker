@@ -1,9 +1,9 @@
 在 OS X 上安装Docker
 ===
 
->注意：Note:Docker 支持 OS X 10.6 及更高的版本
+>注意: Docker 仅支持 OS X 10.6 及更高的版本
 
-Docker 引擎使用的是 Linux 内核的特性，所以在 OSＸ上运行 Docker 我们就得使用轻量级的虚拟机(VM),你使用 OS X 上的 Docker 客户端来管理 Docker 容器和控制 Docker 引擎的构建、运行、管理。
+Docker 引擎要求 Linux 内核环境，所以要在 OSＸ上运行 Docker 我们就得使用轻量级的虚拟机(VM),并使用 OS X 上的 Docker 客户端来管理 Docker 容器和控制 Docker 引擎的构建、运行、管理。
 
 为了简化这个过程，我们设计了一个应用程序叫 Boot2Docker 安装虚拟机和运行 Docker 进程。
 

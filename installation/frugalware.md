@@ -6,11 +6,11 @@ FrugalWare
 - [lxc-docker i686](http://www.frugalware.org/packages/200141)
 - [lxc-docker x86_64](http://www.frugalware.org/packages/200130)
 
-`lxc-docker`包将会安装最新版本。
+`lxc-docker` 包将会安装最新版本的 Docker。
 
 ###依赖关系
 
-docker有几个依赖包需要安装，依赖包如下：
+Docker 有几个依赖包需要安装，核心依赖包如下：
 
 - systemd
 - lvm2
@@ -22,18 +22,17 @@ docker有几个依赖包需要安装，依赖包如下：
 
 ###安装
 
-简单安装
+只需一步就可以完整安装：
 
 	pacman -S lxc-docker
 
-将会全部安装。
 
 ###开始用docker
 
-这里docker会创建一个系统服务。要启动docker服务：
+Docker 会创建一个系统服务，使用下面的命令启动该服务：
 
 	$ sudo systemctl start lxc-docker
 
-开机启动：
+设置开机启动：
 
 	$ sudo systemctl enable lxc-docker
