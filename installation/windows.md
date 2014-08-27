@@ -15,7 +15,7 @@ docker引擎使用的是Linux内核的特性，所以在OSＸ上运行docker我�
 
 ###安装
 
-1.下载最新版本的Docker for Windows Installer(由于S3可能被墙了，所以国内有时候下载不了，但是我把它放到国内七牛上了，大家可以下载试试[http://qiniu.widuu.com/docker-install.exe"](http://qiniu.widuu.com/docker-install.exe"")<版本1.11>)
+1.下载最新版本的Docker for Windows Installer(由于S3可能被墙了，所以国内有时候下载不了，但是我把它放到国内七牛上了，大家可以下载试试[http://qiniu.widuu.com/docker-install.exe"](http://qiniu.widuu.com/docker-install.exe)<版本1.11>)
 
 2.运行安装文件，它将会安装virtualbox、MSYS-git boot2docker Linux镜像和Boot2Docker的管理工具。
 
