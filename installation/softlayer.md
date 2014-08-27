@@ -1,23 +1,29 @@
 IBM SoftLayer
 ===
 
-1.创建一个[ IBM SoftLayer account.](https://www.softlayer.com/cloud-servers/);
+1.创建一个 [IBM SoftLayer 账户](https://www.softlayer.com/cloud-servers/).
 
-2.登陆到[SoftLayer Console](https://control.softlayer.com/devices/).
+2.登陆到 [SoftLayer Customer Portal](https://control.softlayer.com/).
 
-3.[Order Hourly Computing Instance Wizard](https://manage.softlayer.com/Sales/orderHourlyComputingInstance)在你的SoftLayer终端。
+3.在 `Devices` 菜单中选择[设备列表](https://control.softlayer.com/devices).
 
-4.创建一个新的CloudLayer云计算实例使用字段的默认值
+4.点击位于菜单条下方、窗口顶部右侧的 `Order Devices`.
 
-- 第一个可用的`Datacenter`和
-- Ubuntu Linux 12.04 LTS Precise Pangolin - Minimal Install (64 bit) as `Operating System`.
+5.在 `Virtual Server` 下点击 [Hourly](https://manage.softlayer.com/Sales/orderHourlyComputingInstance).
 
-5.点击继续，然后在右底部点击你的订购安装，然后选择区购物车。
+6.创建一个新的 SoftLayer Virtual Server Instance (VSI)，使用全部字段的默认值:
 
-6.插入用户所有的数据和订货。
+* `Datacnter` 的部署位置
+* Ubuntu Linux 12.04 LTS Precise Pangolin - Minimal Install (64 bit) for Operating System
 
-7.这时候你就可以查看ubuntu安装文档
+7.点击底部右侧的 `Continue Your Order`.
 
-###What next?
+8.填写 VSI 主机名和域名。
 
-然后可以读取[用户指南](../userguide/README.md)。
+9.插入用户所有的数据和订货。
+
+10.接下来请继续阅读 [Ubuntu](https://docs.docker.com/installation/ubuntulinux/#ubuntu-linux).
+
+###What next
+
+更多信息请阅读[用户指南](../userguide/README.md)。
