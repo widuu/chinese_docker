@@ -53,4 +53,4 @@ Docker 已经包含在 RHEL 的 EPEL 源中。该源是 [Extra Packages for Ente
 
 	$ sudo docker run -i -t fedora /bin/bash
 
-好！s现在你可以去查看[用户指南](../userguide/README.md)。
+好！现在你可以去查看[用户指南](../userguide/README.md)。
