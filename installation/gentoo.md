@@ -7,7 +7,7 @@ Gentoo
 
 请记住有时候官方最新版本和 overlay 是不一致的，并且在 overlay 和 portage tree 中的版本都不是一致的，请耐心等待，最新版本会很快更新的。
 
-###安装
+##安装
 
 软件包应该正确引入所有必须的依赖关系，并且提示所有必须的内核选项。0.7 以上版本的 ebuilds 包含了 use 标记引入主要存储驱动程序的依赖关系，默认启用了 "device-mapper" use 标记，这是最简单的安装方式。
 
@@ -17,7 +17,7 @@ Gentoo
 
 更多信息请到这里查看：[tianon's blog](https://tianon.github.io/post/2014/05/17/docker-on-gentoo.html)
 
-###启动 Docker
+##启动 Docker
 
 确保您正在运行的内核，包括所有针对 LXC 的必要模块和/或配置（ device-mapper 和/或 AUFS 则是可选的，取决于你决定要使用的存储驱动程序）。
 

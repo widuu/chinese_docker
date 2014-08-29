@@ -5,7 +5,7 @@ Docker 已经支持以下的 Debian 版本：
 
 - [Debian 8.0 Jessie (64-bit)](https://docs.docker.com/installation/debian/#debian-jessie-8-64-bit)
 
-###Debian Jessie 8.0 (64-bit)Debian
+##Debian Jessie 8.0 (64-bit)Debian
 
 Debian 8 已经使用 3.14.0 的内核版本，可以从 Debian 的仓库源来安装 `docker.io` 包。
 
@@ -49,6 +49,6 @@ Debian 8 已经使用 3.14.0 的内核版本，可以从 Debian 的仓库源来�
 	# If you are in  Ubuntu  14.04, use docker.io instead of docker
 	$ sudo service docker restart
 
-###下一步
+##下一步
 
 继续阅读[用户指南](../userguide/README.md)。

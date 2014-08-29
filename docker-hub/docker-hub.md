@@ -9,7 +9,7 @@ Docker Hub
 
 [仓库](repos.md)
 
-了解如何分享你Docker Hub上的Docker镜像，并且如何管理和存储你的私人镜像。
+了解如何分享你 Docker Hub 上的 Docker 镜像，以及如何存储和管理你的私人镜像。
 
 [自动构建](builds.md)
 

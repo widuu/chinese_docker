@@ -9,7 +9,7 @@ Amazon EC2
 
 当然，首先你要创建一个AWS帐号。
 
-Amazon QuickStart
+###Amazon QuickStart
 
  + 1.选择一个镜像。
  + 2.在你的 AWS 控制台选择 [Create Instance Wizard](https://console.aws.amazon.com/ec2/v2/home?#LaunchInstanceWizard: "Create Instance Wizard") 菜单。
@@ -43,7 +43,7 @@ Amazon QuickStart
  + 8.用ssh连接主机安装 Docker: `ssh -i <path to your private key> ec2-user@<your public IP address>`
  + 9.一旦连接到主机，输入 `sudo yum install -y docker ; sudo service docker start` 来安装和启动docker。
 
-###Standard Ubuntu Installation
+###标准Ubuntu安装
 
 如果你想手动配置安装，请在 EC2 主机上根据 [Ubuntu](ubuntu.md) 文档安装 Docker。只要按照步骤1快速选择一个镜像（或者使用你自己现有的），并跳过用户数据的步骤。然后继续按照 [Ubuntu](ubuntu.md) 说明进行操作。
 

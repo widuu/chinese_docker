@@ -109,7 +109,7 @@ Docker 作为一个 Debain 包，安装起来比较简单，如果你不在美�
 
 现在！可以查看[用户指南](../userguide/README.md)。
 
-###Ubuntu Raring 13.04 and Saucy 13.10 (64 bit)
+##Ubuntu Raring 13.04 and Saucy 13.10 (64 bit)
 
 这些指令可以再 Ubuntu 13.04 和 13.10 上使用
 
@@ -183,7 +183,7 @@ Docker 作为一个 Debain 包，安装起来比较简单
 	# install the latest
 	$ sudo apt-get install lxc-docker
 
-###内存和交换空间
+##内存和交换空间
 
 如果你想使用内存和交换空间，你必须在命令行中添加如下的内核参数:
 
@@ -204,13 +204,13 @@ Docker 作为一个 Debain 包，安装起来比较简单
 	WARNING: Your kernel does not support cgroup swap limit.
 	WARNING: Your kernel does not support swap limit capabilities. Limitation discarded.
 
-###故障排除
+##故障排除
 
-在Linux Mint, `cgroup-lite` 默认没有被安装，在 Docker 正常工作之前，你可以通过如下的方式安装：
+在 Linux Mint, `cgroup-lite` 默认没有被安装，在 Docker 正常工作之前，你可以通过如下的方式安装：
 
 	$ sudo apt-get update && sudo apt-get install cgroup-lite
 
-###Docker and UFW
+##Docker and UFW
 
 Docker 使用桥接的方式来管理网络，默认情况下，UFW 会阻止所有的流量转发。你需要允许 UFW 的转发：
 
@@ -229,7 +229,7 @@ UFW 的默认规则是阻止了所有的流入流量。如果你希望能够能�
 
 	$ sudo ufw allow 2375/tcp
 
-###Docker的本地DNS警告
+##Docker的本地DNS警告
 
 正在运行 Ubuntu 或者 Ubuntu 的衍生系统将使用 127.0.0.1 作为 /etc/resolv.conf 的默认域名服务器。NetworkManager 设置 dnsmasq 使用真实的 dns 服务器连接，并且设置 /etc/resolv.conf 的域名服务为 127.0.0.1。
 
@@ -270,7 +270,7 @@ UFW 的默认规则是阻止了所有的流入流量。如果你希望能够能�
 
 >警告：这可能使 dns 解析速度慢
 
-###Mirrors
+##Mirrors
 
 你应该 `ping get.docker.io` 来比较镜像服务的延迟，选择最好的一个。
 
