@@ -1,39 +1,41 @@
-Docker Hub上自动构建
+Docker Hub上的自动化构建
 ===
 
-###自动构建
+##关于自动化构建
 
-自动化构建是一个特殊的功能，允许您在Docker Hub构建集群中指定源代码仓库的`Dockerfile`来构建。该系统将从存储库复制一份，并使用存储库内容构建Dockerfile。由此产生的镜像将被上传到注册表，并且自动生成标记。
+自动化构建是一个特殊的功能，它允许您在 Docker Hub 上使用构建集群，根据指定的 `Dockerfile` 或者 GitHub 、 BitBucket 仓库（或环境）来自动创建镜像。该系统将从仓库复制一份，并根据以仓库为环境的 `Dockerfile` 的描述构建镜像。由此产生的镜像将被上传到注册表，并且自动生成标记。
 
-自动化构建有许多优势。例如，用户使用自动化构建必须是可信的，这就要求构建镜像的精确性。
+自动化构建有许多优势：
 
-此外，存储库的注册表上的Dockerfile提供给任何人浏览。自动化基础优势是自动化构建。这确保你的存储库总是最新的。
+* 你的自动化构建项目一定是准确按照预期构建的
+* 在 Docker Hub 注册表上，任何拥有你仓库访问权限的用户都乐意浏览 `Dockerfile`
+* 自动化构建保证了你的仓库总是最新的
 
-自动化构建支持 GitHub 和 BitBucket私有和公有的仓库。
+自动化构建支持 [GitHub](http://GitHub.com/) 和 [BitBucket](https://bitbucket.org/) 的私有和公有的仓库。
 
-###设置Github自动化构建
+要使用自动化构建，你必须拥有经过验证有效的 Docker Hub 账户和 GitHub/Bitbucket 账户。
 
-为了设置一个自动化构建，首先，需要与一个GitHub链接到你的Docker账户。这将允许注册表能查看你的存储库。
+##设置GitHub自动化构建
 
->注：目前，我们需要有读写权限，因为docker hub需要设置一个服务钩子。虽然没有其他人使用你的账户，这是Github管理权限的方式，很抱歉！
+首先，你需要将 GitHub 账户链接到你的 [Docker Hub](https://hub.docker.com/) 账户，以允许注册表查看你的仓库。
 
-点击开始Automated Builds选项卡，然后选择[+ Add New.](https://registry.hub.docker.com/builds/add/)
+>注：目前我们需要有读写权限以建立 Docker Hub 和 GitHub 的挂钩服务，这是GitHub管理权限的方式，我们别无选择。抱歉！我们将保护您的账户及隐私，确保不会被他人非法获取。
 
-选择[Github服务](https://registry.hub.docker.com/associate/github/)
+开始构建！登录到你的 Docker Hub 账户，点击屏幕右上方的 "+ Add Repository" 按钮，选择[自动化构建](https://registry.hub.docker.com/builds/add/)。
 
-然后按照说明授权和连接你的github账户到Docker Hub。
+选择[GitHub服务](https://registry.hub.docker.com/associate/GitHub/)
 
-创建一个自动构建
+然后按照说明授权和连接你的 GitHub 账户到 Docker Hub。连接成功后，你就可以选择用来自动化构建的仓库了。
 
-你可以[创建一个自动构建](https://registry.hub.docker.com/builds/github/select/)从你的公有或者私有的Github仓库中的`Dockerfile`。
+###创建一个自动化构建项目
 
-Github 组织
+你可以用你的 `Dockerfile` 从你的公共或者私有仓库[创建一个自动化构建项目](https://registry.hub.docker.com/builds/GitHub/select/)。
 
-GitHub组织一旦你的会员身份以公开组织的形式出现在GitHub上。为了验证，你可以查看Github上你组织的成员选项卡。
+###GitHub子模块
 
-Github服务钩子
+如果你的 GitHub 仓库包含了私有子模块的连接，你需要在 Docker Hub 上添加部署秘钥。
 
-您可以按照以下步骤配置自动构建的GitHub服务挂钩:
+部署秘钥位于自动化构建主页的 “Build Details” 菜单。访问设置 GitHub 仓库的页面，选择 “Deploy keys” 来添加秘钥。
 
 <table class="table table-bordered">
   <thead>
@@ -46,59 +48,118 @@ Github服务钩子
   <tbody>
     <tr>
       <td>1.</td>
-      <td><img src="../images/github_settings.png"></td>
-      <td>登录到Github.com，并转到您的存储库页面。点击右侧页面“设置”。
-	为了做到这一点，您必须具有管理员权限的存储库中。</td>
+      <td><img style="max-width:100%;" src="../images/github_submodule_deploy_key.png"></td>
+      <td>你的自动化构建部署秘钥位于 “Build Details” 菜单的 “Deploy keys” 下。</td>
     </tr>
     <tr>
       <td>2.</td>
-      <td><img src="../images/github_service_hooks.png" alt="Webhooks & Services"></td>
-      <td>点击页面左侧的“Webhooks & Services”。</td></tr>
-      <tr><td>3.</td>
-      <td><img src="../images/github_docker_service_hook.png" alt="Find the service labeled Docker"></td><td>查找服务标记"Docker" ，并点击它.</td></tr>
-      <tr><td>4.</td><td><img src="../images/github_service_hook_docker_activate.png" alt="Activate Service Hooks"></td>
-      <td>确认"Active"是被选中，然后点击“Update settings”按钮以保存您的更改。</td>
+      <td><img style="max-width:100%;" src="../images/github_submodule_deploy_key_2.png"></td>
+      <td>在你的 GitHub 子模块仓库设置页，添加部署秘钥。</td>
     </tr>
   </tbody>
 </table>
 
-###设置BitBucket自动构建
+###GitHub组织
 
-为了设置自动构建，你需要先把BitBucket连接到你的Docker Hub账户，这将允许存储库查看你的存储库。
+一旦你的组织成员身份设置为公开，对应的 GitHub 组织状态便会被公开在你的 GitHub 上。为了验证，你可以查看 GitHub 上你的组织的成员选项卡。
 
-点击 Automated Builds选项卡，然后选择+ Add New.。 
+###GitHub服务挂钩
 
-选择的bitbucket服务。 
+按照以下步骤配置自动化构建的 GitHub 服务挂钩:
 
-然后按照指示，授权和您的bitbucket帐户连结至Docker Hub。
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Screenshot</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.</td>
+      <td><img src="../images/GitHub_settings.png"></td>
+      <td>登录到 GitHub.com，并转到您的仓库页面，点击右侧页面“Settings”。
+	执行该操作要求你有该仓库的管理员权限。</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+      <td><img style="max-width:100%;" src="../images/github_service_hooks.png" alt="Webhooks & Services"></td>
+      <td>点击页面左侧的“Webhooks & Services”。</td></tr>
+      <tr><td>3.</td>
+      <td><img style="max-width:100%;" src="../images/github_docker_service_hook.png" alt="Find the service labeled Docker"></td><td>找到 "Docker" 并点击它.</td></tr>
+      <tr><td>4.</td><td><img style="max-width:100%;" src="../images/github_service_hook_docker_activate.png" alt="Activate Service Hooks"></td>
+      <td>确认 "Active" 被选中，然后点击 “Update service” 按钮以保存您的更改。</td>
+    </tr>
+  </tbody>
+</table>
 
-创建自动构建
+##设置BitBucket自动化构建
 
-你可以使用任何你的公共或者私有的BitBucket仓库中的`Dockerfile` 来创建你的自动创建。
+为了设置自动化构建，你需要先把 BitBucket 连接到你的 Docker Hub 账户，以允许其访问你的仓库。
 
-###Dockerfile和自动构建
+登录到你的 Docker Hub 账户，点击屏幕右上方的 "+ Add Repository" 按钮，选择[自动化构建](https://registry.hub.docker.com/builds/add/)。
 
-在构建过程中，我们将复制Dockerfile内容。我们也将添加它到Docker Hub，可以从Docker社区来查看仓库页面。
+选择的 [Bitbucket 服务](https://registry.hub.docker.com/associate/bitbucket/)。 
 
-###README.md
+然后按照说明授权和连接你的 Bitbucket 账户到 Docker Hub。连接成功后，你就可以选择用来自动化构建的仓库了。
 
-如果你的存储库有一个`README.md`文件，我们将使用它作为存储库的描述。
+###创建自动化构建项目
 
->警告：如果你需要在创建之后修改描述。它会在下一次自动构建完成之后被改写。要进行修改，从Git仓库修改`README.md`。我们会寻找`Dockerfile`同一目录下的`README.md`。
+你可以用你的 `Dockerfile` 从你的公共或者私有仓库[创建一个自动化构建项目](https://registry.hub.docker.com/builds/bitbucket/select/)。
+
+###Bitbucket服务挂钩
+
+当你成功连接账户以后，一个 `POST` 挂钩将会自动被添加到你的仓库。请按照以下步骤确认或者更改你的挂钩设置：
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Screenshot</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.</td>
+      <td><img src="../images/bitbucket_hook_menu.png" alt="Settings" width="180"></td>
+      <td>登录到 Bitbucket.org 进入仓库页面。点击左侧导航下的 “Settings”。执行该操作要求你有该仓库的管理员权限。</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+      <td><img src="../images/bitbucket_hook_menu_2.png" alt="Hooks" width="180"></td>
+      <td>点击左侧 “Settings” 下的 "Hooks"。</td></tr>
+    <tr>
+      <td>3.</td>
+      <td><img style="max-width:100%;" src="../images/bitbucket_hook_post.png" alt="Docker Post Hook"></td><td>现在你应该能看到关联了该仓库的挂钩列表，包括一个指向 registry.hub.docker.com/hooks/bitbucket 的 <code>POST</code> 挂钩。</td>
+    </tr>
+  </tbody>
+</table>
+
+##Dockerfile和自动化构建
+
+在构建过程中，我们将复制 `Dockerfile` 的内容。我们也将添加它到 Docker Hub 上，使得 Docker 社区（公共仓库）或者得到许可的团队成员可以访问仓库页面。
+
+##README.md
+
+如果你的仓库有一个 `README.md` 文件，我们将使用它作为仓库的描述。构建过程中会寻找 `Dockerfile` 同一目录下的 `README.md`。
+
+>警告：如果你需要在创建之后修改描述，它会在下一次自动化构建完成之后生效。
 
 ###建立触发器
 
-如果你需要另一种方式来触发GitHub or BitBucket自动构建，你可以设置构建触发。当你打开构建触发一个自动构建,它会给你一个网址,你可以发送POST请求。这将触发自动构建过程,类似于GitHub webhooks。
+如果你需要 GitHub 或者 BitBucket 以外的方式来触发自动化构建，你可以创建一个构建触发器。当你打开构建触发器，它会提供给你一个 url 来发送 POST 请求。这将触发自动化构建过程，类似于 GitHub webhook。
 
-建立触发器可用Settings选项卡下的每一个自动构建。
+建立触发器可在自动化构建项目的 Settings 菜单中设置。
 
->注：你在五分钟内只能触发一个构建，如果你已经进行一个构建，或你最近提交了构建请求，这些请求将被忽略。你可以再设置页面来找到最后10条触发日志来验证是否一切正常工作。
+>注：你在五分钟内只能触发一个构建，如果你已经进行一个构建，或你最近提交了构建请求，这些请求将被忽略。你可以在设置页面来找到最后10条触发日志来验证是否一切正常工作。
 
 ###Webhooks
 
-也可以使用 Webhooks来自动构建， Webhooks在存储库推送成功后被访问。
+也可以使用 Webhooks 来自动化构建，Webhooks 会在仓库推送成功后被调用。
 
-该webhook调用将生成一个HTTP POST如下面的JSON：
+此webhook调用将生成一个 HTTP POST，JSON样例如下：
 
 	{
 	   "push_data":{
@@ -129,14 +190,14 @@ Github服务钩子
 	   }
 	}
 
-Webhooks在每个自动生成的设置选项卡下。
+Webhooks 可在自动化构建项目的 Settings 菜单中设置。
 
->注意：如果你想测试你的webhook出那么我们建议使用像requestb.in的工具。 
+>注意：如果你想测试你的 webhook，我们建议使用像 [requestb.in](http://requestb.in/) 的工具。 
 
-###资源库链接
+###仓库链接
 
-资源库链接的方式来关联一个与另一个自动化构建。如果一个得到更新，连接系统还会触发一个构建为其他自动生成。这使得它很容易让你的自动化构建最新的。
+仓库链接是一种建立自动化项目与项目之间关联的方式。如果一个项目得到更新，连接系统还会触发另一个项目的更新构建。这使得你可以轻松地让所有关联项目保持更新同步。
 
-要添加一个链接，去一个自动生成的设置页面，点击储存库链接。然后输入你想要有链接的库的名称。
+要添加链接的话，访问你想要添加链接的项目的仓库设置页面，在设置菜单下地右侧点击 “Repository Links”。然后输入你想要与之链接的仓库名称。
 
->警告：不过，您可以添加多个存储库的链接，你应该非常小心。自动构建之间的双向关系会造成一个永不停止的构建循环。
+>警告：您可以添加多个仓库的链接，但要小心。自动化构建之间的双向关系会造成一个永不停止的构建循环。

@@ -7,7 +7,7 @@ Docker 引擎要求 Linux 内核环境，所以要在 OSＸ上运行 Docker 我�
 
 为了简化这个过程，我们设计了一个应用程序叫 Boot2Docker 安装虚拟机和运行 Docker 进程。
 
-###安装
+##安装
 
 1.下载最新的版本的 Docker for OS X Installer（因为官方用的亚马逊的云存储，貌似给封了~我下载了一个放到七牛云存储了，大家可以通过下面这个地址下载:[http://qiniu.widuu.com/Boot2Docker-1.1.1.pkg](http://qiniu.widuu.com/Boot2Docker-1.1.1.pkg "Boot2Docker-1.1.1.pkg")<版本：1.1.1>）
 
@@ -27,7 +27,7 @@ Docker 引擎要求 Linux 内核环境，所以要在 OSＸ上运行 Docker 我�
 
 一旦你初始化虚拟机，您可以 `boot2docker stop` 和 `boot2docker start` 来控制。
 
-###升级
+##升级
 
 + 下载最新的 Docker for OS X Installer
 + 运行安装程序，这将升级 VirtualBox 和 Boot2Docker 管理工具
@@ -37,7 +37,7 @@ Docker 引擎要求 Linux 内核环境，所以要在 OSＸ上运行 Docker 我�
 	$ boot2docker download
 	$ boot2docker start
 
-###运行 Docker
+##运行 Docker
 
 通过终端，你可以运行 Docker 输出 “hello word” 的例子
 
@@ -45,7 +45,7 @@ Docker 引擎要求 Linux 内核环境，所以要在 OSＸ上运行 Docker 我�
 
 这将下载 Ubuntu 镜像和打印 hello word
 
-###容器端口重定向
+##容器端口重定向
 
 最新版本的 boot2docker 可以设置网络适配器提供容器访问的端口
 
@@ -59,7 +59,7 @@ Docker 引擎要求 Linux 内核环境，所以要在 OSＸ上运行 Docker 我�
 
 通常，是192.168.59.103,但是可以通过 Virtualbox 的 DHCP 改变。
 
-###进一步的细节
+##更多细节
 
 如果你有求知欲，boot2docker 的默认用户名是 `docker` 密码是 `tcuser`
 
