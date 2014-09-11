@@ -12,14 +12,14 @@
 
 如果你得到 `/var/lib/docker/repositories: permission denied` ，那你可能没有权限访问你主机上的Docker。
 
-为获得访问Docker权限可以直接在命令前加`sudo`，或者采取以下步骤授予权限：
+为获得访问Docker权限可以直接在命令前加`sudo`，或者采取以下步骤授予权限：：
 
-       #如果还没有docker group就添加一个：
-       $ sudo groupadd docker
-       #将用户加入该group内。然后退出并重新登录即可生效。
-       $ sudo gpasswd -a ${USER} docker
-       # 重启docker
-       $ sudo service docker restart
+	# 如果还没有docker group就添加一个：
+	$ sudo groupadd docker
+	# 将用户加入该group内。然后退出并重新登录即可生效。
+	$ sudo gpasswd -a ${USER} docker
+	# 重启docker
+	$ sudo service docker restart
 
 请参考[安装指南](../install/)安装。
 
@@ -97,6 +97,7 @@
 
 	$ sudo docker ps # Lists only running containers
 	$ sudo docker ps -a # Lists all containers
+	$ sudo docker ps -l # List the last running container
 
 ####控制容器
 
