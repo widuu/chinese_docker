@@ -150,4 +150,20 @@
 
 你现在有一个镜像的状态，你可以创建新的实例。
 
+####删除Docker镜像
+
+首先要保证有权限对Docker镜像或者容器进行操作，具体做法参见进入前文安装部分。
+
+	# 停止所有容器
+	$ docker stop $(docker ps -a -q)
+	
+	# 删除指定镜像
+	$ docker rmi $image
+	
+	# 删除无标示镜像，即id为<None>的镜像
+	$ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+	
+	# 删除所有镜像
+	$ docker rmi $(docker images -q)
+
 
