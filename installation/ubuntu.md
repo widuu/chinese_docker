@@ -13,7 +13,7 @@ Docker 支持以下的 Ubuntu 版本
 
 Ubuntu配置了 3.13.0 Linux 内核和将安装 Docker 0.9.1 的 `docker.io` 包，当然这些都取决于你的 Ubuntu 镜像源。
 
->提示：Ubuntu (和 Debain )包含一个特别陈旧的 KED3/GNOME2 包叫 `docker` ,所以我们把这个包叫 `docker.io`。
+>提示：Ubuntu (和 Debian )包含一个特别陈旧的 KDE3/GNOME2 包叫 `docker` ,所以我们把这个包叫 `docker.io`。
 
 ###安装
 
