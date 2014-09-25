@@ -9,7 +9,7 @@ Docker 已经支持以下的 Debian 版本：
 
 Debian 8 已经使用 3.14.0 的内核版本，可以从 Debian 的仓库源来安装 `docker.io` 包。
 
->提示：Debian包含一个特别陈旧的KED3/GNOME2包叫 `docker` ,所以我们把这个包叫`docker.io`。
+>提示：Debian包含一个特别陈旧的KDE3/GNOME2包叫 `docker` ,所以我们把这个包叫`docker.io`。
 
 ###安装
 
