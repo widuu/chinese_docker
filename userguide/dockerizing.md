@@ -25,7 +25,7 @@ Docker在容器内运行应用程序。在一个容器内运行一个应用程�
 
 当我们的docker创建一个新的Ubuntu 14.04环境，然后执行`/bin/echo`命令。我们会在命令行看到结果：
 
-	hello word
+	hello world
 
 那么，我们创建容器之后会发生什么呢？这里Docker容器当你输入指令时被激活运行。这里只要"hello word"被输出，容器就会停止。
 
