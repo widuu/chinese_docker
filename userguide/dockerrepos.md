@@ -79,39 +79,35 @@ Docker通过`docer search`、`pull`、`login`和`push`等命令提供了连接Do
 
 自动构建功能会自动从[Github](https://www.github.com/)和[BitBucket](http://bitbucket.com/)直接将镜像构建或更新至Docker Hub，通过为Github或Bitbucket的仓库添加一个提交的hook来实现，当你推送提交的时候就会触发构建和更新。
 
-设置一个自动化构建：
+设置一个自动化构建你需要：
 
-* 1.创建一个Docker Hub账户并且登陆
-* 2.通过“Link Accounts”按钮连接你的GitHub或者BitBucket
-* 3.配置自动化构建
-* 4.选择一个`Github`和`BitBucket`项目来构建你想要构建的`Dockerfile`
-* 5.选择你想建立的分支（默认是主分支）
+* 1.创建一个[Docker Hub](https://hub.docker.com/)账户并且登陆
+* 2.通过[Link Accounts](https://registry.hub.docker.com/account/accounts/)菜单连接你的GitHub或者BitBucket
+* 3.[配置自动化构建](https://registry.hub.docker.com/builds/add/)
+* 4.选择一个包含`Dockerfile`的Github或BitBucket项目
+* 5.选择你想用于构建的分支（默认是`master`分支）
 * 6.给自动构建创建一个名称
 * 7.指定一个Docker标签来构建
-* 8.指定Dockerfile的路径，默认是`/`。
+* 8.指定`Dockerfile`的路径，默认是`/`。
 
-一旦你配置好自动构建，他就会自动触发构建，等几分钟，你就会在Docker Hub仓库源看到你新创建的自动构建。它将会和你的Github或者BitBucket保持同步更新直到你解除自动构建。
+一旦配置好自动构建，在几分钟内就会自动触发构建，你就会在[Docker Hub](https://hub.docker.com/)仓库源看到你新的构建，并且它将会和你的Github或者BitBucket保持同步更新直到你解除自动构建。
 
-如果你想看到你自动化构建的状态，你可以去你的Docker Hub[自动化构建页面](https://registry.hub.docker.com/builds/).它将会想你展示你构建的状态和构建历史。
+如果你想看到你自动化构建的状态，你可以去你的Docker Hub[自动化构建页面](https://registry.hub.docker.com/builds/)，它将会想你展示你构建的状态和构建历史。
 
-一旦你创建了一个自动化构建，你可以禁用和删除它。然而，你不能通过`docker push`推送一个自动化构建。你只能通过在Github或者BitBucket提交你的代码来管理它。
+一旦你创建了一个自动化构建，你可以禁用或删除它。但是，你不能通过`docker push`推送一个自动化构建，而只能通过在Github或者BitBucket提交你的代码来管理它。
 
-你可以创建多个自动化的仓库，并且配置它们只想你指定的`Dockerfile`或Git 分支。
+你可以在一个仓库中创建多个自动构建，配置它们只指定的`Dockerfile`或Git 分支。
 
-建立触发器
+###构建触发器
 
-你可以通过Docker Hub的Url来实现自动构建。这是满足你重新自动化构建的需求。
+自动构建也可以通过Docker Hub的Url来触发，这样你就可以通过命令重构自动构建镜像。
 
 ###Webhooks
 
-webhooks属于你的存储库的一部分，当一个镜像更新或者推送到你的存储库时允许你触发一个时间。当你的镜像被推送的时候，webhook可以根据你指定的url和一个有效的Json来递送。
+webhooks属于你的存储库的一部分，当一个镜像更新或者推送到你的存储库时允许你触发一个事件。当你的镜像被推送的时候，webhook可以根据你指定的url和一个有效的Json来递送。
 
 ###下一步
 
 去使用Docker!
-
-
-
-
 
 
