@@ -1,15 +1,7 @@
 开始使用Docker Hub
 ===
 
-现在你已经学习了如何利用命令行在本地运行Docker，还学习了如何[拉取镜像](usingdocker.md)用于从现成的镜像中构建容器，并且还学习了如何[创建镜像](dockerimages.md)。
-
-接下来，你将会学到如何利用[Docker Hub](https://hub.docker.com)简化和增强你的Docker工作流。
-
-[Docker Hub](https://hub.docker.com)是一个由Docker公司负责维护的公共注册中心，它包含了超过15,000个可用来下载和构建容器的镜像，并且还提供认证、工作组结构、工作流工具（比如webhooks）、构建触发器以及私有工具（比如私有仓库可用于存储你并不想公开分享的镜像）。
-
-### Docker命令和Docker Hub
-
-Docker通过`docer search`、`pull`、`login`和`push`等命令提供了连接Docker Hub服务的功能，本页将展示这些命令如何工作的。
+本节提供快速介绍Docker Hub,将向您展示如何创建一个账户。
 
 Docker Hub和docker及其组件一起工作。Docker Hub会帮助你和你的同事协作，并获取功能最全的docker。要做到这一点，它提供的服务有：
 
