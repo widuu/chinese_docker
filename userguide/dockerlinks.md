@@ -1,7 +1,7 @@
 连接容器
 ===
 
-在使用[Docker部分](usingdocker.md),我们谈到了通过网络端口来连接运行服务的docker。这是与docker容器内运行应用程序交互的一种方法。在本节中，我们打算通过端口连接到一个docker容器，以及向您介绍容器连接概念。
+在使用[Docker部分](usingdocker.md),我们谈到了通过网络端口来连接运行服务的docker。这是与docker容器内运行应用程序交互的一种方法。在本节中，我们打算通过端口连接到一个docker容器，并向您介绍容器连接概念。
 
 ###网络端口映射
 
@@ -11,7 +11,7 @@
 
 >注：容器有一个内部网络和IP地址（在使用Docker部分我们使用`docker inspect`命令显示容器的IP地址）。Docker可以有各种网络配置方式。你可以再这里学到更多docker网络信息。
 
-我们使用`-P`标记创建一个容器，将容器的内部端口随机映射到主机的高端口49000到499000。这时我们可以使用`docker ps`来看到端口5000绑定主机端口49155。
+我们使用`-P`标记创建一个容器，将容器的内部端口随机映射到主机的高端口49000到49900。这时我们可以使用`docker ps`来看到端口5000绑定主机端口49155。
 
 	$ sudo docker ps nostalgic_morse
 	CONTAINER ID  IMAGE                   COMMAND       CREATED        STATUS        PORTS                    NAMES
@@ -25,13 +25,13 @@
 
 我们还有很多设置`-p`标识的方法。默认`-p`标识会绑定本地主机上的指定端口。并且我们可以指定绑定的网络地址。举例设置`localhost`
 
-	$ sudo docker run -d -p 127.0.0.1:5000:5000 training/webapp python app.py
+	$ sudo docker run -d -p 127.0.0.1:5001:5002 training/webapp python app.py
 
-这将绑定容器内部5000端口到主机的`localhost`或者`127.0.0.1`5000端口。
+这将绑定容器内部5002端口到主机的`localhost`或者`127.0.0.1`的5001端口。
 
-或绑定端口5000容器动态端口，并且让`localhost`访问，我们可以这样做：
+如果要绑定容器端口5002到宿主机动态端口，并且让`localhost`访问，我们可以这样做：
 
-	$ sudo docker run -d -p 127.0.0.1::5000 training/webapp python app.py
+	$ sudo docker run -d -p 127.0.0.1::5002 training/webapp python app.py
 
 我们也可以绑定UDP端口，我们可以在后面添加`/udp`,举例：
 
