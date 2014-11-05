@@ -22,7 +22,7 @@
 
 这时候我们使用`docker version`命令来返回安装的docker客户端和进程信息。
 
-这个命令不仅给您返回了您使用的docker客户端版本信息，还返回了docker的编程语言GO版本信息。
+这个命令不仅返回了您使用的docker客户端版本信息，还返回了docker的编程语言GO的版本信息。
 
 	Client version: 0.8.0
 	Go version (client): go1.2
@@ -62,7 +62,7 @@
 
 	$ sudo docker images --help
 
-这将显示所有的文本信息和可用的标示：
+这将显示所有的描述信息和可用的标示：
 
 	Usage: docker attach [OPTIONS] CONTAINER
 
@@ -99,9 +99,9 @@
 
 你可以看到我们在`docker ps`中已经指定了新的标示`-l`。这通知`docker ps`命令返回最后的容器的状态。
 
->注意：默认情况下，`docker ps`命令值显示运行中的容器。如果你也想看已经停止的容器请`-a`标示。
+>注意：默认情况下，`docker ps`命令只显示运行中的容器。如果你还想看已经停止的容器，请加上`-a`标示。
 
-我们可以看到一些细节，我们看到当我们第一次运行这个容器应用的时候，这里多了一个重要的列`PORTS`。
+我们可以看到一些细节，与我们第一次运行`docker ps`命令的时候相比，这里多了一个重要的列`PORTS`。
 
 	PORTS
 	0.0.0.0:49155->5000/tcp
@@ -116,7 +116,7 @@ Docker可以配置绑定网络端口。在最后一个例子中`-P`标示，是`
 
 	$ sudo docker run -d -p 5000:5000 training/webapp python app.py
 
-他将端口5000映射到我们本地主机端口5000.现在你可能会问：为什么我们只使用1对1端口映射到Docker容器而不是映射到高端口？1:1映射端口只能到你本地主机的端口。假设你想要测试两个Python应用程序，两个容器内绑定到端口5000，没有足够的docker的端口映射你只能访问一次。
+他将容器的5000端口映射到我们本地主机5000端口.现在你可能会问：为什么我们只使用1对1端口映射到Docker容器而不是映射到高端口？1:1映射端口只能到你本地主机的端口。假设你想要测试两个Python应用程序，两个容器内绑定到端口5000，没有足够的docker的端口映射你只能访问其中一个。
 
 所以，现在我们打开浏览器访问端口49155。
 
@@ -133,16 +133,16 @@ Docker可以配置绑定网络端口。在最后一个例子中`-P`标示，是`
 
 ###网络端口快捷方式
 
-使用`docker ps`命令会返回映射端口，就是有点笨手笨脚的。所以，docker有一种快捷方式可以使用`docker port`.使用`docker port`可以指定容器ID或者名字映射到主机端的端口号。
+使用`docker ps`命令会返回映射端口，就是有点笨手笨脚的。对此，docker提供了一种快捷方式：`docker port`。使用`docker port`可以查看指定（ID或者名字的）容器的某个确定端口映射到宿主机的端口号。
 
 	$ sudo docker port nostalgic_morse 5000
 	0.0.0.0:49155
 
-在这种情况下，我们看到端口5000映射到容器外的主机端口。
+在这种情况下，我们看到容器的5000端口映射到了宿主机的的49155端口。
 
 ###查看WEB应用程序日志
 
-让我们看看我们的容器应用程序都发生了什么，使用我们学习到的另一个命令`docker logs`来查看。
+让我们看看我们的容器中的应用程序都发生了什么，使用我们学习到的另一个命令`docker logs`来查看。
 
 	$ sudo docker logs -f nostalgic_morse
 	* Running on http://0.0.0.0:5000/
@@ -182,14 +182,14 @@ Docker可以配置绑定网络端口。在最后一个例子中`-P`标示，是`
 	       "User": "",
 	. . .
 
-我们也可以针对我们想要的信息缩小显示，例如，返回容器的IP地址，如下：
+我们也可以针对我们想要的信息进行过滤，例如，返回容器的IP地址，如下：
 
 	$ sudo docker inspect -f '{{ .NetworkSettings.IPAddress }}' nostalgic_morse
 	172.17.0.5
 
 ###停止我们的容器
 
-好吧，我们看到WEB应用程序工作。现在我们通过使用`docker stop`命令来停止我们容器名字：nostalgic_morse
+好吧，我们看到WEB应用程序工作。现在我们通过使用`docker stop`命令来停止名为 nostalgic_morse 的容器：
 
 	$ sudo docker stop nostalgic_morse
 	nostalgic_morse
@@ -209,25 +209,25 @@ Docker可以配置绑定网络端口。在最后一个例子中`-P`标示，是`
 
 ###移除我们的应用程序
 
-你的同事告诉你它们现在已经完成了在容器上的工作，现在已经不需要了。让我们使用`docker rm`命令来删除它：
+你的同事告诉你他们已经完成了在容器上的工作，不在需要容器了。让我们使用`docker rm`命令来删除它：
 
 	$ sudo docker rm nostalgic_morse
 	Error: Impossible to remove a running container, please stop it first or use -f
 	2014/05/24 08:12:56 Error: failed to remove one or more containers
 
-发生了什么？实际上我们不能删除正在运行的容器。这保护你以外删除你可能需要的运行容器。让我们先试一遍停止容器。
+发生了什么？实际上，我们不能删除正在运行的容器。这避免你意外删除了可能需要的运行中的容器。让我们先停止容器，再试一次。
 
 	$ sudo docker stop nostalgic_morse
 	nostalgic_morse
 	$ sudo docker rm nostalgic_morse
 	nostalgic_morse
 
-现在我们容器停止和删除。
+现在我们停止并删除了容器。
 
 >注意：删除容器是最后一步！
 
 ###下一步
 
-直到现在我们使用镜像，我们从Docker Hub下载，现在我们建设和分享我们的镜像。
+直到现在，我们使用的镜像都是从Docker Hub下载的。接下来，我们学习创建和分享镜像。
 
 阅读[使用镜像](dockerimages.md)
