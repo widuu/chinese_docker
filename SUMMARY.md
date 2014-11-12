@@ -28,7 +28,6 @@
 	* [管理容器数据](./userguide/dockervolumes.md)
 	* [使用Docker Hub](./userguide/dockerrepos.md)
 * [Docker Hub](./docker-hub/docker-hub.md)
-	* [Docker Hub](./docker-hub/docker-hub.md)
 	* [账户](./docker-hub/accounts.md) 
 	* [存储库](./docker-hub/repos.md)
 	* [自动构建](./docker-hub/builds.md)
