@@ -1,13 +1,12 @@
 Docker中文指南
 ===
 
- docker正式版已经推出，做的改动非常多，以前版本的docker翻译已经不能用了，所以现在重新开始希望有兴趣的朋友一起加入！
+ docker正式版已经推出，做的改动非常多，以前版本的docker翻译已经不能用了，所以现在重新开始。希望有兴趣的朋友一起加入！
 
 
 [文章目录](./SUMMARY.md)
 
 gitHub地址：[http://github.com/widuu/chinese_docker](http://github.com/widuu/chinese_docker)
-
 
 blog地址：[http://www.widuu.com](http://www.widuu.com)
 
