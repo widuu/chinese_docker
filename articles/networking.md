@@ -1,47 +1,48 @@
 网络配置
 ===
 
-###TL;DR
+###TL;DR(原文的这些个符号，几个意思？)
 
- `Dockers`启动后，会在宿主机上创建一个虚拟的网卡`docker0`。它会随机选择一个宿主机没有使用，且满足RFC 1918定义的私有网络地址和子网，来分配给 `docker0`。举例来说，在我做这个步骤时，Docker选择了 `172.17.42.1/16`，这个16位的子网掩码会为宿主机和容器提供65534个地址。
+ `Dockers`启动后，会在宿主机上创建名为`docker0`的虚拟网卡，并给`docker0`随机分配一个宿主机没有使用，且满足RFC 1918定义的私有网络地址和子网段。举例来说，在我做这个步骤时，Docker分配的子网段是`172.17.42.1/16`，（最后那个16是掩码，表示该子网段可以会为宿主机和容器提供65534个地址）。容器的MAC地址根据IP地址生成，可以避免产生ARP冲突，它的范围从 02:42:ac:11:00:00 开始到 02:42:ac:11:ff:ff结束。
 
->注：本文档讨论的是 `docker` 的网络高级配置选项。在大多数情况下你不会用到这些。如果你仅仅想简单了解`docker`网络或如何进行容器间的连接，请查看[docker用户指南](../userguide/dockerlinks)
+>注：本文档讨论的是 `docker` 的网络高级配置选项，初级用户无需阅读。如果想了解`docker`网络或容器间的连接方式，请查看[docker用户指南](../userguide/dockerlinks)
 
-不过， `docker0` 不仅是普通接口。它是一个虚拟的网桥，实现其附属的网络接口间的自动数据包转发。这允许容器与主机彼此之间通信。每次 `docker` 创建一个容器，它就创建了一个“对等”的接口，就像一个管道的两段，--一端发送数据包，另一端就会收到。它会给对等一端的容器成为 `eth0`网卡，并且保持另一端的通信，并且在主机的命名空间给唯一的一个名称 `vethAQI2QT`。通过绑定每个 `veth*`接口到 `docker0`桥。 `Docker`每个docker容器和共享主机之间创建一个虚拟子网。
+当然， `docker0` 除了是虚拟网卡，还是负责其附属网卡间数据转发的虚拟网桥。`docker`每新建一个容器，就会同时创建了两个相对应的网卡接口，它们就像一条管道的两端：数据从一端进入（发送），从另一端出来（接受）。这两个网卡，一个被分配给新建的容器做`eth0`网卡，另一个被分配给宿主机，并取个类似于`vethAQI2QT`的唯一名称。就这样，通过绑定每个`veth*`网卡到`docker0`网桥，`Docker`在宿主机和各docker容器间搭建起了一个虚拟子网。
 
-本文的剩余部门来诠释所有的方法，你可以使用 `docker`命令选项，在先前的情况下对linux网络进行调整、补充、或者完全替代docker的默认网络配置。
+接下来，我们详细阐述如何使用`docker`参数或Linux网络命令来进一步修改、完善、或者完全替代`docker`的默认网络配置。
 
-###快速指南
+###参数快速指南
 
-这是一个 `docker` 网络有关的命令行选项，它会帮助你在下边查找到你想要查看的选项。
+首先，来浏览`docker`的网络相关的命令行选项列表，下面的章节对一一进行介绍：
 
-一些网络命令行选项只能在 `docker`服务启动时提供，一旦运行，不能改变：
+第一部分：只能在`docker`服务启动时使用使用的网络命令行选项，一旦运行，不能改变。
 
-+ -b BRIDGE or --bridge=BRIDGE — 下边查看创建自己的网桥
-+ --bip=CIDR — 查看定制docker0
-+ -H SOCKET... 或 --host=SOCKET... 这听起来像涉及到容器网络，但是它实际上是另一个方面的作用：它告诉 `Docker` 服务通过什么途径来接收命令像"运行容器"和“通知容器”。
-+ --icc=true|false — 查看容器之间的通信
-+ --ip=IP_ADDRESS — 查看绑定容器端口
-+ --ip-forward=true|false — 查看容器之间的通信
-+ --iptables=true|false — 查看容器之间的通信
-+ --mtu=BYTES — 查看定制docker0
++ `-b BRIDGE` or `--bridge=BRIDGE` — 请查看[搭建私人网桥](#bridge-building)小节
++ `--bip=CIDR` — 请查看[定制 docker0](#docker0)小节
++ `-H SOCKET...` 或 `--host=SOCKET...`  —这个参数听起来像是在说容器网络，但实际上是在干另一件事：用来向`Docker`服务传递类似"运行容器"和“停止容器”的命令。
++ `--icc=true|false` — 请查看[容器间通信](#between-containers)小节小节
++ `--ip=IP_ADDRESS` — 请查看[绑定容器端口](#binding-port)小节
++ `--ipv6=true|false` — 请查看[IPV6](#ipv6)小节
++ `--ip-forward=true|false` — 请查看[容器与外部通讯](#the-world)小节
++ `--iptables=true|false` — 请查看[容器间通信](#between-containers)小节
++ `--mtu=BYTES` — 请查看[定制 docker0](#docker0)小节
 
-这里有两个网络选项，可以提供在启动时或者当 `docker run` 运行调用。当提供了启动时，如果没有指定选项的值， `docker run` 会自动设置默认值。
+第二部分：下面两个参数，可以在启动时或者当 `docker run` 运行调用。如果启动时进行了设置，就会作为`docker run`运行时的初始默认值。
 
-+ --dns=IP_ADDRESS... — 查看设置DNS
-+ --dns-search=DOMAIN... --查看设置DNS
++ `--dns=IP_ADDRESS...`  — 请查看[配置 DNS](#dns)小节
++ `--dns-search=DOMAIN...`  — 请查看[配置 DNS](#dns)小节
 
+第三部分：只能在`docker run`运行时调用的参数，特别用来定制容器的特性：
 
-最后，几个网络选项只能在`docker run`时调用，因为他们指定给一个容器一些特性：
++ `-h HOSTNAME` or `--hostname=HOSTNAME`  — 请查看[配置 DNS](#dns)小节和[如何设置容器的网络](#containers-networking)小节
++ `--link=CONTAINER_NAME:ALIAS`  — 请查看[配置 DNS](#dns)小节和[容器间通信](#between-containers)小节
++ `--net=bridge|none|container:NAME_or_ID|host`  — 请查看[如何设置容器的网络](#containers-networking)小节
++ `--mac-address=MACADDRESS...`  — 请查看[如何设置容器的网络](#containers-networking)小节
++ `-p SPEC` or `--publish=SPEC`  — 请查看[绑定容器端口](#binding-port)小节
++ `-P` or `--publish-all=true|false`  — 请查看[绑定容器端口](#binding-port)小节
 
-+ -h HOSTNAME or --hostname=HOSTNAME — 查看配置DNS和如何设置容器网络
-+ --link=CONTAINER_NAME:ALIAS — 配置DNS和容器之间的通信
-+ --net=bridge|none|container:NAME_or_ID|host — 查看如何设置容器网络
-+ -p SPEC or --publish=SPEC — 查看绑定容器端口
-+ -P or --publish-all=true|false — 查看绑定容器端口
-
-以下部分解决上述所有的提到的主题，从简单到复杂的。
+接下来，我们从浅到深的讲解上述题目。
 
 ###配置DNS
 
-docker如何给每一个容器提供一个主机名和DNS配置，无需构建一个定制的镜像和主机写在里面，
+docker如何给每个容器提供独立的主机名和DNS配置呢？当然不是直接把主机名写到镜像里。docker巧妙的利用可刷新的虚拟文件覆盖了容器`/etc`目录下的三个关键文件。可以在容器内运行`mount`命令进行查看：
