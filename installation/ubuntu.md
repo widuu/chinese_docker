@@ -21,6 +21,100 @@ Docker 需要在64位版本的Ubuntu上安装。此外，你还需要保证你�
 	3.11.0-15-generic
 >Docker 要求 Ubuntu 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的Ubuntu版本是否支持 Docker 。
 
+###Trusty 14.04
+
+ 这个版本不需要考虑前提条件
+
+###Precise 12.04 (LTS)
+
+对于Ubuntu Precise版本, 安装Docker需要内核在3.13及以上版本。如果你的内核版本低于3.13你需要升级你的内核。 通过下边的表，请查阅下边的表来确认你的环境需要哪些包。
+
+<style type="text/css"> .tg  {border-collapse:collapse;border-spacing:0;} .tg
+td{font-size:14px;padding:10px
+5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg-031{width:275px;font-family:monospace} </style> <table class="tg"> <tr> <td
+class="tg-031">linux-image-generic-lts-trusty</td> <td class="tg-031e">Generic
+Linux kernel image. This kernel has AUFS built in. This is required to run
+Docker.</td> </tr> <tr> <td class="tg-031">linux-headers-generic-lts-trusty</td>
+<td class="tg-031e">Allows packages such as ZFS and VirtualBox guest additions
+which depend on them. If you didn't install the headers for your existing
+kernel, then you can skip these headers for the"trusty" kernel. If you're
+unsure, you should include this package for safety.</td> </tr> <tr> <td
+class="tg-031">xserver-xorg-lts-trusty</td> <td class="tg-031e"
+rowspan="2">Optional in non-graphical environments without Unity/Xorg.
+<i>Required</i> when running Docker on machine with a graphical environment.
+
+<p>To learn more about the reasons for these packages, read the installation
+instructions for backported kernels, specifically the <a
+href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack" target="_blank">LTS
+Enablement Stack</a> &mdash; refer to note 5 under each version.</p></td> </tr>
+<tr> <td class="tg-031">libgl1-mesa-glx-lts-trusty</td> </tr> </table> &nbsp;
+
+通过下边的操作来升级你的内核和安装额外的包
+
+1. 在Ubuntu系统中打开命令行控制台。
+
+2. 升级你的包管理器
+
+		$ sudo apt-get update
+
+3. 安装所有必须和可选的包
+
+		$ sudo apt-get install linux-image-generic-lts-trusty
+
+	根据个人的系统环境来选择是否安装更多的包（前表列出）。
+
+4. 重启系统
+
+		$ sudo reboot
+
+5. 等到系统重启成功之后，查看[安装Docker](#Ubuntu安装Docker)
+
+###Saucy 13.10 (64 bit)
+
+Docker 使用 AUFS 作为默认的后端存储方式，如果你之前没有安装 AUFS ，Docker 在安装过程中会自动添加。
+
+##Ubuntu安装Docker
+
+首先要确认你的 Ubuntu 版本是否符合安装 Docker 的前提条件。如果没有问题，你可以通过下边的方式来安装 Docker ：
+
+1. 使用具有`sudo`权限的用户来登录你的Ubuntu。
+
+2. 查看你是否安装了`wget`
+
+		$ which wget
+
+	如果`wget`没有安装，先升级包管理器，然后再安装它。
+		
+		$ sudo apt-get update $ sudo apt-get install wget
+
+3. 获取最新版本的 Docker 安装包
+
+		$ wget -qO- https://get.docker.com/ | sh
+
+	系统会提示你输入`sudo`密码，输入完成之后，就会下载脚本并且安装Docker及依赖包。
+
+4. 验证 Docker 是否被正确的安装
+
+		$ sudo docker run hello-world
+	
+ 	上边的命令会下载一个测试镜像，并在容器内运行这个镜像。
+
+
+##Ubuntu Docker可选配置
+
+这部分主要介绍了 Docker 的可选配置项，使用这些配置能够让 Docker 在 Ubuntu 上更好的工作。
+
+
+- 创建 Docker 用户组
+- 调整内存和交换空间(swap accounting) 
+- 启用防火墙的端口转发(UFW)
+- 为 Docker 配置DNS服务
+
+###创建 Docker 用户组
+
+docker 进程通过监听一个 Unix Socket 来替代 TCP 端口。在默认情况下，docker 的 Unix Socket属于`root`用户，当然其他用户可以使用`sudo`方式来访问。因为这个原因， docker 进程就一直是`root`用户运行的。
+
 ---
 
 如何你打算使用 [UFW防火墙](https://help.ubuntu.com/community/UFW)，请阅读 [*docker和UFW*](#docker-and-ufw)
