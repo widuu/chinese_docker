@@ -7,7 +7,25 @@ Docker 支持以下的 Ubuntu 版本
 + Ubuntu Precise 12.04 (LTS) (64-bit)
 + Ubuntu Raring 13.04 and Saucy 13.10 (64 bit)
 
+这个页面可以指导你安装 Docker 包管理器，并了解其中的安装机制。通过下边的安装方式可以确保你获取的是最新版本的 Docker。如果你想要使用 'Ubuntu包管理器' 安装，你可以查阅你的 Ubuntu 文档。
+
+###前提条件
+
+Docker 需要在64位版本的Ubuntu上安装。此外，你还需要保证你的 Ubuntu 内核的最小版本不低于 3.10，其中3.10 小版本和更新维护版也是可以使用的。
+
+在低于3.10版本的内核上运行 Docker 会丢失一部分功能。在这些旧的版本上运行 Docker 会出现一些BUG，这些BUG在一定的条件里会导致数据的丢失，或者报一些严重的错误。
+
+打开控制台使用 `uname -r`命令来查看你当前的内核版本。
+
+	$ uname -r 
+	3.11.0-15-generic
+>Docker 要求 Ubuntu 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的Ubuntu版本是否支持 Docker 。
+
+---
+
 如何你打算使用 [UFW防火墙](https://help.ubuntu.com/community/UFW)，请阅读 [*docker和UFW*](#docker-and-ufw)
+
+
 
 ##Ubuntu Trusty 14.04 (LTS) (64-bit)
 
