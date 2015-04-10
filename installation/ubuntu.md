@@ -29,10 +29,7 @@ Docker 需要在64位版本的Ubuntu上安装。此外，你还需要保证你�
 
 对于Ubuntu Precise版本, 安装Docker需要内核在3.13及以上版本。如果你的内核版本低于3.13你需要升级你的内核。 通过下边的表，请查阅下边的表来确认你的环境需要哪些包。
 
-<style type="text/css"> .tg  {border-collapse:collapse;border-spacing:0;} .tg
-td{font-size:14px;padding:10px
-5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg-031{width:275px;font-family:monospace} </style> <table class="tg"> <tr> <td
+ <table class="tg"> <tr> <td
 class="tg-031">linux-image-generic-lts-trusty</td> <td class="tg-031e">Generic
 Linux kernel image. This kernel has AUFS built in. This is required to run
 Docker.</td> </tr> <tr> <td class="tg-031">linux-headers-generic-lts-trusty</td>
