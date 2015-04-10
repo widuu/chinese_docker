@@ -7,21 +7,21 @@ Microsoft Windows 安装docker
 
 #windows
 
->注意：docker已经在windows7.1和windows 8上通过测试，也支持运行老的版本，你的处理器必须支持硬件虚拟化。
+>注意：docker已经在windows7.1和windows 8上通过测试，当然它也可以在低版本的windows上允许。但是你的处理器必须支持硬件虚拟化。
 
-docker引擎使用的是Linux内核的特性，所以在OSＸ上运行docker我们就待使用轻量级的虚拟机(VM),你使用windows上的Docker客户端来管理Docker容器和控制docker引擎的构建、运行、管理。
+docker引擎使用的是Linux内核的特性，所以我们需要在 Windows 上使用一个轻量级的虚拟机(vm)来运行 docker。我们使用 Windows的Docker客户端来控制 Docker 虚拟化引擎的构建、运行和管理 Docker 容器。
 
-为了简化这个过程，我们设计了一个应用程序叫Boot2Docker安装虚拟机和运行docker进程。
+为了简化这个过程，我们设计了一个叫 Boot2Docker的应用程序，你可以通过它来安装虚拟机和运行docker 进程。
 
 ###安装
 
-1.下载最新版本的Docker for Windows Installer(由于S3可能被墙了，所以国内有时候下载不了，但是我把它放到国内七牛上了，大家可以下载试试[http://qiniu.widuu.com/docker-install.exe"](http://qiniu.widuu.com/docker-install.exe)<版本1.11>)
+1. 下载最新版本的[Docker for Windows Installer](https://github.com/boot2docker/windows-installer/releases/latest)
 
-2.运行安装文件，它将会安装virtualbox、MSYS-git boot2docker Linux镜像和Boot2Docker的管理工具。
+2. 运行安装文件，它将会安装virtualbox、MSYS-git boot2docker Linux镜像和Boot2Docker的管理工具。
 
 ![docker windows软件安装](http://widuu.u.qiniudn.com/windows_docker.png)
 
-3.从你的桌面上或者从你的应用程序文件夹中找到应用的快捷方式，运行`Boot2Docker Start`，启动脚本会让你输入一个ssh秘钥密码（简单点但最起码安全）
+3. 从桌面上或者Program Files中找到Boot2Docker for Windows，运行 `Boot2Docker Start` 脚本。这个脚本会要求你输入 ssh 密钥密码 - 可以简单点（但是起码看起来比较安全），然后只需要按[Enter]按钮即可。
 
 ![windows docker run](http://widuu.u.qiniudn.com/windows_docker2.png)
 
@@ -34,9 +34,9 @@ docker引擎使用的是Linux内核的特性，所以在OSＸ上运行docker我�
 	boot2docker.exe ssh
 ###升级
 
-+ 下载最新的 Docker for OS X Installer
++ 下载最新的 [Docker for Windows Installer](https://github.com/boot2docker/windows-installer/releases/tag/v1.5.0)
 + 运行安装程序，这将升级VirtualBox和Boot2Docker管理工具
-+ 升级现有的虚拟机，打开终端并运行
++ 打开终端输入如下的命令来升级你现有的容器：
 
 	$ boot2docker stop
 	$ boot2docker download
@@ -44,47 +44,49 @@ docker引擎使用的是Linux内核的特性，所以在OSＸ上运行docker我�
 
 ###运行Docker
 
-通过终端，你可以运行docker输出“hello word”的例子
+> 注意：如果你使用一个远程的 Docker 进程，像 Boot2Docker 。在这时候，当你运行 docker 命令的时候前边不需要像前边的例子那样加入`sudo`。
 
-	$ docker run ubuntu echo hello world
+我们运行一下事例镜像 `hello-world `，运行如下命令：
 
-这将下载Ubuntu镜像和打印hello word
+	$ docker run hello-world
 
-###Docker测试
+这将下载非常小的 `hello-world` 镜像，并且打印打印 `Hello from Docker.` 信息。
 
->这个不是官方的，因为我们大家知道下载docker从国外是灰常慢的，而且不一定什么时候就被墙了，所以在这里我就提供几个测试的，让大家下载来使用。
+###使用PUTTY登陆来代替CMD命令行
 
-	wget qiniu.widuu.com/busybox.tar
-	docker load -i busybox.tar
-	//如果没有tag或者name
-	docker tag id name:tag
-	
-	//或者大家使用docker中文社区提供的,这里非常感谢docker中文社区
-	
-	docker pull index.dockboard.org/widuucom/busybox
-	
-	docker run index.dockboard.org/widuucom/busybox echo hello word
+Boot2Docker使用 `%HOMEPATH%\.ssh` 目录来生成你的共有和私有密钥。同样登陆的时候你也需要使用这个目录下的私有密钥。
+
+这个私有密钥需要转换成 PuTTY 所需要的格式。
+
+你可以使用 [puttygen](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)来生成，具体操作如下:
+
+1. 打开 `puttygen.exe` 找到（"File"->"Load"）按钮来加载 %HOMEPATH%\.ssh\id_boot2docker 私有密钥文件。
+
+2. 点击` "Save Private Key"`按钮。
+
+3. 在PUTTY中使用刚才保存的文件来登陆 docker@127.0.0.1:2022 
+
+###进一步细节
+
+Boot2Docker 管理工具提供了如下几个命令：
+
+	$ ./boot2docker
+	Usage: ./boot2docker [<options>] {help|init|up|ssh|save|down|poweroff|reset|restart|config|status|info|ip|delete|download|version} [<args>]
 
 ###容器端口重定向
 
-最新版本的boot2docker可以设置网络适配器提供容器访问的端口
+boot2Docker的默认用户是 `docker` 密码是 `tcuser`。 
 
-如果你运行容器给定一个指定的端口
+最新版本的 boot2docker 可以设置网络适配器来给容器提供端口访问。
 
-	$ docker run --rm -i -t -p 80:80 ngin
+如你运行一个暴露内部端口的容器
 
-然后你应该能够使用IP地址访问Nginx服务器：
+	docker run --rm -i -t -p 80:80 nginx
+
+当你需要使用一个IP地址来访问 Nginx 服务器，你可以使用如下命令来查看 ip。
 
 	$ boot2docker ip
 
-通常，是192.168.59.103,但是可以通过virtualbox的dhcp改变。
+通常情况下，是192.168.59.103,但是它可以通过 virtualbox 的 dhcp 来改变。
 
-###进一步的细节
-
-如果你有求知欲，boot2docker的默认用户名是`docker`密码是`tcuser`
-
-Boot2Docker管理工具提供了一些默认命令:
-
-	$ ./boot2docker
-	Usage: ./boot2docker [<options>]
-	{help|init|up|ssh|save|down|poweroff|reset|restart|config|status|info|ip|delete|download|version} [<args>]
+更多细节信息，请查看[Boot2Docker site](http://boot2docker.io/)
