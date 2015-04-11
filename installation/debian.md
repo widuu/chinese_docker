@@ -1,7 +1,6 @@
 Debian
 ===
 
-Docker 已经支持以下的 Debian 版本：
 以下版本的 Debian 支持 Docker：
 
 + [Debian 8.0 Jessie (64-bit)](#debian-jessie-80-64-bit)
