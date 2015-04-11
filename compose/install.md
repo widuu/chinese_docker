@@ -9,15 +9,12 @@
 首先，你需要安装大于或者等于1.3版本的 Docker 。
 
 
-If you're on OS X, you can use the OS X installer to install both Docker and the OSX helper app, boot2docker. Once boot2docker is running, set the environment variables that'll configure Docker and Compose to talk to it:
-
 如果你使用 OS X 系统，你可以使用 OS X 安装程序 boot2docker 来安装 Docker。 当 boot2docker 运行起来的时候，使用下边的指令来配置 Docker 的环境变量：
 
 	$(boot2docker shellinit)
 
 添加上边输出的信息到 `~/.bashrc` 文件，来保存shell环境变量信息。
 
-For complete instructions, or if you are on another platform, consult Docker's installation instructions.
 
 需要查看完整的说明文档，或者你使用的是其它平台，你可以查看 [Docker 安装文档](../install/)。
 
