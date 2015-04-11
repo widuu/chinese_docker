@@ -7,11 +7,11 @@ Microsoft Windows 安装docker
 
 #windows
 
->注意：docker已经在windows7.1和windows 8上通过测试，当然它也可以在低版本的windows上允许。但是你的处理器必须支持硬件虚拟化。
+>注意：docker已经在windows7.1和windows 8上通过测试，当然它也可以在低版本的windows上使用。但是你的处理器必须支持硬件虚拟化。
 
-docker引擎使用的是Linux内核的特性，所以我们需要在 Windows 上使用一个轻量级的虚拟机(vm)来运行 docker。我们使用 Windows的Docker客户端来控制 Docker 虚拟化引擎的构建、运行和管理 Docker 容器。
+docker 引擎使用的是Linux内核的特性，所以我们需要在 Windows 上使用一个轻量级的虚拟机(vm)来运行 docker。我们使用 Windows的Docker客户端来控制 Docker 虚拟化引擎的构建、运行和管理 Docker 容器。
 
-为了简化这个过程，我们设计了一个叫 Boot2Docker的应用程序，你可以通过它来安装虚拟机和运行docker 进程。
+为了简化这个过程，我们设计了一个叫 Boot2Docker 的应用程序，你可以通过它来安装虚拟机和运行docker 进程。
 
 ###安装
 
