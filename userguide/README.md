@@ -67,5 +67,16 @@ Docker 为你将要运行的应用程序提供了一个基于容器的虚拟化�
 
 Docker Compose 你只需要一个简单的配置文件就可以自定义你所需要的应用组件，包括容器、配置、网络链接和挂载卷。只需要一个简单的命令就可以启动和运行你的应用程序。
 
-阅读[Docker Compose 用户指南.](/compose/README.md)
+阅读[Docker Compose 用户指南.](../compose/README.md)
 
+###Docker Machine
+
+Docker Machine 可以帮助你快速的启动和运行 Docker 引擎。 Machine 可以帮助你配置本地电脑、云服务商和你的个人数据中心上的 Docker 引擎主机，并且通过配置 Docker 客户端来让它们进行安全的通信。
+
+查阅 [Go to Docker Machine user guide.](../machine/README.md)
+
+###Docker 集群
+
+Docker 集群是将多个 Docker 引擎池连接在一起组合成一个独立的主机来提供给外界。它是以 Docker API 作为服务标准的，所以任何已经在Docker上工作的工具，现在都可以透明地扩展到多个主机上。
+
+阅读 [Go to Docker Swarm user guide.](../swarm/)
