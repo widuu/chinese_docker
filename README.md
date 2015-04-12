@@ -12,7 +12,7 @@ Docker中文指南
 
 ##参与详细
 
-1. 请发送邮箱到 admin#widuu.com(#换成@)，说明参与 Docker 翻译。
+1. 请发送邮件到 admin#widuu.com(#换成@)，说明参与 Docker 翻译。
 2. 您会收到 Worktile 和 Breaychat 的 邀请链接，点击加入。
 3. 在 Worktile 上领取自己要翻译的文章，开始翻译，使用 Worktile 是为了避免翻译冲突。 
 4. 在 Breaychat 上会提示大家每个人提交翻译的细节，并且作为团队沟通工具。
