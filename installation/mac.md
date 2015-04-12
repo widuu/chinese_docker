@@ -10,7 +10,7 @@ src="../images/kitematic.png" alt="Download Kitematic"></a>
 
 ###Command-line Docker with Boot2Docker
 
-因为 Docker 进程使用的是 Linux 内核特性，所以你能在原生的 OS X 中安装 Docker，如果你需要安装 Docker ，你必须安装 `Boot2Docker`。 这个程序中包含了 `VirtualBox` 虚拟主机(VM), Docker 和 Boot2Docker 管理工具。
+因为 Docker 进程使用的是 Linux 内核特性，所以你不能在原生的 OS X 中安装 Docker，如果你需要安装 Docker ，你必须安装 `Boot2Docker`。 这个程序中包含了 `VirtualBox` 虚拟主机(VM), Docker 和 Boot2Docker 管理工具。
 
 Boot2Docker 是专门为OS X上运行 Docker 而开发的一个轻量级的虚拟主机管理工具。当Virtual Box在内存中启动后，它会下载一个大约 24MB 的 ISO文件（boot2docker.iso），下载完成后，大约5S中就会启动了。
 
