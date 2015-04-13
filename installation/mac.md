@@ -30,7 +30,7 @@ Boot2Docker 是专门为OS X上运行 Docker 而开发的一个轻量级的虚�
 
 ![mac_docker_host](../images/mac_docker_host.png)
 
-在 OS X 中，Docker 主机地址就是 Linux 虚拟主机地址。当你启动 `boot2docker` 进程的时候，虚拟主机就是为它指定IP。在 `boot2docker` 下运行的虚拟主机，通过端口映射的方式将端口映射到虚拟主机上。通过你可以通过本页面上的操作实践来体会到这一点。
+在 OS X 中，Docker 主机地址就是 Linux 虚拟主机地址。当你启动 `boot2docker` 进程的时候，虚拟主机就会为它指定IP。在 `boot2docker` 下运行的容器，通过端口映射的方式将端口映射到虚拟主机上。你可以通过本页面上的操作实践来体会到这一点。
 
 ###安装Docker
 
