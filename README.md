@@ -21,7 +21,10 @@ Docker中文指南
 ## Contributing
 
 1. 登录 <https://coding.net> 或 <https://github.com>
-2. Fork <https://coding.net/u/widuu/p/chinese_docker/git> 或 <http://github.com/widuu/chinese_docker>
+2. 仓库地址分布： 
+	1.  Coding仓库：<https://coding.net/u/widuu/p/chinese_docker/git> 
+	1.  github仓库：<http://github.com/widuu/chinese_docker>
+	1. oschina仓库：<http://git.oschina.net/widuu/chinese_docker>
 3. 创建您的特性分支 (`git checkout -b my-new-feature`)
 4. 提交您的改动 (`git commit -am 'Added some feature'`)
 5. 将您的改动记录提交到远程 git 仓库 (`git push origin my-new-feature`)
