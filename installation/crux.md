@@ -4,9 +4,8 @@ CRUX Linux
 在CRUX Linux可以通过由 [James Mills](http://prologic.shortcircuit.net.au/) 提供的 ports，或者官方的 [contrib](http://crux.nu/portdb/?a=repo&q=contrib) ports.
 
 - docker
-- docker-bin
 
-`docker` port 将安装最新版本的 Docker，`docker-bin` port 将从二进制文件安装最新版本的 Docker。
+`docker` port 将构建安装最新版本的 Docker。
 
 ###安装
 
@@ -18,13 +17,15 @@ CRUX Linux
 
 ###内核要求
 
-如果使 CRUX + Docker 主机正常工作，你必须确保你的内核安装必要的模块来保证LXC容器所需要的函数和docker进程的正常运行。
+如果使 CRUX + Docker 主机正常工作，你必须确保你的内核安装必要的模块来保证 Docker 进程的正常运行。
 
 请阅读`README`：
 
 	$ prt-get readme docker
 
-`docker` 和 `docker-bin` ports 安装由 Docker 发行版提供的 contrib/check-config.sh 脚本，以供检查你的内核配置是否适合 Docker 主机。
+`docker` ports 安装由 Docker 发行版提供的 contrib/check-config.sh 脚本，以供检查你的内核配置是否适合安装 Docker 主机。
+
+运行下面的命令来检查你的内核：
 
 	$ /usr/share/docker/check-config.sh
 
@@ -38,6 +39,20 @@ CRUX Linux
 
 - 编辑 `/etc/rc.conf`
 - 将 `docker` 放到 `SERVICES=(...)` 数组 `net` 之后.
+
+###镜像
+
+“官方库”中提供了由 [James Mills](http://prologic.shortcircuit.net.au/) 制作的 CRUX 镜像。你可以使用 `pull` 命令来使用这个镜像，当然你也可以在 `Dockerfile(s)` 中的 `FROM` 部分来设置使用。
+
+
+    $ docker pull crux
+    $ docker run -i -t crux
+
+在 Docker Hub 中也有其他用户贡献的  [CRUX 基础镜像](https://registry.hub.docker.com/repos/crux/) 。
+
+###Issues
+
+如果你有一些问题，请在 [CRUX Bug Tracker](http://crux.nu/bugs/) 提交。
 
 ###支持
 
