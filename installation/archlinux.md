@@ -27,6 +27,8 @@ Docker 依赖于几个指定的安装包，核心的几个依赖包为：
 
 	pacman -S docker
 
+这就安装了你所需要的一切。
+
 对于AUR包的执行：
 
 	yaourt -S docker-git
@@ -35,10 +37,14 @@ Docker 依赖于几个指定的安装包，核心的几个依赖包为：
 
 ###开启Docker
 
-Docker 会创建一个系统服务，用下面命令来启动：
+Docker 会创建一个系统服务，用下面命令来启动 Docker：
 
 	$ sudo systemctl start docker
 
 设置开机启动：
 
 	$ sudo systemctl enable docker
+
+## 自定义进程选项
+
+如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解[如何定制 Docker 进程](/articles/systemd.md)
