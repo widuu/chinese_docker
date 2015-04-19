@@ -1,72 +1,75 @@
-Fedora
-===
+# Fedora
 
-Docker 适用于 Fedora 19 及以后的版本，注意由于 Docker 的限制，Docker 只能使用在64位的主机上。
+Docker 已经支持以下版本的 Fedora :
 
-###安装
+- [*Fedora 20 (64-bit)*](#fedora-20-installation)
+- [*Fedora 21 and later (64-bit)*](#fedora-21-and-later-installation)
 
-Fedora提供了 Docker 安装包 `docker-io`
+目前的 Fedora 项目，仅发行版本中的内核支持 Docker。如果你打算在非发行版本的内核上运行 Docker ，内核的改动可能会导致出错。
 
-如果你安装了（无关的） `docker` 包，它会与 `docker-io` 包发生冲突。这里有一个[bug](https://bugzilla.redhat.com/show_bug.cgi?id=1043676)报告。如果在 Fedora 19 上安装 `docker-io` 包，请先卸载 `docker`
+## Fedora 21 或更高版本安装 Docker 
 
-	$ sudo yum -y remove docker
+在你的主机上安装 `docker` 包来安装 Docker 。
 
-Fedora 21以后的版本上， `wmdocker` 包提供了和 `docker` 包相同的功能，但是不和 `docker-io` 冲突。
+    $ sudo yum -y install docker
 
-	$ sudo yum -y install wmdocker
-	$ sudo yum -y remove docker
+更新 `docker` :
 
-在我们的主机上安装 `docker-io` 包
+    $ sudo yum -y update docker
 
-	$ sudo yum -y install docker-io
+请继续阅读启动 Docker 进程 [Starting the Docker daemon](#starting-the-docker-daemon)。
 
-更新 `docker-io` 包
+ 
+## Fedora 20 安装 Docker
 
-	$ sudo yum -y update docker-io
+在 `Fedora 20` 中，一个系统自带的可执行的应用程序与 docker 包名字发生冲突，所以我们给 docker 的RPM包重命名为 docker-io 。
 
-现在已经安装好了,让我们启动 docker 进程
+`Fedora 20` 中 安装 `docker-io` 之前需要先卸载 `docker` 包。
 
-	$ sudo systemctl start docker
+    $ sudo yum -y remove docker
+    $ sudo yum -y install docker-io
 
-设置开机启动：
+更新 `docker`
 
-	$ sudo systemctl enable docker
+    $ sudo yum -y update docker-io
 
-让我们验证 Docker 是否正常工作
+请继续阅读启动 Docker 进程 [Starting the Docker daemon](#starting-the-docker-daemon)。
 
-	$ sudo docker run -i -t fedora /bin/bash
+## Starting the Docker daemon
 
-###给Docker用户授权
+当 Docker 安装完成之后，你需要启动 docker 进程。
 
-Fedora 19 和 20 附带 Docker 0.11 版本，在 Fedora 20 上 Docker 已经更新到了 1.0 版本。如果你还在使用 0.11 版本，你需要给 Docker 用户授权。
+    $ sudo systemctl start docker
 
-`docker` 命令行通过 sockt 文件 /var/run/docker.sock 来连接 `docker` 进程的，这个进程的用户组是 `docker` .运行 `docker -d` 必须需要 Docker 用户组的一个用户来连接。
+如果我们希望开机时自动启动 Docker ，如下操作：
 
-	$ usermod -a -G docker login_name
+    $ sudo systemctl enable docker
 
-当然,在 1.0 版本以上就没有这个必要了。
+现在，我们来验证 Docker 是否正常工作。
 
-###HTTP代理
+    $ sudo docker run -i -t fedora /bin/bash
 
-如果使用HTTP代理服务器，如企业级别部署，你需要在 Docker 中配置系统服务文件。
+> 注意 ： 如果你使用的时候提示了 `Cannot start container` 错误，错误中提到了 SELINUX 或者权限不足，你需要更新 SELinux 策略，你可以使用 `sudo yum upgrade selinux-policy` 来改变 SELinux策略并重启。
 
-编辑 `/lib/systemd/system/docker.service` 文件,在 `[Service]` 添加以下部分：
+## 为使用 Docker 用户授权
 
-	Environment="HTTP_PROXY=http://proxy.example.com:80/"
+`docker` 命令行工具通过 socket 文件 `/var/run/docker.sock` 和 `docker` 守护进程进行通信的。而这个 socket 文件的用户权限是 `root:root`。 虽然
+[推荐](https://lists.projectatomic.io/projectatomic-archives/atomic-devel/2015-January/msg00034.html)
+使用 `sudo` 命令来使用 docker 命令，但是如果你不想使用 `sudo`, 系统管理员可以创建一个 `docker` 用户组，并将 `/var/run/docker.sock` 赋予 docker 用户组权限，然后给 docker 用户组添加用户即可。
 
-如果你不需要代理，你可以通过设置 NO_PROXY 变量来达到目的：
 
-	Environment="HTTP_PROXY=http://proxy.example.com:80/" "NO_PROXY=localhost,127.0.0.0/8,docker-registry.somecorporation.com"
+    $ sudo groupadd docker
+    $ sudo chown root:docker /var/run/docker.sock
+    $ sudo usermod -a -G docker $USERNAME
 
-刷新更改：
+## 自定义进程选项
 
-	$ systemctl daemon-reload
+如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解[如何定制 Docker 进程](/articles/systemd.md)
 
-重启 Docker :
-	
-	$ systemctl start docker
 
-下一步，请继续阅读[用户指南](../userguide/README.md)
+## 下一步
+
+阅读 [用户指南](../userguide/).
 	
 
 
