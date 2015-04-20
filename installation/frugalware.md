@@ -36,3 +36,7 @@ Docker 会创建一个系统服务，使用下面的命令启动该服务：
 设置开机启动：
 
 	$ sudo systemctl enable lxc-docker
+
+## 自定义进程选项
+
+如果你想要添加一个 HTTP 代理，为 Docker 运行文件设置不同的目录或分区，又或者定制一些其它的功能，请阅读我们的系统文章，了解[如何定制 Docker 进程](/articles/systemd.md)
