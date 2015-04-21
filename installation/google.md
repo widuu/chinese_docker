@@ -3,9 +3,9 @@ Google Cloud Platform
 
 ###Google Compute Enginer 镜像快速入门
 
-1.去谷歌云控制台，创建一个新的云计算项目，启用计算引擎
+1.去谷歌云控制台，创建一个新的云计算项目，启用云引擎
 
-2.下载和配置谷歌云 SDK 来配置您的项目使用如下的命令：
+2.使用如下的命令来下载谷歌云 SDK 并配置您的项目：
 
 	$ curl https://sdk.cloud.google.com | bash
 	$ gcloud auth login
@@ -21,5 +21,8 @@ Google Cloud Platform
 4.用ssh来连接这个实例：
 
 	$ gcloud compute ssh --zone us-central1-a docker-playground
-	docker-playground:~$ sudo docker run busybox echo 'docker on GCE \o/'
-	docker on GCE \o/
+	docker-playground:~$ sudo docker run hello-world
+
+当 Docker 输出 hello word 消息的时候，说明你的 Docker 工作正常。
+
+更多，请阅读 [ google 云平台部署容器 ](https://developers.google.com/compute/docs/containers)
