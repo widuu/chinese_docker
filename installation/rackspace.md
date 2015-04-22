@@ -1,9 +1,8 @@
-Rackspace Cloud
-===
+#Rackspace Cloud
 
-由 Rackspace 提供的 Ubuntu 安装 Docker 是非常简单的，你应该能够大多按照[Ubuntu](../installation/ubuntu.md "Ubuntu")的安装指南。
+由 Rackspace 提供的 Ubuntu 安装 Docker 是非常简单的，你可以大多按照[Ubuntu](../installation/ubuntu.md "Ubuntu")的安装指南。
 
-不过请注意：
+**不过请注意：**
 
 如果你使用的 Linux 发行版没有运行 3.8 内核，你就必须升级内核，这个在 Rackspace 上是有些困难的。
 
@@ -34,7 +33,7 @@ Rackspace 使用 grub 的 `menu.lst` 启动服务，虽然它们运行正常，�
 这是配置好的样子：
 
 	## ## End Default Options ##
-
+	
 	title              Ubuntu 12.04.2 LTS, kernel 3.8.x generic
 	root               (hd0)
 	kernel             /boot/vmlinuz-3.8.0-19-generic root=/dev/xvda1 ro quiet splash console=hvc0
