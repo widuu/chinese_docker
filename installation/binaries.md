@@ -1,11 +1,10 @@
-Binaries
-===
+#Binaries
 
 本安装说明是提供给那些想在多种环境中安装 Docker 的 hacker 们的。
 
 在进行安装之前，请检查你的 Linux 发行版本是否有打包好的 Docker 安装包。我们已经发布了许多发行版，这样会节省您很多时间。
 
-###检查运行时的依赖关系
+##检查运行时的依赖关系
 
 如果想要 Docker 正常运行，需要安装以下软件:
 
@@ -15,11 +14,11 @@ Binaries
 - XZ Utils 4.9 or later
 - a [properly mounted](https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount) cgroupfs hierarchy (having a single, all-encompassing "cgroup" mount point [is not sufficien](https://github.com/docker/docker/issues/3485))
 
-###检查内核的依赖关系
+##检查内核的依赖关系
 
 Docker进程模式需要特定的内核环境支持。详情请检查您的[发行版](../SUMMARY.md)。
 
-一般来说，Linux 内核 3.8（或更高版本）是首选，之前的版本会让 Docker 引发已知的问题。
+3.10 版本的 Linux 内核是 Docker 的最低要求，低于 3.10 版本的内核会缺少一些运行 Docker 容器的所需的功能。这些比较旧的内核，在一定条件下会导致数据丢失和频繁的错误。
 
 
 注意：Docker 也有客户端模式，它可以运行在任何 Linux 内核上（它甚至可以运行在 OS X 上）
