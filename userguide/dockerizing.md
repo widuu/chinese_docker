@@ -1,9 +1,9 @@
-Docker 应用 "hello Word"
+Docker 应用 "hello World"
 ===
 
 Docker 允许你在容器内运行应用程序， 使用 `docker run` 命令来在容器内运行一个应用程序。
 
-##Hello word
+##Hello world
 
 现在让我们来试试
 
@@ -28,7 +28,7 @@ Docker 允许你在容器内运行应用程序， 使用 `docker run` 命令来�
 
 	hello world
 
-那么，我们创建容器之后会发生什么呢？ 当命令状态状态处于激活状态的时候 Docker 容器就会一直运行。这里只要 "hello word" 被输出，容器就会停止。
+那么，我们创建容器之后会发生什么呢？ 当命令状态状态处于激活状态的时候 Docker 容器就会一直运行。这里只要 "hello world" 被输出，容器就会停止。
 
 ## 一个交互式的容器
 
@@ -68,7 +68,7 @@ Docker 允许你在容器内运行应用程序， 使用 `docker run` 命令来�
 	$ sudo docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 	1e5535038e285177d5214659a068137486f96ee5c2e85a4ac52dc83f2ebe4147
 
-等等，怎么回事？我们的 “hello word” 输出呢？让我们看看它是怎么运行的。这个命令看起来应该很熟悉.我们运行`docker run` ，但是我们指定了一个 `-d` 标识。`-d` 标识告诉 docker 在容器内以后台进程模式运行。
+等等，怎么回事？我们的 “hello world” 输出呢？让我们看看它是怎么运行的。这个命令看起来应该很熟悉.我们运行`docker run` ，但是我们指定了一个 `-d` 标识。`-d` 标识告诉 docker 在容器内以后台进程模式运行。
 
 我们也指定了一个相同的镜像: `ubuntu:14.04`
 
@@ -76,9 +76,9 @@ Docker 允许你在容器内运行应用程序， 使用 `docker run` 命令来�
 
 	/bin/sh -c "while true; do echo hello world; sleep 1; done"
 
-这是一个荒谬的 hello word 进程：一个脚本会一直输出 "hello word"
+这是一个忠实的 hello world 进程：一个脚本会一直输出 "hello world"
 
-为什么我们看不到的一大堆的 "hello word" ? 而是docker返回的一个很长的字符串：
+为什么我们看不到的一大堆的 "hello world" ? 而是docker返回的一个很长的字符串：
 
 	1e5535038e285177d5214659a068137486f96ee5c2e85a4ac52dc83f2ebe4147
 
@@ -86,7 +86,7 @@ Docker 允许你在容器内运行应用程序， 使用 `docker run` 命令来�
 
 >注意：容器 ID 是有点长并且非常的笨拙，稍后我们会看到一个短点的 ID,某些方面来说它是容器 ID 的简化版。
 
-我们可以根据容器 ID 查看 "hello word" 进程发生了什么
+我们可以根据容器 ID 查看 "hello world" 进程发生了什么
 
 首先，我们要确保容器正在运行。我们可以使用 `docker ps` 命令来查看。`docker ps` 命令可以查询 docker 进程的所有容器。
 
@@ -108,7 +108,7 @@ Docker 允许你在容器内运行应用程序， 使用 `docker run` 命令来�
 	hello world
 	. . .
 
-`docker logs` 命令会查看容器内的标准输出：这个例子里输出的是我们的命令 `hello word`
+`docker logs` 命令会查看容器内的标准输出：这个例子里输出的是我们的命令 `hello world`
 
 太棒了！我们的 docker 进程是工作的，并且我们创建了我们第一个 docker 应用。
 
