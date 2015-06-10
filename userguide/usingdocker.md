@@ -1,28 +1,31 @@
-使用容器
+使用容器工作
 ===
 
-在上一节的用户指南，我们开始了我们的第一个容器。我们使用`docker run`命令启用了两个容器
+在上一节的 Docker 用户指南中，我们启动了我们的第一个容器。而后边的例子中我们使用 `docker run` 命令启动了两个容器
 
-- 我们在前台进行容器交互
-- 在后台进程运行容器
++ 与前台进行交互的容器
 
-在这个过程中我们了解了几个docker命令：
++ 以进程方式在后台运行的容器
 
-- `docker ps` 列出容器
-- `docker logs`显示容器的标准输出
-- `docker stop`停止正在运行的容器
+在这个过程中，我们学习到了几个 Docker 命令：
 
->提示：我们有另外一种方法来学习`docker`命令，与[用户交互](https://www.docker.com/tryit/)
+- `docker ps`   列出容器
+- `docker logs` 显示容器的标准输出
+- `docker stop` 停止正在运行的容器
 
-`docker`客户端非常简单。你可以使用docker的每一个标示和参数组合来进行你的操作。
+>提示：另一种学习 `docker` 命令的方式就是查看我们的[交互式教程页面。](https://www.docker.com/tryit/)
+
+`docker` 客户端非常简单 。Docker 的每一项操作都是通过命令行来实现的，而每一条命令行都可以使用一系列的标识（flags）和参数。
 
 	# Usage:  [sudo] docker [flags] [command] [arguments] ..
 	# Example:
 	$ docker run -i -t ubuntu /bin/bash
 
-这时候我们使用`docker version`命令来返回安装的docker客户端和进程信息。
+让我们看看这个使用 `docker version` 命令的操作，它将返回当前安装的 Docker 客户端和进程的版本信息。
 
-这个命令不仅返回了您使用的docker客户端版本信息，还返回了docker的编程语言GO的版本信息。
+	$ sudo docker version
+
+这个命令不仅返回了您使用的 Docker 客户端和进程的版本信息，还返回了 GO 语言的版本信息( Docker的编程语言 )。
 
 	Client version: 0.8.0
 	Go version (client): go1.2
@@ -35,13 +38,13 @@
 	
 	Last stable version: 0.8.0
 
-###看看docker客户端能做什么
+## 查看一下 Docker 客户端都能做什么
 
-我们可以通过只输入`docker`没有任何其它选项来查看docker客户端所有的命令。
+我们可以通过只输入不附加任何参数的 `docker` 命令来运行 docker 二进制文件，这样我们就会查看到 Docker 客户端的所有命令选项。
 
 	$ sudo docker
 
-您将看到所有当前可用列表：
+会看到当前可用的所有命令行列表：
 
 	Commands:
      attach    Attach to a running container
@@ -49,20 +52,20 @@
      commit    Create a new image from a container's changes
 	 . . .
 
-###docker命令使用
+## 查看 Docker 命令用法
 
-你可以更深入的去了解docker命令的使用。
+你可以更深入的去了解指定的 Docker 命令使用方法。
 
-试着输入Docker [command]，这里会看到docker命令的使用方法：
+试着输入 Docker `[command]`，这里会看到 docker 命令的使用方法：
 
 	$ sudo docker attach
 	Help output . . .
 
-或者你可以再docker命令中使用`--help`标示
+或者你可以通过在 docker 命令中使用 `--help` 标识(flags)
 
 	$ sudo docker images --help
 
-这将显示所有的描述信息和可用的标示：
+这将返回所有的帮助信息和可用的标识(flags)：
 
 	Usage: docker attach [OPTIONS] CONTAINER
 
@@ -71,9 +74,15 @@
 	  --no-stdin=false: Do not attach stdin
 	  --sig-proxy=true: Proxify all received signal to the process (even in non-tty mode)
 
->注意：你可以看到一个完整的docker命令列表。
+>注意：你可以点击[这里](https://docs.docker.com/reference/commandline/cli/) 来查看完整的 Docker 命令行列表和使用方法。
 
-###在Docker中运行一个web应用
+## 在Docker中运行一个web应用
+
+====
+
+翻译到这里了
+
+====
 
 现在我们已经学习了更多的docker命令，我们需要学习在容器中运行更多重要的事情。到目前为止我们已经运行的容器没有什么特别用处。让我们通过在docker运行一个web应用程序实例来了解。
 
