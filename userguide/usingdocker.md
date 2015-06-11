@@ -78,37 +78,40 @@
 
 ## 在Docker中运行一个web应用
 
-====
+到这里我们了解了更多关于 docker 客户端的知识，而现在我们需要将学习的焦点转移到重要的部分：运行多个容器。到目前为止我们发现运行的容器并没有一些什么特别的用处。让我们通过使用 docker 构建一个 web 应用程序来运行一个web应用程序来体验一下。
 
-翻译到这里了
-
-====
-
-现在我们已经学习了更多的docker命令，我们需要学习在容器中运行更多重要的事情。到目前为止我们已经运行的容器没有什么特别用处。让我们通过在docker运行一个web应用程序实例来了解。
-
-在我们的web应用中，我们将运行一个python应用。让我们先从`docker run`命令开始。
+在这个 web 应用中，我们将运行一个 Python Flask 应用。使用 `docker run` 命令。
 
 	$ sudo docker run -d -P training/webapp python app.py
 
-让我们来回顾一下我们的命令。我们指定了`-d`和`-P`两个标示。我们已经知道的是`-d`标示是让docker容器在后台运行。新的`-P`标示通知Docker所需的网络端口映射从主机映射到我们的容器内。现在让我们看看我们的web应用程序。
+让我们来回顾一下我们的命令都做了什么。我们指定两个标识(flags)   `-d` 和 `-P` 。我们已知是 `-d` 标识是让 docker 容器在后台运行。新的 `-P` 标识通知 Docker 将容器内部使用的网络端口映射到我们使用的主机上。现在让我们看看我们的 web 应用。
 
-我们指定了`training/web`镜像。这个预先建立好的镜像被我们创建后就已经包含了简单的python应用程序环境。
+This image is a pre-built image we've created that contains a simple Python Flask web application.
 
-最好，我们指定一个容器来运行：`python`
+我们指定了 `training/web` 镜像。我们创建容器的时候使用的是这个预先构建好的镜像，并且这个镜像已经包含了简单的 Python Flask web 应用程序。
 
->注意：你可以在[命令参考](http://docs.docker.com/reference/commandline/cli/#run)和[Docker run参考](http://docs.docker.com/reference/run/)看到更多`docker run`命令的细节
+最后，我们指定了我们容器要运行的命令： `python app.py`。这样我们的 web 应用就启动了。
 
-###查看web应用容器
+>注意：你可以在[命令参考](http://docs.docker.com/reference/commandline/cli/#run)和[Docker run参考](http://docs.docker.com/reference/run/)查看更多 `docker run` 命令细节
 
-现在我们使用`docker ps`查看我们正在运行的容器。
+## 查看 WEB 应用容器
+
+现在我们使用 `docker ps` 来查看我们正在运行的容器。
 
 	$ sudo docker ps -l
 	CONTAINER ID  IMAGE                   COMMAND       CREATED        STATUS        PORTS                    NAMES
 	bc533791f3f5  training/webapp:latest  python app.py 5 seconds ago  Up 2 seconds  0.0.0.0:49155->5000/tcp  nostalgic_morse
 
-你可以看到我们在`docker ps`中已经指定了新的标示`-l`。这通知`docker ps`命令返回最后的容器的状态。
+你可以看到我们在 `docker ps` 命令中指定了新的标识 `-l`。这样组合的 `docker ps` 命令会返回最后启动容器的详细信息。
 
->注意：默认情况下，`docker ps`命令只显示运行中的容器。如果你还想看已经停止的容器，请加上`-a`标示。
+>注意：默认情况下，`docker ps` 命令只显示运行中的容器。如果你还想看已经停止的容器，请加上 `-a` 标示。
+
+====
+
+翻译到这里
+
+====
+
 
 我们可以看到一些细节，与我们第一次运行`docker ps`命令的时候相比，这里多了一个重要的列`PORTS`。
 
