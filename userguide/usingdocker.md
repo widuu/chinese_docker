@@ -148,34 +148,31 @@ Docker 能够很容易的配置和绑定网络端口。在最后一个例子中 
 
 在这种情况下，我们看到容器的 5000 端口映射到了宿主机的的 49155 端口。
 
-===
-翻译到这里
-===
 
 ###查看WEB应用程序日志
 
-让我们看看我们的容器中的应用程序都发生了什么，使用我们学习到的另一个命令`docker logs`来查看。
+让我们看看我们的容器中的应用程序都发生了什么，这里我们使用学习到的另一个命令 `docker logs` 来查看。
 
 	$ sudo docker logs -f nostalgic_morse
 	* Running on http://0.0.0.0:5000/
 	10.0.2.2 - - [23/May/2014 20:16:31] "GET / HTTP/1.1" 200 -
 	10.0.2.2 - - [23/May/2014 20:16:31] "GET /favicon.ico HTTP/1.1" 404 -
 
-这次我们添加了一个标示`-f`。这将使`docker log`命令中使用`tail -f`来查看容器标准输出。这里我们从应用程序日志的5000端口的访问日志条目。
+这次我们添加了一个 `-f` 标识。 `docker log` 命令就像使用 `tail -f` 一样来输出容器内部的标准输出。这里我们从显示屏上可以看到应用程序使用的是 5000 端口并且能够查看到应用程序的访问日志。
 
-###查看我们WEB应用程序容器的过程
+### 查看WEB应用程序容器的进程
 
-我们除了可以查看容器日志，我们还可以使用`docker top`来查看容器进程：
+我们除了可以查看容器日志，我们还可以使用 `docker top` 来查看容器内部运行的进程：
 
 	$ sudo docker top nostalgic_morse
 	PID                 USER                COMMAND
 	854                 root                python app.py
 
-这里我们可以看到`python app.py`在容器里唯一进程。
+这里我们可以看到 `python app.py` 在容器里唯一进程。
 
-###检查我们的WEB应用程序
+###检查WEB应用程序
 
-最后，我们可以使用`docker inspect `来查看Docker的底层信息。它会返回一个JSON文件记录docker容器的配置和状态信息。
+最后，我们可以使用 `docker inspect ` 来查看Docker的底层信息。它会返回一个 JSON 文件记录着 Docker 容器的配置和状态信息。
 
 	$ sudo docker inspect nostalgic_morse
 
@@ -194,40 +191,42 @@ Docker 能够很容易的配置和绑定网络端口。在最后一个例子中 
 	       "User": "",
 	. . .
 
-我们也可以针对我们想要的信息进行过滤，例如，返回容器的IP地址，如下：
+我们也可以针对我们想要的信息进行过滤，例如，返回容器的 IP 地址，如下：
 
 	$ sudo docker inspect -f '{{ .NetworkSettings.IPAddress }}' nostalgic_morse
 	172.17.0.5
 
-###停止我们的容器
+###停止WEB应用容器
 
-好吧，我们看到WEB应用程序工作。现在我们通过使用`docker stop`命令来停止名为 nostalgic_morse 的容器：
+现在，我们的WEB应用程序处于工作状态。现在我们通过使用 `docker stop` 命令来停止名为 `nostalgic_morse` 的容器：
 
 	$ sudo docker stop nostalgic_morse
 	nostalgic_morse
 
-现在我们使用`docker ps`命令来检查容器是否停止了。
+现在我们使用 `docker ps` 命令来检查容器是否停止了。
 
-###重启我们的应用程序
+	$ sudo docker ps -l
+
+###重启WEB应用容器
 
 哎呀！刚才你停止了另一个开发人员所使用的容器。这里你现在有两个选择：您可以创建一个新的容器或者重新启动旧的。让我们启动我们之前的容器：
 
 	$ sudo docker start nostalgic_morse
 	nostalgic_morse
 
-现在运行`docker ps -l`来查看正在运行的容器，或者通过URL访问来查看我们的应用程序是否响应。
+现在再次运行 `docker ps -l` 来查看正在运行的容器，或者通过URL访问来查看我们的应用程序是否响应。
 
->注意：也可以使用`docker restart`命令来停止容器或然后再启动容器。
+>注意：也可以使用 `docker restart` 命令来停止容器然后再启动容器。
 
-###移除我们的应用程序
+###移除WEB应用容器
 
-你的同事告诉你他们已经完成了在容器上的工作，不在需要容器了。让我们使用`docker rm`命令来删除它：
+你的同事告诉你他们已经完成了在容器上的工作，不在需要容器了。让我们使用 `docker rm` 命令来删除它：
 
 	$ sudo docker rm nostalgic_morse
 	Error: Impossible to remove a running container, please stop it first or use -f
 	2014/05/24 08:12:56 Error: failed to remove one or more containers
 
-发生了什么？实际上，我们不能删除正在运行的容器。这避免你意外删除了可能需要的运行中的容器。让我们先停止容器，再试一次。
+发生了什么？实际上，我们不能删除正在运行的容器。这避免你意外删除了正在使用并且运行中的容器。让我们先停止容器，然后再试一试删除容器。
 
 	$ sudo docker stop nostalgic_morse
 	nostalgic_morse
