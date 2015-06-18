@@ -1,19 +1,20 @@
-使用docker镜像
+使用 Docker 镜像
 ===
 
-在前边的安装简介中，我们提及到了基础镜像。在[前面的部分](dockerizing.md)我们已经使用了Docker镜像，举例：`ubuntu`镜像和`training/webapp`镜像。
+在[了解Docker]()这部分中，我们知道了 Docker 镜像是容器的基础。。在[前面的部分](dockerizing.md)我们使用的是已经构建好的 Docker 镜像，例如： `ubuntu` 镜像和 `training/webapp` 镜像。
 
-我们还发现Docker主机会从存储中心下载镜像。如果一个镜像不存在，他就会自动从docker镜像仓库去下载：默认的`Docker Hub`公共镜像源。
+我们还了解到 Docker 商店下载镜像到本地的 Docker 主机上。如果一个镜像不存在，他就会自动从 Docker 镜像仓库去下载，默认是从 `Docker Hub` 公共镜像源下载。
 
-在这一节中，我们将探讨更多的关于docker镜像的东西：
+在这一节中，我们将探讨更多的关于 Docker 镜像的东西：
 
-* 在本地Docker主机上管理和处理镜像
+
+* 管理和使用本地 Docker 主机镜像。
 * 创建基本镜像
-* 上传docker镜像到docker镜像源
+* 上传 Docker 镜像到 [Docker Hub Registry](https://registry.hub.docker.com/)。
 
-###在主机上列出镜像
+### 在主机上列出镜像列表
 
-让我们来列出本地主机上的镜像。你可以使用`docker images`来完成这项任务：
+让我们列出本地主机上的镜像。你可以使用 `docker images` 来完成这项任务：
 
 	$ sudo docker images
 	REPOSITORY       TAG      IMAGE ID      CREATED      VIRTUAL SIZE
@@ -32,15 +33,15 @@
 	ubuntu           10.04    3db9c44f4520  4 weeks ago  183 MB
 	ubuntu           lucid    3db9c44f4520  4 weeks ago  183 MB
 
-我们可以看到之前使用的镜像。每次从`Docker Hub`下载一个镜像就会在本地创建一个对应的容器。
+我们可以看到之前使用的镜像。当我们每次要使用镜像启动一个容器的时候都会从 [Docker Hub](https://hub.docker.com/) 下载对应的镜像。
 
 我们在镜像列表中看到三个至关重要的东西。
 
-* 来自什么镜像源，例如`ubuntu`
-* 每个镜像都有标签，例如`14.04`
+* 来自什么镜像源，例如 `ubuntu`
+* 每个镜像都有标签(tags)，例如 `14.04`
 * 每个镜像都有镜像ID
 
-镜像源中可能有多种不同的镜像。`Ubuntu`中我们会看到多个Ubuntu版本：10.04, 12.04, 12.10, 13.04, 13.10 and 14.04。每个容器有一个唯一的标签，让我们来识别不同的镜像，例如：
+镜像源中可能存储这一个镜像源的多个版本。我们会看到 `Ubuntu` 的多个版本：10.04, 12.04, 12.10, 13.04, 13.10 and 14.04。每个容器有一个唯一的标签，让我们来识别为不同的镜像，例如：
 
 	ubuntu:14.04
 
@@ -48,17 +49,17 @@
 
 	$ sudo docker run -t -i ubuntu:14.04 /bin/bash
 
-如果我们想要使用`Ubuntu 12.04`的镜像来构建，我们可以这样做
+如果我们想要使用 `Ubuntu 12.04` 的镜像来构建，我们可以这样做
 
 	$ sudo docker run -t -i ubuntu:12.04 /bin/bash
 
-如果你不指定一个镜像的版本标签，例如你只使用`Ubuntu`，Docker将默认使用`Ubuntu:latest`镜像。
+如果你不指定一个镜像的版本标签，例如你只使用 `Ubuntu`，Docker将默认使用 `Ubuntu:latest` 镜像。
 
->提示：我们建议使用镜像时指定一个标签，例如`ubuntu:12.04`。这样你知道你使用的是一个什么版本的镜像。
+>提示：我们建议使用镜像时指定一个标签，例如 `ubuntu:12.04` 。这样你知道你使用的是一个什么版本的镜像。
 
-###获取一个新的镜像
+### 获取一个新的镜像
 
-现在如何获取一个新的镜像？当我们在本地主机上使用一个不存在的镜像时Docker就会自动下载这个镜像。但是这需要一段时间下载这个镜像。如果我们想预先加载这个镜像，我们可以使用`docker pull`命令来下载它。像我们所说的我们下载`centos`镜像。
+现在如何获取一个新的镜像？当我们在本地主机上使用一个不存在的镜像时 Docker 就会自动下载这个镜像。但是这需要一段时间来下载这个镜像。如果我们想预先下载这个镜像，我们可以使用`docker pull`命令来下载它。这里我们下载 `centos` 镜像。
 
 	$ sudo docker pull centos
 	Pulling repository centos
@@ -68,18 +69,18 @@
 	ef52fb1fe610: Download complete
 	. . .
 
-我们看到每一层的镜像都被下载下来了，现在我们可以直接使用这个镜像，而不需要在下载这个镜像了。
+我们看到镜像的每一层都被下载下来了，现在我们可以直接使用这个镜像来运行容器，而不需要在下载这个镜像了。
 
 	$ sudo docker run -t -i centos /bin/bash
 	bash-4.1#
 
-###查找镜像
+### 查找镜像
 
-Docker的特点之一是人们创建了各种各样的docker镜像。而且这些镜像已经被上传到了`Docker Hub`。我们可以从`Docker Hub`网站来搜索镜像。
+Docker 的特点之一是人们创建了各种各样的 Docker 镜像。而且这些镜像已经被上传到了 `Docker Hub` 。我们可以从 `Docker Hub` 网站来搜索镜像。
 
 ![](../images/search.png)
 
-我们也可以使用`docker search`命令来搜索镜像。譬如说我们的团队需要一个安装了Ruby和Sinatra的镜像来做我们的web应用程序开发。我们可以通过`docker search`命令来搜索所有的`sinatra`镜像来寻找我们合适的镜像
+我们也可以使用 `docker search` 命令来搜索镜像。譬如说我们的团队需要一个安装了 Ruby 和 Sinatra 的镜像来做我们的 web 应用程序开发。我们可以通过 `docker search` 命令来搜索所有的`sinatra` 来寻找适合我们的镜像
 
 	$ sudo docker search sinatra
 	NAME                                   DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
@@ -92,7 +93,11 @@ Docker的特点之一是人们创建了各种各样的docker镜像。而且这�
 	bmorearty/sinatra                                                                      0
 	. . . 
 
-我们看到了返回了大量的`sinatra`镜像。我们看到列表中有镜像名称、描述、Stars(衡量镜像的流行程度-如果用户喜欢这个镜像他就会点击stars)和官方自动构建镜像状态。Stackbrew维护者官方仓库源，镜像源是自动构建的，您可以验证镜像的来源和内容。
+我们看到了返回了大量的 `sinatra `镜像。我们看到列表中有镜像名称、描述、Stars(衡量镜像的流行程度-如果用户喜欢这个镜像他就会点击 stars )和 是否是正式以及构建状态。[官方镜像仓库](https://docs.docker.com/docker-hub/official_repos/) 是官方精心整理出来服务 Docker 的 Docker 镜像库。自动化构建的镜像仓库是允许你验证镜像的内容和来源。
+
+===
+翻译到这里
+===
 
 我们回顾以前使用的镜像，我们决定使用`sinatra`镜像。到目前为止，我们已经看到了两种类型的镜像，像`ubuntu`镜像，我们称它为基础镜像或者根镜像。这些镜像是由docker公司提供建立、验证和支持。这些镜像都可以通过自己的名字来标示。
 
