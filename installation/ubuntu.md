@@ -202,7 +202,7 @@ docker 进程通过监听一个 Unix Socket 来替代 TCP 端口。在默认情�
 
 该警告是因为 Docker 容器不能使用本地的DNS服务。相反 Docker 使用一个默认的外部域名服务器。
 
-为了避免此警告，你可以给 Docker 容器指定一个DNS服务器。或者你可以禁用 NetworkManager 的 `dnsmasq`。不过当禁止 `dnsmasq` 可能是某些网络的DNS解析速度变慢。
+为了避免此警告，你可以给 Docker 容器指定一个DNS服务器。或者你可以禁用 NetworkManager 的 `dnsmasq`。不过当禁止 `dnsmasq` 可能使某些网络的DNS解析速度变慢。
 
 为 Docker 指定一个DNS服务器
 
