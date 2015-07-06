@@ -97,58 +97,56 @@ Docker 的特点之一是人们创建了各种各样的 Docker 镜像。而且�
 
 通过检索镜像，我们决定使用 `training/sinatra` 镜像。到目前为止，我们已经看到了两种类型的镜像，像`ubuntu` 镜像，我们称它为基础镜像或者根镜像。这些镜像是由 Docker 官方提供构建、验证和支持。这些镜像都可以通过用自己的名字来标记。
 
-===
-fanyidaozhelile
-===
+我们也可以查找其它用户的公开镜像，像我们选择使用的 `training/sinatra` 镜像。个人镜像是由 Docker 社区的成员创建和维护的。你可以用用户名称来识别这些镜像，因为这些镜像的前缀都是以用户名来标记的 ，像 `training` ，就是由 `training` 用户创建的镜像。
 
-当然还有用户个人镜像，像我们选择使用的 `training/sinatra` 镜像。
+###拖取镜像(Pull our image)
 
-我们还可以看到用户的镜像，例如`training/sinatra`,并且我们可以使用`docker pull`命令来下载它。
+我们已经确定了要使用的镜像， `training/sinatra` , 现在我们使用 `docker pull` 命令来下载这个镜像。
 
 	$ sudo docker pull training/sinatra
 
-现在我们的团队可以在自己的容器内使用这个镜像了。
+现在团队成员可以在自己的容器内使用这个镜像了。
 
 	$ sudo docker run -t -i training/sinatra /bin/bash
 	root@a8cb6ce02d85:/#
 
-###创建自己的镜像
+###创建我们自己的镜像
 
-我们的团队发现`training/sinatra`镜像虽然有用但是不是我们需要的，我们需要针对这个镜像做出更改。现在又两种方法，我们可以更新和创建镜像。
+团队成员发现 `training/sinatra` 镜像对于我们来说是非常有用的，但是它不能满足我们的需求，我们需要针对这个镜像做出更改。这里我们有两种方法，更新镜像或者创建一个新的镜像。
 
 * 1.我们可以从已经创建的容器中更新镜像，并且提交这个镜像。
-* 2.我们可以使用`Dockerfile`指令来创建一个镜像。
+* 2.我们可以使用 `Dockerfile` 指令来创建一个新的镜像。
 
 ###更新并且提交镜像
 
-更新一个镜像，首先我们要创建一个我们想更新的容器。
+更新镜像之前，我们需要使用镜像来创建一个容器。
 
 	$ sudo docker run -t -i training/sinatra /bin/bash
 	root@0b2616b0e5a8:/#
 
->注意：创建容器ID`0b2616b0e5a8`,我们在后边还需要使用它。
+>注意：已创建容器ID `0b2616b0e5a8`,我们在后边还需要使用它。
 
-在我们的容器内添加`json`
+在运行的容器内使用 gem 来安装 `json`
 
 	root@0b2616b0e5a8:/# gem install json
 
-当我们完成的时候，输入`exit`命令来退出这个容器。
+在完成操作之后，输入 `exit `命令来退出这个容器。
 
-现在我们有一个根据我们需求做出改变的容器。我们可以使用`docker commit`来提交这个容器。
+现在我们有一个根据我们需求做出更改的容器。我们可以使用 `docker commit` 来提交容器副本。
 
 	$ sudo docker commit -m="Added json gem" -a="Kate Smith" \
 	0b2616b0e5a8 ouruser/sinatra:v2
 	4f177bd27a9ff0f6dc2a830403925b5360bfe0b93d476f7fc3231110e7f71b1c
 
-这里我们使用了`docker commit`命令。我们可以指定`-m`和`-a`标示。`-m`标示是允许我们指定提交的信息，就像你提交一个版本控制。`-a`标示允许对我们的更新指定一个用户。
+这里我们使用了 `docker commit` 命令。这里我们指定了两个标识(flags) `-m` 和 `-a` 。`-m` 标示我们指定提交的信息，就像你提交一个版本控制。`-a` 标识允许对我们的更新来指定一个作者。
 
-我们也指定了我们想要创建的新镜像来自(我们先前记录的ID)`0b2616b0e5a8`和我们指定的目标镜像：
+我们也指定了想要创建的新镜像容器来源 (我们先前记录的ID) `0b2616b0e5a8` 和 我们指定要创建的目标镜像：
 
 	ouruser/sinatra:v2
 
-让我们分解这个步骤。我们先给这个镜像分配了一个新用户名字`ouruser`；接着，未修改镜像名称，保留了原镜像名称`sinatra`；最后为镜像指定了标签`v2`。
+我们分解一下前边的步骤。我们先给这个镜像分配了一个新用户名字 `ouruser`，接着，未修改镜像名称，保留了原有镜像名称` sinatra`；最后为镜像指定了标签(tag) `v2`。
 
-我们可以使用`docker images`命令来查看我们的新镜像`ouruser/sinatra`。
+我们可以使用 `docker images` 命令来查看我们的新镜像 `ouruser/sinatra`。
 
 	$ sudo docker images
 	REPOSITORY          TAG     IMAGE ID       CREATED       VIRTUAL SIZE
@@ -161,80 +159,219 @@ fanyidaozhelile
 	$ sudo docker run -t -i ouruser/sinatra:v2 /bin/bash
 	root@78e82f680994:/#
 
-###使用`Dockerfile`创建镜像
+### 使用 `Dockerfile` 构建镜像
 
-使用`docker commit`命令能非常简单的扩展镜像，但是它有点麻烦：在一个团队中不容易共享它的开发过程。为解决这个问题，我们可以使用一个新的命令来创建新的镜像。
+使用 `docker commit` 命令能够非常简单的扩展镜像。但是它有点麻烦，并且在一个团队中也不能够轻易的共享它的开发过程。为解决这个问题，我们使用一个新的命令 `docker build` ， 从零开始来创建一个新的镜像。
 
-为此，我们创建一个`Dockerfile`，其中包含一组指令告诉docker如何创建我们的镜像。
+为此，我们需要创建一个 `Dockerfile` 文件，其中包含一组指令来告诉 Docker 如何构建我们的镜像。
 
-现在让我们创建一个目录，并且创建一个`Dockerfile`
+现在创建一个目录，并且创建一个 `Dockerfile`
 
 	$ mkdir sinatra
 	$ cd sinatra
 	$ touch Dockerfile
 
-每一个指令镜像就会创建一个新的层，让我们看一个简单的例子，我们的开发团建创建一个自己的`Sinatra `镜像：
+如果你是在 Windows 上使用的 Boot2Docker，你可以通过使用 `cd` 命令来访问你的本地主机目录 `/c/Users/your_user_name`
+
+每一个指令都会在镜像上创建一个新的层，来看一个简单的例子，我们的开发团建来构建一个自己的 `Sinatra `镜像：
 
 	# This is a comment
 	FROM ubuntu:14.04
 	MAINTAINER Kate Smith <ksmith@example.com>
-	RUN apt-get -qq update
-	RUN apt-get -qqy install ruby ruby-dev
+	RUN apt-get update && apt-get install -y ruby ruby-dev
 	RUN gem install sinatra
 
-【注意】：
-	1）、每个指令前缀都必须大写：
-		INSTRUCTION statement
-	2）、可以使用`#`注释；
+让我们看一下我们的 `Dockerfile` 做了什么。每一个指令的前缀都必须是大写的。
 
-让我们看看`Dockerfile`做了什么：
-	第一个指令`FROM`，告诉Docker使用哪个镜像源，在这个案例中我们使用了一个`Ubuntu 14.04`基础镜像。
-	下一步，我们使用`MAINTAINER `指令指定谁是维护者。
-	最后，我们指定三个`RUN`指令，一个`RUN`指令在镜像内执行命令。例如安装包。这里我们在`Sinatra `中更新了APT缓存，安装了`Ruby`和`RubyGems`。
+	INSTRUCTION statement
 
->注意：我们还提供了更多的Dockerfile指令参数。
+>提示：我们可以使用 **#** 来注释
 
-现在我们使用`docker build`命令和`Dockerfile`命令来创建一个镜像。
+第一个指令 `FROM` 是告诉 Docker 使用的哪个镜像源，在这个案例中，我们使用的是 Ubuntu 14.04 基础镜像。
 
-	$ sudo docker build -t="ouruser/sinatra:v2" .
-	Uploading context  2.56 kB
-	Uploading context
+下一步，我们使用 `MAINTAINER ` 指令来指定谁在维护这个新镜像。
+
+最后，我们指定了两个 `RUN` 指令。 `RUN` 指令在镜像内执行一条命令，例如：安装一个包。这里我们更新了 APT 的缓存，并且安装 Ruby 和 RubyGems ，然后使用 gem 安装 Sinatra 。
+
+
+>注意：我们还提供了更多的 Dockerfile 指令参数。
+
+现在，我们使用 `Dockerfile` 文件通过 `docker build` 命令来构建一个镜像。
+
+	$ docker build -t ouruser/sinatra:v2 .
+	Sending build context to Docker daemon 2.048 kB
+	Sending build context to Docker daemon 
 	Step 0 : FROM ubuntu:14.04
-	 ---> 99ec81b80c55
+	 ---> e54ca5efa2e9
 	Step 1 : MAINTAINER Kate Smith <ksmith@example.com>
-	 ---> Running in 7c5664a8a0c1
-	 ---> 2fa8ca4e2a13
-	Removing intermediate container 7c5664a8a0c1
-	Step 2 : RUN apt-get -qq update
-	 ---> Running in b07cc3fb4256
-	 ---> 50d21070ec0c
-	Removing intermediate container b07cc3fb4256
-	Step 3 : RUN apt-get -qqy install ruby ruby-dev
-	 ---> Running in a5b038dd127e
+	 ---> Using cache
+	 ---> 851baf55332b
+	Step 2 : RUN apt-get update && apt-get install -y ruby ruby-dev
+	 ---> Running in 3a2558904e9b
 	Selecting previously unselected package libasan0:amd64.
 	(Reading database ... 11518 files and directories currently installed.)
 	Preparing to unpack .../libasan0_4.8.2-19ubuntu1_amd64.deb ...
-	. . .
+	Unpacking libasan0:amd64 (4.8.2-19ubuntu1) ...
+	Selecting previously unselected package libatomic1:amd64.
+	Preparing to unpack .../libatomic1_4.8.2-19ubuntu1_amd64.deb ...
+	Unpacking libatomic1:amd64 (4.8.2-19ubuntu1) ...
+	Selecting previously unselected package libgmp10:amd64.
+	Preparing to unpack .../libgmp10_2%3a5.1.3+dfsg-1ubuntu1_amd64.deb ...
+	Unpacking libgmp10:amd64 (2:5.1.3+dfsg-1ubuntu1) ...
+	Selecting previously unselected package libisl10:amd64.
+	Preparing to unpack .../libisl10_0.12.2-1_amd64.deb ...
+	Unpacking libisl10:amd64 (0.12.2-1) ...
+	Selecting previously unselected package libcloog-isl4:amd64.
+	Preparing to unpack .../libcloog-isl4_0.18.2-1_amd64.deb ...
+	Unpacking libcloog-isl4:amd64 (0.18.2-1) ...
+	Selecting previously unselected package libgomp1:amd64.
+	Preparing to unpack .../libgomp1_4.8.2-19ubuntu1_amd64.deb ...
+	Unpacking libgomp1:amd64 (4.8.2-19ubuntu1) ...
+	Selecting previously unselected package libitm1:amd64.
+	Preparing to unpack .../libitm1_4.8.2-19ubuntu1_amd64.deb ...
+	Unpacking libitm1:amd64 (4.8.2-19ubuntu1) ...
+	Selecting previously unselected package libmpfr4:amd64.
+	Preparing to unpack .../libmpfr4_3.1.2-1_amd64.deb ...
+	Unpacking libmpfr4:amd64 (3.1.2-1) ...
+	Selecting previously unselected package libquadmath0:amd64.
+	Preparing to unpack .../libquadmath0_4.8.2-19ubuntu1_amd64.deb ...
+	Unpacking libquadmath0:amd64 (4.8.2-19ubuntu1) ...
+	Selecting previously unselected package libtsan0:amd64.
+	Preparing to unpack .../libtsan0_4.8.2-19ubuntu1_amd64.deb ...
+	Unpacking libtsan0:amd64 (4.8.2-19ubuntu1) ...
+	Selecting previously unselected package libyaml-0-2:amd64.
+	Preparing to unpack .../libyaml-0-2_0.1.4-3ubuntu3_amd64.deb ...
+	Unpacking libyaml-0-2:amd64 (0.1.4-3ubuntu3) ...
+	Selecting previously unselected package libmpc3:amd64.
+	Preparing to unpack .../libmpc3_1.0.1-1ubuntu1_amd64.deb ...
+	Unpacking libmpc3:amd64 (1.0.1-1ubuntu1) ...
+	Selecting previously unselected package openssl.
+	Preparing to unpack .../openssl_1.0.1f-1ubuntu2.4_amd64.deb ...
+	Unpacking openssl (1.0.1f-1ubuntu2.4) ...
+	Selecting previously unselected package ca-certificates.
+	Preparing to unpack .../ca-certificates_20130906ubuntu2_all.deb ...
+	Unpacking ca-certificates (20130906ubuntu2) ...
+	Selecting previously unselected package manpages.
+	Preparing to unpack .../manpages_3.54-1ubuntu1_all.deb ...
+	Unpacking manpages (3.54-1ubuntu1) ...
+	Selecting previously unselected package binutils.
+	Preparing to unpack .../binutils_2.24-5ubuntu3_amd64.deb ...
+	Unpacking binutils (2.24-5ubuntu3) ...
+	Selecting previously unselected package cpp-4.8.
+	Preparing to unpack .../cpp-4.8_4.8.2-19ubuntu1_amd64.deb ...
+	Unpacking cpp-4.8 (4.8.2-19ubuntu1) ...
+	Selecting previously unselected package cpp.
+	Preparing to unpack .../cpp_4%3a4.8.2-1ubuntu6_amd64.deb ...
+	Unpacking cpp (4:4.8.2-1ubuntu6) ...
+	Selecting previously unselected package libgcc-4.8-dev:amd64.
+	Preparing to unpack .../libgcc-4.8-dev_4.8.2-19ubuntu1_amd64.deb ...
+	Unpacking libgcc-4.8-dev:amd64 (4.8.2-19ubuntu1) ...
+	Selecting previously unselected package gcc-4.8.
+	Preparing to unpack .../gcc-4.8_4.8.2-19ubuntu1_amd64.deb ...
+	Unpacking gcc-4.8 (4.8.2-19ubuntu1) ...
+	Selecting previously unselected package gcc.
+	Preparing to unpack .../gcc_4%3a4.8.2-1ubuntu6_amd64.deb ...
+	Unpacking gcc (4:4.8.2-1ubuntu6) ...
+	Selecting previously unselected package libc-dev-bin.
+	Preparing to unpack .../libc-dev-bin_2.19-0ubuntu6_amd64.deb ...
+	Unpacking libc-dev-bin (2.19-0ubuntu6) ...
+	Selecting previously unselected package linux-libc-dev:amd64.
+	Preparing to unpack .../linux-libc-dev_3.13.0-30.55_amd64.deb ...
+	Unpacking linux-libc-dev:amd64 (3.13.0-30.55) ...
+	Selecting previously unselected package libc6-dev:amd64.
+	Preparing to unpack .../libc6-dev_2.19-0ubuntu6_amd64.deb ...
+	Unpacking libc6-dev:amd64 (2.19-0ubuntu6) ...
+	Selecting previously unselected package ruby.
+	Preparing to unpack .../ruby_1%3a1.9.3.4_all.deb ...
+	Unpacking ruby (1:1.9.3.4) ...
+	Selecting previously unselected package ruby1.9.1.
+	Preparing to unpack .../ruby1.9.1_1.9.3.484-2ubuntu1_amd64.deb ...
+	Unpacking ruby1.9.1 (1.9.3.484-2ubuntu1) ...
+	Selecting previously unselected package libruby1.9.1.
+	Preparing to unpack .../libruby1.9.1_1.9.3.484-2ubuntu1_amd64.deb ...
+	Unpacking libruby1.9.1 (1.9.3.484-2ubuntu1) ...
+	Selecting previously unselected package manpages-dev.
+	Preparing to unpack .../manpages-dev_3.54-1ubuntu1_all.deb ...
+	Unpacking manpages-dev (3.54-1ubuntu1) ...
+	Selecting previously unselected package ruby1.9.1-dev.
+	Preparing to unpack .../ruby1.9.1-dev_1.9.3.484-2ubuntu1_amd64.deb ...
+	Unpacking ruby1.9.1-dev (1.9.3.484-2ubuntu1) ...
+	Selecting previously unselected package ruby-dev.
+	Preparing to unpack .../ruby-dev_1%3a1.9.3.4_all.deb ...
+	Unpacking ruby-dev (1:1.9.3.4) ...
+	Setting up libasan0:amd64 (4.8.2-19ubuntu1) ...
+	Setting up libatomic1:amd64 (4.8.2-19ubuntu1) ...
+	Setting up libgmp10:amd64 (2:5.1.3+dfsg-1ubuntu1) ...
+	Setting up libisl10:amd64 (0.12.2-1) ...
+	Setting up libcloog-isl4:amd64 (0.18.2-1) ...
+	Setting up libgomp1:amd64 (4.8.2-19ubuntu1) ...
+	Setting up libitm1:amd64 (4.8.2-19ubuntu1) ...
+	Setting up libmpfr4:amd64 (3.1.2-1) ...
+	Setting up libquadmath0:amd64 (4.8.2-19ubuntu1) ...
+	Setting up libtsan0:amd64 (4.8.2-19ubuntu1) ...
+	Setting up libyaml-0-2:amd64 (0.1.4-3ubuntu3) ...
+	Setting up libmpc3:amd64 (1.0.1-1ubuntu1) ...
+	Setting up openssl (1.0.1f-1ubuntu2.4) ...
+	Setting up ca-certificates (20130906ubuntu2) ...
+	debconf: unable to initialize frontend: Dialog
+	debconf: (TERM is not set, so the dialog frontend is not usable.)
+	debconf: falling back to frontend: Readline
+	debconf: unable to initialize frontend: Readline
+	debconf: (This frontend requires a controlling tty.)
+	debconf: falling back to frontend: Teletype
+	Setting up manpages (3.54-1ubuntu1) ...
+	Setting up binutils (2.24-5ubuntu3) ...
+	Setting up cpp-4.8 (4.8.2-19ubuntu1) ...
+	Setting up cpp (4:4.8.2-1ubuntu6) ...
+	Setting up libgcc-4.8-dev:amd64 (4.8.2-19ubuntu1) ...
+	Setting up gcc-4.8 (4.8.2-19ubuntu1) ...
+	Setting up gcc (4:4.8.2-1ubuntu6) ...
+	Setting up libc-dev-bin (2.19-0ubuntu6) ...
+	Setting up linux-libc-dev:amd64 (3.13.0-30.55) ...
+	Setting up libc6-dev:amd64 (2.19-0ubuntu6) ...
+	Setting up manpages-dev (3.54-1ubuntu1) ...
+	Setting up libruby1.9.1 (1.9.3.484-2ubuntu1) ...
+	Setting up ruby1.9.1-dev (1.9.3.484-2ubuntu1) ...
+	Setting up ruby-dev (1:1.9.3.4) ...
 	Setting up ruby (1:1.9.3.4) ...
 	Setting up ruby1.9.1 (1.9.3.484-2ubuntu1) ...
 	Processing triggers for libc-bin (2.19-0ubuntu6) ...
-	 ---> 2acb20f17878
-	Removing intermediate container a5b038dd127e
-	Step 4 : RUN gem install sinatra
-	 ---> Running in 5e9d0065c1f7
-	. . .
+	Processing triggers for ca-certificates (20130906ubuntu2) ...
+	Updating certificates in /etc/ssl/certs... 164 added, 0 removed; done.
+	Running hooks in /etc/ca-certificates/update.d....done.
+	 ---> c55c31703134
+	Removing intermediate container 3a2558904e9b
+	Step 3 : RUN gem install sinatra
+	 ---> Running in 6b81cb6313e5
+	unable to convert "\xC3" to UTF-8 in conversion from ASCII-8BIT to UTF-8 to US-ASCII for README.rdoc, skipping
+	unable to convert "\xC3" to UTF-8 in conversion from ASCII-8BIT to UTF-8 to US-ASCII for README.rdoc, skipping
+	Successfully installed rack-1.5.2
+	Successfully installed tilt-1.4.1
 	Successfully installed rack-protection-1.5.3
 	Successfully installed sinatra-1.4.5
 	4 gems installed
-	 ---> 324104cde6ad
-	Removing intermediate container 5e9d0065c1f7
-	Successfully built 324104cde6ad
+	Installing ri documentation for rack-1.5.2...
+	Installing ri documentation for tilt-1.4.1...
+	Installing ri documentation for rack-protection-1.5.3...
+	Installing ri documentation for sinatra-1.4.5...
+	Installing RDoc documentation for rack-1.5.2...
+	Installing RDoc documentation for tilt-1.4.1...
+	Installing RDoc documentation for rack-protection-1.5.3...
+	Installing RDoc documentation for sinatra-1.4.5...
+	 ---> 97feabe5d2ed
+	Removing intermediate container 6b81cb6313e5
+	Successfully built 97feabe5d2ed
 
-我们使用`docker build`命令和`-t`来创建我们的新镜像，用户是`ouruser`、仓库源名称`sinatra`、标签是`v2`。
 
-如果`Dockerfile`在我们当前目录下，我们可以使用`.`来指定`Dockerfile`
+我们使用 `docker build` 命令并指定 `-t` 标识(flag)来标示属于 `ouruser` ，镜像名称为 `sinatra `,标签是 `v2`。
 
->提示：你也可以指定`Dockerfile`路径
+如果 `Dockerfile` 在我们当前目录下，我们可以使用 `.` 来指定 `Dockerfile`
+
+>提示：你也可以指定 `Dockerfile` 路径
+
+===
+翻译到这里了Now we can see the build process at work
+===
 
 现在我们可以看到构建过程。docker做的第一件事是通过你的上下文构建。基本上是目录的内容构建。docker会根据本地的内容来在docker进程中去构建。
 
