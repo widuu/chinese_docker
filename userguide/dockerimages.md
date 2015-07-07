@@ -1,9 +1,9 @@
 使用 Docker 镜像
 ===
 
-在[了解Docker]()这部分中，我们知道了 Docker 镜像是容器的基础。。在[前面的部分](dockerizing.md)我们使用的是已经构建好的 Docker 镜像，例如： `ubuntu` 镜像和 `training/webapp` 镜像。
+在[了解Docker]()这部分中，我们知道了 Docker 镜像是容器的基础。在[前面的部分](dockerizing.md)我们使用的是已经构建好的 Docker 镜像，例如： `ubuntu` 镜像和 `training/webapp` 镜像。
 
-我们还了解到 Docker 商店下载镜像到本地的 Docker 主机上。如果一个镜像不存在，他就会自动从 Docker 镜像仓库去下载，默认是从 `Docker Hub` 公共镜像源下载。
+我们还了解了从 Docker 商店下载镜像到本地的 Docker 主机上。如果一个镜像不存在，他就会自动从 Docker 镜像仓库去下载，默认是从 `Docker Hub` 公共镜像源下载。
 
 在这一节中，我们将探讨更多的关于 Docker 镜像的东西：
 
@@ -33,7 +33,7 @@
 	ubuntu           10.04    3db9c44f4520  4 weeks ago  183 MB
 	ubuntu           lucid    3db9c44f4520  4 weeks ago  183 MB
 
-我们可以看到之前使用的镜像。当我们每次要使用镜像启动一个容器的时候都会从 [Docker Hub](https://hub.docker.com/) 下载对应的镜像。
+我们可以看到之前使用的镜像。当我们每次要使用镜像来启动一个新容器的时候都会从 [Docker Hub](https://hub.docker.com/) 下载对应的镜像。
 
 我们在镜像列表中看到三个至关重要的东西。
 
@@ -41,7 +41,7 @@
 * 每个镜像都有标签(tags)，例如 `14.04`
 * 每个镜像都有镜像ID
 
-镜像源中可能存储这一个镜像源的多个版本。我们会看到 `Ubuntu` 的多个版本：10.04, 12.04, 12.10, 13.04, 13.10 and 14.04。每个容器有一个唯一的标签，让我们来识别为不同的镜像，例如：
+镜像源中可能存储着一个镜像源的多个版本。我们会看到 `Ubuntu` 的多个版本：10.04, 12.04, 12.10, 13.04, 13.10 and 14.04。每个容器有一个唯一的标签(tag)，让我们来识别为不同的镜像，例如：
 
 	ubuntu:14.04
 
@@ -53,13 +53,13 @@
 
 	$ sudo docker run -t -i ubuntu:12.04 /bin/bash
 
-如果你不指定一个镜像的版本标签，例如你只使用 `Ubuntu`，Docker将默认使用 `Ubuntu:latest` 镜像。
+如果你不指定一个镜像的版本标签，例如你只使用 `Ubuntu`，Docker 将默认使用 `Ubuntu:latest` 镜像。
 
 >提示：我们建议使用镜像时指定一个标签，例如 `ubuntu:12.04` 。这样你知道你使用的是一个什么版本的镜像。
 
 ### 获取一个新的镜像
 
-现在如何获取一个新的镜像？当我们在本地主机上使用一个不存在的镜像时 Docker 就会自动下载这个镜像。但是这需要一段时间来下载这个镜像。如果我们想预先下载这个镜像，我们可以使用`docker pull`命令来下载它。这里我们下载 `centos` 镜像。
+现在如何获取一个新的镜像？当我们在本地主机上使用一个不存在的镜像时 Docker 就会自动下载这个镜像。但是这需要一段时间来下载这个镜像。如果我们想预先下载这个镜像，我们可以使用 `docker pull` 命令来下载它。这里我们下载 `centos` 镜像。
 
 	$ sudo docker pull centos
 	Pulling repository centos
@@ -80,7 +80,7 @@ Docker 的特点之一是人们创建了各种各样的 Docker 镜像。而且�
 
 ![](../images/search.png)
 
-我们也可以使用 `docker search` 命令来搜索镜像。譬如说我们的团队需要一个安装了 Ruby 和 Sinatra 的镜像来做我们的 web 应用程序开发。我们可以通过 `docker search` 命令来搜索所有的`sinatra` 来寻找适合我们的镜像
+我们也可以使用 `docker search` 命令来搜索镜像。譬如说我们的团队需要一个安装了 Ruby 和 Sinatra 的镜像来做我们的 web 应用程序开发。我们可以通过 `docker search` 命令搜索 `sinatra` 来寻找适合我们的镜像
 
 	$ sudo docker search sinatra
 	NAME                                   DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
@@ -93,11 +93,11 @@ Docker 的特点之一是人们创建了各种各样的 Docker 镜像。而且�
 	bmorearty/sinatra                                                                      0
 	. . . 
 
-我们看到了返回了大量的 `sinatra `镜像。我们看到列表中有镜像名称、描述、Stars(衡量镜像的流行程度-如果用户喜欢这个镜像他就会点击 stars )和 是否是正式以及构建状态。[官方镜像仓库](https://docs.docker.com/docker-hub/official_repos/) 是官方精心整理出来服务 Docker 的 Docker 镜像库。自动化构建的镜像仓库是允许你验证镜像的内容和来源。
+我们看到返回了大量的 `sinatra `镜像。而列表中有镜像名称、描述、Stars(衡量镜像的流行程度-如果用户喜欢这个镜像他就会点击 stars )和 是否是正式版以及构建状态。[官方镜像仓库](https://docs.docker.com/docker-hub/official_repos/) 是官方精心整理出来服务 Docker 的 Docker 镜像库。自动化构建的镜像仓库是允许你验证镜像的内容和来源。
 
 通过检索镜像，我们决定使用 `training/sinatra` 镜像。到目前为止，我们已经看到了两种类型的镜像，像`ubuntu` 镜像，我们称它为基础镜像或者根镜像。这些镜像是由 Docker 官方提供构建、验证和支持。这些镜像都可以通过用自己的名字来标记。
 
-我们也可以查找其它用户的公开镜像，像我们选择使用的 `training/sinatra` 镜像。个人镜像是由 Docker 社区的成员创建和维护的。你可以用用户名称来识别这些镜像，因为这些镜像的前缀都是以用户名来标记的 ，像 `training` ，就是由 `training` 用户创建的镜像。
+我们也可以查找其它用户的公开镜像，像我们选择使用的 `training/sinatra` 镜像，这属于个人镜像。个人镜像是由 Docker 社区的成员创建和维护的。你可以用用户名称来识别这些镜像，因为这些镜像的前缀都是以用户名来标记的 ，像 `training` ，就是由 `training` 用户创建的镜像。
 
 ###拖取镜像(Pull our image)
 
@@ -117,7 +117,7 @@ Docker 的特点之一是人们创建了各种各样的 Docker 镜像。而且�
 * 1.我们可以从已经创建的容器中更新镜像，并且提交这个镜像。
 * 2.我们可以使用 `Dockerfile` 指令来创建一个新的镜像。
 
-###更新并且提交镜像
+###更新并且提交更改
 
 更新镜像之前，我们需要使用镜像来创建一个容器。
 
@@ -138,7 +138,7 @@ Docker 的特点之一是人们创建了各种各样的 Docker 镜像。而且�
 	0b2616b0e5a8 ouruser/sinatra:v2
 	4f177bd27a9ff0f6dc2a830403925b5360bfe0b93d476f7fc3231110e7f71b1c
 
-这里我们使用了 `docker commit` 命令。这里我们指定了两个标识(flags) `-m` 和 `-a` 。`-m` 标示我们指定提交的信息，就像你提交一个版本控制。`-a` 标识允许对我们的更新来指定一个作者。
+这里我们使用了 `docker commit` 命令。这里我们指定了两个标识(flags) `-m` 和 `-a` 。`-m` 标识我们指定提交的信息，就像你提交一个版本控制。`-a` 标识允许对我们的更新来指定一个作者。
 
 我们也指定了想要创建的新镜像容器来源 (我们先前记录的ID) `0b2616b0e5a8` 和 我们指定要创建的目标镜像：
 
@@ -196,7 +196,7 @@ Docker 的特点之一是人们创建了各种各样的 Docker 镜像。而且�
 
 >注意：我们还提供了更多的 Dockerfile 指令参数。
 
-现在，我们使用 `Dockerfile` 文件通过 `docker build` 命令来构建一个镜像。
+现在，我们使用 `Dockerfile` 文件，通过 `docker build` 命令来构建一个镜像。
 
 	$ docker build -t ouruser/sinatra:v2 .
 	Sending build context to Docker daemon 2.048 kB
@@ -369,42 +369,57 @@ Docker 的特点之一是人们创建了各种各样的 Docker 镜像。而且�
 
 >提示：你也可以指定 `Dockerfile` 路径
 
-===
-翻译到这里了Now we can see the build process at work
-===
 
-现在我们可以看到构建过程。docker做的第一件事是通过你的上下文构建。基本上是目录的内容构建。docker会根据本地的内容来在docker进程中去构建。
+现在我们可以看到构建过程。Docker 做的第一件事是通过你的上下文进行构建，基本上是目录的内容构建。这样做是因为 Docker 进程构建镜像是实时构建的，并且是需要本地的上下文来做这些工作的。（这里上下文是指Context）
 
-下一步，我们`Dockerfile`一步一步执行命令。我们可以看到，每个步骤可以创建一个新的容器，在容器内运行指令并且提交改变，就像我们早期看到的`docker commit`流程、当所有的指令执行完成之后，我们就会得到`324104cde6ad `镜像（有助于标记ouruser/sinatra:v2）,然后所有中间容器会被删除干净。
+下一步，`Dockerfile` 中的每一条命令都一步一步的被执行。我们会看到每一步都会创建一个新的容器，在容器内部运行指令并且提交更改 - 就像我们之前使用的 `docker commit` 一样。当所有的指令执行完成之后，我们会得到`97feabe5d2ed ` 镜像（也帮助标记为 `ouruser/sinatra:v2`）, 然后所有中间容器会被清除。
 
-我们可以从我们的新镜像中创建一个容器：
+>注意：与存储程序驱动无关，镜像不能超过127层。这是一种全局设置，为了是从整体上来优化镜像的大小。
 
-	$ sudo docker run -t -i ouruser/sinatra:v2 /bin/bash
+我们可以使用新的镜像来创建容器：
+
+	$ docker run -t -i ouruser/sinatra:v2 /bin/bash
 	root@8196968dac35:/#
 
->注意：这是比较简单的创建镜像方法。我们跳过了你可以使用的一大堆指令。在后面的部门我们将会看到更多的指令指南，或者你可以参考`Dockerfile`参考的例子和详细描述每一个指令。
+>注意：这里只是简单的介绍一下如何创建镜像。我们跳过了很多你可以使用的其它指令。你会从后边的章节看到更多的指令或者你可以参考 `Dockerfile` 的详细说明和每一条指令的例子。为了帮助你编写清晰、易读、易维护的 `Dockerfile` ，我们也编写了 `Dockerfile` [最佳实践指南](../articles/dockerfile_best-practices.md)
+
+###更多
+
+学习更多，请查看 [ Dockerfile 教程](https://docs.docker.com/userguide/level1/)
 
 ###设置镜像标签
 
-你可以给现有的镜像添加标记，然后提交和构建。我们可以使用`docker tag`命令。让我们给`ouruser/sinatra`镜像添加一个新的标签。
+你可以在提交更改和构建之后为镜像来添加标签(tag)。我们可以使用 `docker tag` 命令。为我们的 `ouruser/sinatra` 镜像添加一个新的标签。
 
-	$ sudo docker tag 5db5f8471261 ouruser/sinatra:devel
+	$ docker tag 5db5f8471261 ouruser/sinatra:devel
 
-`docker tag`指令标记镜像ID，这里是`5db5f8471261`,设定我们的用户名称、镜像源名称和新的标签。
+`docker tag` 需要使用镜像ID，这里是 `5db5f8471261` ,用户名称、镜像源名(repository name)和新的标签名(tag)。
 
-让我们使用`docker images`命令查看新的标签。
-
-	$ sudo docker images ouruser/sinatra
+	$ docker images ouruser/sinatra
 	REPOSITORY          TAG     IMAGE ID      CREATED        VIRTUAL SIZE
 	ouruser/sinatra     latest  5db5f8471261  11 hours ago   446.7 MB
 	ouruser/sinatra     devel   5db5f8471261  11 hours ago   446.7 MB
 	ouruser/sinatra     v2      5db5f8471261  11 hours ago   446.7 MB
 
-###向Docker Hub推送镜像
+###Image Digests
 
-一旦你构建或创造一个新的镜像，你可以使用`docker push`命令推送到Docker Hub。可以对其他人公开进行分享，或把它添加到你的私人仓库中。
+v2 或后续版本格式的镜像会有内容定位标示符叫做 `digest`。只要用于生成镜像的镜像源不更改， digests 值就是可以预料的。使用 ` --digests` 标识来列出镜像 digests 的值
 
-	$ sudo docker push ouruser/sinatra
+	$ docker images --digests | head
+	REPOSITORY                         TAG                 DIGEST                                                                     IMAGE ID            CREATED             VIRTUAL SIZE
+	ouruser/sinatra                    latest              sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf    5db5f8471261        11 hours ago        446.7 MB
+
+当我们从 v2 版本的镜像仓库来推送或者拉取镜像的时候，`pull` 和 `push` 命令包含了镜像 digests 。 你可以使用 `digests` 值来拉取镜像。
+
+	$ docker pull ouruser/sinatra@cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
+
+你可以参考 digest 的 `create`、`run` 和 `rmi` 命令，以及 `Dockerfile` 中的 `FROM` 镜像。
+
+###推送镜像到 Docker Hub
+
+一旦你构建或创建了一个新的镜像，你可以使用 `docker push` 命令将镜像推送到 Docker Hub 。这样你就可以分享你的镜像了，镜像可以是公开的，或者你可以把镜像添加到你的私有仓库中。
+
+	$ docker push ouruser/sinatra
 	The push refers to a repository [ouruser/sinatra] (len: 1)
 	Sending image list
 	Pushing repository ouruser/sinatra (3 tags)
@@ -412,20 +427,20 @@ Docker 的特点之一是人们创建了各种各样的 Docker 镜像。而且�
 
 ###主机中移除镜像
 
-你也可以删除你主机上的镜像，某种程度上我们可以使用`docker rmi`命令。
+你可以删除你主机上的镜像，类似于删处容器的方法，这里我们使用 `docker rmi` 命令。
 
-让我们删除已经不需要的容器：`training/sinatra`。
+让我们删除这个不需要使用的容器：`training/sinatra`。
 
-	$ sudo docker rmi training/sinatra
+	$ docker rmi training/sinatra
 	Untagged: training/sinatra:latest
 	Deleted: 5bc342fa0b91cabf65246837015197eecfa24b2213ed6a51a8974ae250fedd8d
 	Deleted: ed0fffdcdae5eb2c3a55549857a8be7fc8bc4241fb19ad714364cbfd7a56b22f
 	Deleted: 5c58979d73ae448df5af1d8142436d81116187a7633082650549c52c3a2418f0
 
->提示：在容器从主机中移除前，请确定容器没有被使用。
+>提示：为了能够从主机上删除镜像，请确保没有基于此镜像的容器。
 
 ###下一步
 
-现在，我们已经看到如何在容器中构建单独的应用程序。接下来，我们要学习如何把多个docker容器连接在一起构建一个完整的应用程序。
+现在，我们已经看到如何在容器中构建单独的应用程序。接下来，我们要学习如何把多个 Docker 容器连接在一起构建一个完整的应用程序。
 
 请阅读[连接容器](dockerlinks.md)
