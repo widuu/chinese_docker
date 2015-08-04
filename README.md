@@ -1,9 +1,13 @@
-Docker中文指南
+Docker 中文指南
 ===
 
 [文章目录](./SUMMARY.md)
 
->Docker 已经出到1.6了，很多文章翻译的不对或者是已经过时，需要重新翻译和核对。从现在开始每天抽一点额外的时间来翻译文章。
+>Docker 已经出到1.7了，很多文章翻译的不对或者是已经过时，需要重新翻译和核对。从现在开始每天抽一点额外的时间来翻译文章。
+
+##进度
+
+>现在 Docker 的安装篇基本完成，但是也是会随时更新和修改，请大家注意。其它篇正在更新中...
 
 ##联系方式
 
@@ -52,5 +56,6 @@ blog地址：[http://www.widuu.com](http://www.widuu.com)
 
 除特别声明外，本书中的内容使用[CC BY-SA 3.0 License](http://creativecommons.org/licenses/by-sa/3.0/)（创作共用 署名-相同方式共享3.0许可协议）授权 。
 
+![Docker friend](./images/docker-friends.png)
 
 
