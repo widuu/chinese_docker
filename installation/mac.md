@@ -1,50 +1,79 @@
 Mac OS X 安装 Docker
 ===
 
- 你可以使用 Boot2Docker 来安装 Docker ，然后在命令行运行 `docker`。如果你对命令行比较熟悉或者你打算在 Github 上贡献 Docker 项目，那么你就可以选择此安装方式。
+> 注意：
+> 该 Docker 版本为了支持 Docker 机,于是不再支持 Boot2Docker 命令行。使用 Docker Toolbox 和其它 Docker 工具来安装 Docker 机。
+
+您可以利用 Docker Toolbox 来安装 Docker。Docker Toolbox 提供了以下工具：
+
+* 用于运行 docker-machine 二进制文件的 `Docker Machine`
+* 用于运行 docker 二进行文件的 `Docker Engine`
+* 用于运行 docker-compose 二进行文件的 `Docker Compose (Mac 特有)`
+* Kitematic，Docker 的图形用户界面
+* 用于 Docker 命令行环且预先配置好的 shell
+* Oracle VM VirtualBox
+
+由于 Docker 的后台程序使用了 Linux 特有的内核特性，所以您不能直接在 OS X 上运行 Docker。相反，您必须使用 `docker-machine` 来创建并附加一台虚拟机（VM）。该虚拟机需要安装 Linux 操作系统以便在您 Mac 机上运行 Docker。
+
+####前提条件
+
+您 Mac 机的 OS X 版本必须大于等于 10.8 "Snow Leopard" 才可以安装 Docker Toolbox。
+
+###在安装之前先来了解一些关键概念
+
+当我们在一台 Linux 主机上安装完 Docker 之后，我们的机器中就包含了本地主机和 Docker 主机。如果从网络层来划分，本地主机就代表你的电脑，而 Docker 主机就是运行 container 的那台机器。
+
+在 Linux 机器上的一种典型安装 Docker 方法：Docker 客户端，Docker 后台程序和 container 会直接运行在您的机器上。这就意味着您可以使用标准的本地主机寻址（例如 `localhost:8000` 或者 `0.0.0.0:8376`）来为 Docker container 分配一个地址。
+
+![linux_docker_host](../images/linux_docker_host.svg)
+
+在 OS X 上安装的 Docker ，其 Docker 后台程序是运行在一个名为 `default` 的 Linux 虚拟机上的。`default` 是 Linux 上的一个轻量级的虚拟机，是专门用于在 Mac OS X 机器上运行 Docker 的。
+
+![mac_docker_host](../images/mac_docker_host.svg)
+
+在 OS X 中，Docker 主机地址就是 Linux 虚拟机的地址。当你使用 `docker-machine` 启动虚拟机的时候，该虚拟机会自动获取到 IP 地址。当您开启一个 container 的时候，container 上的端口会映射到虚拟机的端口上。本页面上的实践操作会一一印证上述内容。
+
+###安装
+
+如果您有一个正在运行着的 VirtualBox，那么请您在运行安装器（Docker Toolbox）之前务必关闭它。
+
+1. 进入 [Docker Toolbox](https://www.docker.com/toolbox) 页面。
+
+2. 点击 Docker Toolbox 下载链接，进行下载。
+
+3. 双击安装包或者通过右击并在快捷菜单中选择“打开”的方式安装 Docker Toolbox。
+
+   此时会弹出“Install Docker Toolbox”（安装 Docker 工具箱）窗口。
+
+   ![mac-welcome-page](../images/mac-welcome-page.png)
+
+4. 点击“继续”（Continue），安装 toolbox。
+  
+   此时，toolbox 会展现给你一些选项，供您自定义标准安装。
  
- 或者，你可以使用 [Kitematic](https://kitematic.com/) , 它是一款图形界面的应用程序（GUI），你可以通过图形界面来轻松的设置 Docker 和运行容器。
+   ![mac-page-two](../images/mac-page-two.png)
+
+   默认情况下，标准的 Docker Toolbox 安装是这样的：
+   * 向 `/usr/local/bin` 目录中添加 Docker 工具的二进制文件。
+   * 修改权限使得这些二进制文件可供任何用户使用。
+   * 更新现有的 VirtualBox 安装。
+   
+   <br/>
+   通过点击“自定义”或“更改安装目录”修改这些默认安装值。
+
+5. 点击“安装”，执行标准安装。
  
- <a id="graphic" href="https://kitematic.com/" target="_blank"><img
-src="../images/kitematic.png" alt="Download Kitematic"></a>
+   系统提示您输入密码。
 
-###Command-line Docker with Boot2Docker
+   ![mac-password-prompt](../images/mac-password-prompt.png)
 
-因为 Docker 进程使用的是 Linux 内核特性，所以你不能在原生的 OS X 中安装 Docker，如果你需要安装 Docker ，你必须安装 `Boot2Docker`。 这个程序中包含了 `VirtualBox` 虚拟主机(VM), Docker 和 Boot2Docker 管理工具。
+6. 输入密码，继续安装
+   
+   安装完成后，Docker Toolbox 会为您提供一些信息，通过这些信息您可以完成一些常见的任务。 
 
-Boot2Docker 是专门为OS X上运行 Docker 而开发的一个轻量级的虚拟主机管理工具。当Virtual Box在内存中启动后，它会下载一个大约 24MB 的 ISO文件（boot2docker.iso），下载完成后，大约5S中就会启动了。
-
-###前提条件
-
-你的 OS X 版本必须大于等于 10.6 "Snow Leopard" 才可以运行 Boot2Docker 。
-
-###在安装之前了解一些概念
-
-当我们在一台 Linux 主机上安装完 Docker 之后，我们的机器中就包含了本地主机和 Docker 主机。如果从网络层来划分，本地主机就代表你的电脑，而 Docker 主机就代表你运行的容器。
-
-在一个典型的 Linux 主机上安装 Docker 客户端，运行 Docker daemon ，并且在本地主机上直接运行一些容器。这就意味着你可以为 Docker 容器指定本地主机端口，例如 `localhost:8000` 或者 `0.0.0.0:8376`。
-
-![linux_docker_host](../images/linux_docker_host.png)
-
-在 OS X 上安装的 Docker ， `docker` 进程是通过 Boot2Docker 在 Linux 虚拟主机上运行的。
-
-![mac_docker_host](../images/mac_docker_host.png)
-
-在 OS X 中，Docker 主机地址就是 Linux 虚拟主机地址。当你启动 `boot2docker` 进程的时候，虚拟主机就会为它指定IP。在 `boot2docker` 下运行的容器，通过端口映射的方式将端口映射到虚拟主机上。你可以通过本页面上的操作实践来体会到这一点。
-
-###安装Docker
-
-1. 点击进入[boot2docker/osx-installer release](https://github.com/boot2docker/osx-installer/releases/latest)页面。
-
-2. 在下载页面中点击 `Boot2Docker-x.x.x.pkg` 来下载 Boot2Docker。
-
-3. 双击安装包来安装 Boot2Docker
-
-	将 Boot2Docker 放到你的 "应用程序（Applications）" 文件夹
-	
-安装程序会将 `docker` 和 `boot2docker` 二进制包放到 `/usr/local/bin` 文件夹下。
-
-###启动 Boot2Docker 程序
+7. 点击“关闭”，离开当前窗口。
+  
+###运行 Docker Container
 
 想要运行一个 Docker 容器，首先，你需要先启动 `boot2docker` 虚拟机，然后使用 `docker` 命令来加载、运行、管理容器。你可以从你的应用程序文件夹双击启动 `boot2docker`，或者使用命令行来启动。
 
