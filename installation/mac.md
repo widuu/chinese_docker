@@ -73,226 +73,238 @@ Mac OS X 安装 Docker
 
 7. 点击“关闭”，离开当前窗口。
   
-###运行 Docker Container
+##运行 Docker Container
 
-想要运行一个 Docker 容器，首先，你需要先启动 `boot2docker` 虚拟机，然后使用 `docker` 命令来加载、运行、管理容器。你可以从你的应用程序文件夹双击启动 `boot2docker`，或者使用命令行来启动。
+想要运行一个 Docker 容器，你需要做如下内容：
+* 创建一个新的（或开启一台已存在的）Docker 虚拟机
+* 从您当前的环境切换到新的虚拟机的环境中
+* 利用 `docker` 客户端创建，加载并管理 container
 
-> 提示： Boot2Docker 是被作为开发工具而设计的，不适用于生产环境中。
+一旦您创建了一台虚拟机，您就可以随时使用它。如同任意一台 VirtualBox 虚拟机，在每次使用它的时候都会保存其配置。
 
-###应用程序文件夹
+这里提供两种使用 Docker Toolbox 的方法：使用 Docker 的快速入门终端或使用您的 shell 环境。
 
-当你从你的“应用程序文件夹(Applications)” 来启动 "Boot2Docker" 程序, 程序会做如下事项：
+###使用 Docker 的快速入门终端
+1. 打开“应用程序”文件夹或“启动面板”。
+2. 找到 Docker 快速入门终端并双击启动它。
 
-- 打开一个命令行控制台。
-- 创建 $HOME/.boot2docker 目录
-- 创建  VirtualBox ISO 虚拟机 和 证书 （ssh key） 
-- 启动 VirtualBox 并运行 `docker` 进程
-
-到这里就启动完毕了， 你可以运行 `docker` 命令。你可以运行 `hello-word` 容器来验证你是否安装成功。
-
-		$ docker run hello-world
-	    Unable to find image 'hello-world:latest' locally
-	    511136ea3c5a: Pull complete
-	    31cbccb51277: Pull complete
-	    e45a5af57b00: Pull complete
-	    hello-world:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
-	    Status: Downloaded newer image for hello-world:latest
-	    Hello from Docker.
-	    This message shows that your installation appears to be working correctly.
-	
-	    To generate this message, Docker took the following steps:
-	     1. The Docker client contacted the Docker daemon.
-	     2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-	        (Assuming it was not already locally available.)
-	     3. The Docker daemon created a new container from that image which runs the
-	        executable that produces the output you are currently reading.
-	     4. The Docker daemon streamed that output to the Docker client, which sent it
-	        to your terminal.
-	
-	    To try something more ambitious, you can run an Ubuntu container with:
-	     $ docker run -it ubuntu bash
-	
-	    For more examples and ideas, visit:
-	     http://docs.docker.com/userguide/
-
-你可以使用命令行来启动和关闭 `boot2docker` 。
-
-###使用命令行 
-
-使用命令行来初始化和运行 `boot2docker` ，有如下步骤：
-
-1. 创建一个新的 Boot2Docker 虚拟机
-
-		$ boot2docker init
-
-	这会创建一个新的虚拟主机，你只需要运行一次这个命令就可以了，以后就不需要了。
-
-2. 启动 `boot2docker` 虚拟机。
-
-		$ boot2docker start
-
-3. 通过 docker 客户端来查看环境变量
-
-		$ boot2docker shellinit
-		Writing /Users/mary/.boot2docker/certs/boot2docker-vm/ca.pem
-		Writing /Users/mary/.boot2docker/certs/boot2docker-vm/cert.pem
-		Writing /Users/mary/.boot2docker/certs/boot2docker-vm/key.pem
-		    export DOCKER_HOST=tcp://192.168.59.103:2376
-		    export DOCKER_CERT_PATH=/Users/mary/.boot2docker/certs/boot2docker-vm
-		    export DOCKER_TLS_VERIFY=1
-
-	 每台机器的具体路径和地址可能都不相同。
-
-4. 使用 shell 命令来设置环境变量。
-
-		$ eval "$(boot2docker shellinit)"
-
-5.	运行 `hello-word` 容器来验证安装。
-
-		$ docker run hello-world、
-
-###Boot2Docker 基本练习
-
-这一部分，需要你提前运行 `boot2docker` 并初始化 `docker` 客户端环境。你可以运行下边的命令来验证：
-
-	$ boot2docker status
-	$ docker version  
-
-本节我们通过使用 `boot2docker` 虚拟机来创建一些容器任务
-
-####容器端口访问
-
-1. 在 Docker 主机上启动一个 Nginx 容器。
-
-		$ docker run -d -P --name web nginx
-
-	一般来说，`docker run` 命令会启动一个容器，运行这个容器，然后退出。`-d` 标识可以让容器在 `docker run ` 命令完成之后继续在后台运行。 `-P` 标识会将容器的端口暴露给主机，这样你就可以从你的 MAC 上访问它。
-
-2. 使用 `docker ps` 命令来查看你运行的容器
-
-		CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
-		5fb65ff765e9        nginx:latest        "nginx -g 'daemon of   3 minutes ago       Up 3 minutes        0.0.0.0:49156->443/tcp, 0.0.0.0:49157->80/tcp   web
-
-	通过这一点我们可以看出 `nginx` 作为一个进程运行。
-
-3. 查看容器端口
-
-		$ docker port web
-		443/tcp -> 0.0.0.0:49156
-		80/tcp -> 0.0.0.0:49157
-
-	上边的显示告诉我们，`web` 容器将 80 端口映射到 Docker 主机的 49157 端口上。
-
-
-4. 在浏览器输入地址 `http://localhost:49157` (localhost 是 0.0.0.0):
-
- 	![bad_host.png](../images/bad_host.png)
-
-
- 	没有正常工作。没有正常工作的原因是 `DOCKER_HOST` 主机的地址不是 localhost (0.0.0.0),但是你可以使用 `boot2docker` 虚拟机的IP地址来访问。
-
-
-5. 获取 `boot2docker` 主机地址
-
-		$ boot2docker ip
-		192.168.59.103
-
-6. 在浏览器中输入 `http://192.168.59.103:49157`
-
-	![good_host.png](../images/good_host.png)
-
-	成功运行！
-
-7. 通过如下方法，停止并删除 `nginx` 容器。
-
-		$ docker stop web
-		$ docker rm web
-
-###给容器挂载一个卷
-
-当你启动 `boot2docker` 的时候，它会自动共享 `/Users` 目录给虚拟机。你可以利用这一点，将本地目录挂载到容器中。这个练习中我们将告诉你如何进行操作。
-
-1. 回到你的 $HOME 目录
-
-		$ cd $HOME
-
-2. 创建一个新目录，并命名为 `site`
-
-		$ mkdir site
-
-3. 进入 `site` 目录。
-
-		$ cd site
-
-4. 创建一个 `index.html` 文件。
-	
-		$ echo "my new site" > index.html
-
-5. 启动一个新的 `nginx` 容器,并将本地的 `site` 目录替换容器中的 `html` 文件夹。
-
-		$ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
-
-6. 获取 `mysite` 容器端口
-
-		$ docker port mysite
-		80/tcp -> 0.0.0.0:49166
-		443/tcp -> 0.0.0.0:49165
-
-7. 在浏览器中打开站点。
-
-	![newsite_view.png](../images/newsite_view.png)
-
-8. 现在尝试在  `$HOME/site` 中创建一个页面
-
-		$ echo "This is cool" > cool.html
-
-9.  在浏览器中打开新创建的页面。
-
-	![cool_view.png](../images/cool_view.png)
-
-10. 停止并删除 `mysite` 容器。
-
-		$ docker stop mysite
-		$ docker rm mysite  
-
-###升级 Boot2Docker
-
-如果你现在运行的是1.4.1及以上版本 Boot2Docker , 你可以使用命令行来升级 Boot2Docker 。如果你运行的是老版本，你需要使用 `boot2docker` 仓库提供的包来升级。
-
-####命令行操作
-
-你可以参照下边的操作来升级1.4.1以上版本：
-
-1. 在你的机器中打开命令行。
-
-2. 停止 `boot2docker` 应用。
-
-		$ boot2docker stop
-
-3. 执行升级命令。
-	
-		$ boot2docker upgrade
-
-####安装包方式升级
-
-下边的操作可以升级任何版本的 Boot2Docker:
+   该应用程序：
+   * 开启一个终端窗口
+   * 如果还没有虚拟机的化，请创建一台名叫 `default` 的虚拟机；如果已经存在这样一台虚拟机，请你开启它。
+   * 将当前终端环境切换到虚拟机环境中。
    
-1. 在你的机器中打开命令行。
+   一旦启动完成，Docker 快速入门终端会是如下状态：
+ 
+   ![mac-success](../images/mac-success.png)
+   现在，您可以运行 `docker` 命令了。
 
-2. 停止 `boot2docker` 应用。
+3. 通过运行 `hello-world` container 来核实您的安装是否成功。
 
-		$ boot2docker stop
 
-3. 打开 [boot2docker/osx-installer](https://github.com/boot2docker/osx-installer/releases/latest)  发布页。
+   ```
+   $ docker run hello-world
+   Unable to find image 'hello-world:latest' locally
+   511136ea3c5a: Pull complete
+   31cbccb51277: Pull complete
+   e45a5af57b00: Pull complete
+   hello-world:latest: The image you are pulling has been verified.
+   Important: image verification is a tech preview feature and should not be
+   relied on to provide security.
+   Status: Downloaded newer image for hello-world:latest
+   Hello from Docker.
+   This message shows that your installation appears to be working correctly.
 
-4. 在下载部分点击 `Boot2Docker-x.x.x.pkg` 来下载 Boot2Docker。
 
-5. 双击安装 Boot2Docker 包。
+   To generate this message, Docker took the following steps:
+   1. The Docker client contacted the Docker daemon.
+   2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+      (Assuming it was not already locally available.)
+   3. The Docker daemon created a new container from that image which runs the
+      executable that produces the output you are currently reading.
+   4. The Docker daemon streamed that output to the Docker client, which sent it
+      to your terminal.
 
-	将 Boot2Docker 拖放到应用程序文件夹。
 
-###学习更多的知识
+   To try something more ambitious, you can run an Ubuntu container with:
+   $ docker run -it ubuntu bash
 
-使用 `boot2docker help ` 列出完整的命令行参考列表。更多关于使用 SSH 或 SCP 来访问 Boot2Docker 虚拟机的文档，请查看 [Boot2Docker repository](https://github.com/boot2docker/boot2docker) 。
 
-继续阅读[用户指南](../userguide/README.md)
+   For more examples and ideas, visit:
+   http://docs.docker.com/userguide/
+   ```
+
+
+一个可以和 Docker 工具进行交互的另一种典型方法就是：从您的 shell 命令行入手。
+
+###使用shell 命令行
+该部分假设您正在运行一个 Bash shell。您运行的可能是不同的 shell，例如 C shell，但是不用担心，命令都是一样的。
+
+1. 创建一个新的 Docker 虚拟机。
+   ```
+   $ docker-machine create --driver virtualbox default
+   Creating VirtualBox VM...
+   Creating SSH key...
+   Starting VirtualBox VM...
+   Starting VM...
+   To see how to connect Docker to this machine, run: docker-machine env default
+   ``` 
+  
+   这就在 VirtualBox 中创建了一台新的 `default` 虚拟机。
+   
+   该命令还会在 `~/.docker/machine/machines/default` 目录下生成一个 docker machine 的配置文件。您只需执行一次 `create` 命令。然后，您可以使用 `docker-machine` 命令来开启，停止，查询并管理虚拟机。
+
+2. 列出所有可用的 docker machine。
+   
+   ```
+   $ docker-machine ls
+   NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
+   default             *        virtualbox   Running   tcp://192.168.99.101:2376  
+   ```
+   如果您之前安装了现在已经舍弃了的 Boot2Docker 这个应用程序的话或者您运行了 Docker 快速入门终端，在列表中还会有一个 `dev` 虚拟机。当   您创建 `default` 虚拟机的时候，`docker-machine` 命令给出了一些指导，以便您您连接虚拟机。
+
+3. 获取 `default` 虚拟机的环境变量
+   ```
+   $ docker-machine env default
+   export DOCKER_TLS_VERIFY="1"
+   export DOCKER_HOST="tcp://192.168.99.101:2376"
+   export DOCKER_CERT_PATH="/Users/mary/.docker/machine/machines/default"
+   export DOCKER_MACHINE_NAME="default"
+   # Run this command to configure your shell: 
+   # eval "$(docker-machine env default)"
+   ```
+
+4. 连接到 `default` 虚拟机
+   ```
+   $ eval "$(docker-machine env default)"
+   ```
+
+5. 运行 `hello-world` container 来验证您的安装是否已经成功。
+   ```
+   docker run hello-world
+   ```
+
+##学习 Toolbox 安装
+
+Toolbox 将 Docker Engine 的可执行文件和 Docker 的可执行文件下载到您的系统中。当您使用 Docker 快速入门终端或手动创建一个 `default` 虚拟机的时候，Docker Machine 会更新 `~/.docker/machine/machines/default` 文件。该文件夹中包含了虚拟机的配置文件。
+
+您可以利用 Docker Machine 在系统中创建多个虚拟机，那么也就会有多个虚拟机的配置文件。如果您想要删除某台虚拟机，请您使用 `docker-machine rm <machine-name>` 命令。
+
+##从 Boot2Docker 迁移
+如果您现在用的还是 Boot2Docker 的话，在您的本地系统中还会有一个 `boot2docker-vm` 虚拟机。为了允许 Docker Machine 管理该台虚拟机，你可以对它进行迁移。
+1. 打开一个终端或 Docker 的命令行界面。
+2. 输入以下命令。
+   ```
+   docker-machine create -d virtualbox --virtualbox-import-boot2docker-vm boot2docker-vm docker-vm
+   ```
+3. 使用 `docker-machine` 命令与该台要被迁移的虚拟机进行交互。 
+   `docker-machine` 的子命令和 `boot2docker` 的子命令比起来还是有一些不同之处的。下面这个表列出了对比了二者的不同并介绍其功能。   
+
+
+   | **`boot2docker`** | **`docker-machine`** | **`docker-machine`** description |
+   | --------------------- | ------------------------ | ------------------------------------ | 
+   | init | create | Creates a new docker host. |
+   | up | start | Starts a stopped machine. |
+   | ssh | ssh | Runs a command or interactive ssh session on the machine. |
+   | save | - | Not applicable. |
+   | down | stop | Stops a running machine. |
+   | poweroff | stop | Stops a running machine. |
+   | reset | restart | Restarts a running machine. |
+   | config | inspect | Prints machine configuration details. |
+   | status | ls | Lists all machines and their status. |
+   | info | inspect | Displays a machine's details. |
+   | ip | ip | Displays the machine's ip address. |
+   | shellinit | env | Displays shell commands needed to configure your shell to interact with a machine. |
+   | delete | rm | Removes a machine. |
+   | download | - | Not applicable. |
+   | upgrade | upgrade | Upgrades a machine's Docker client to the latest stable release. |
+
+##Mac OS X 上 Docker 的实例
+通过了解本小节，您可以尝试在虚拟机上进行一些可行的 container 任务。现在，您应该有一台运行着的虚拟机，且通过 shell 脚本可以连接到该虚拟机。为了验证上面所说的，可以执行如下命令来验证:
+```
+$ docker-machine ls
+NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
+default             *        virtualbox   Running   tcp://192.168.99.100:2376   
+```
+该台处于 `ACTIVE` 状态的虚拟机，即本例中的 default 虚拟机，就是您的环境所指向的虚拟机。
+
+###访问 container 的端口
+1. 在 DOCKER_HOST 上开启一个NGINX container。
+```
+$ docker run -d -P --name web nginx
+```
+一般来说，`docker run` 命令会开启一个 container，并运行它，最后关闭它。加上 `-d` 这个参数，container 就可以在您执行了 `docker run` 这条命令后继续在后台运行了。加上 `-P` 这个参数就可以将 container 监听的那个端口告知给 Docker Host；这样您就可以在您的 Mac 机上访问 container 了。
+2. 执行 `docker ps` 命令，查看运行着的 container
+```
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
+5fb65ff765e9        nginx:latest  
+```
+此时，您会发现 `nginx` 依然在后台运行。
+3. 查看 container 的端口
+```
+$ docker port web
+443/tcp -> 0.0.0.0:49156
+80/tcp -> 0.0.0.0:49157
+```
+该命令显示出的内容会告诉你 `web` container 的 `80` 端口已经映射到了 Docker Host 上的 `49157` 端口上。
+4. 在您的浏览器中输入地址 ```http://localhost:49157```（localhost 就是 0.0.0.0）。
+![bad_host1](../images/bad_host1.png)
+
+并没有生效，其原因就是 `DOCKER_HOST` 的地址并不是你本地的机器的地址（0.0.0.0），而是您的 Docker 虚拟机的地址。
+5. 获取 Docker 虚拟机（即 `default`）的地址。
+```
+$ docker-machine ip default
+192.168.59.103
+```
+6. 在您的浏览器中输入地址 `http://192.168.59.103:49157`
+![good_host1](../images/good_host1.png)
+成功了！
+7. 如果您想停止并删除正在运行的 `nginx` container 的话，请执行如下操作：
+```
+$ docker stop web
+$ docker rm web
+```
+
+###为容器挂载一个卷
+当您开启一个 container 的时候，系统会自动将您本机中的 `/Users/username` 目录共享给 Docker 虚拟机。通过本次共享，您可以将该目录挂载到您的 container 上。下面的内容将会介绍如何做到这些。
+1. 跳转到您的用户 `$HOME` 目录下。
+```
+$ cd $HOME
+```
+2. 创建一个新的 `site` 目录。
+```
+$ mkdir site
+```
+3. 跳转到 `site` 目录中。
+```
+$ cd site
+```
+4. 创建一个新的 `index.html` 文件。
+```
+$ echo "my new site" > index.html
+```
+5. 开启一个新 `nginx` container 并将 `html` 目录替换为 `site` 目录。
+```
+$ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
+```
+6. 获取到 `mysite` 这个 container 的端口。
+```
+$ docker port mysite
+80/tcp -> 0.0.0.0:49166
+443/tcp -> 0.0.0.0:49165
+```
+7. 在浏览器中输入地址：
+![newsite_view1](../images/newsite_view1.png)
+
+8. 立即添加一个文件到 `$HOME/siet` 目录下。
+```
+$ echo "This is cool" > cool.html
+``` 
+9. 在浏览器中输入地址：
+![cool_view1](../images/cool_view1.png)
+10. 停止然后删除正在运行的 `mysite` container。
+```
+$ docker stop mysite
+$ docker rm mysite
+```
+##升级 Docker Toolbox
+##卸载 Docker Toolbox
