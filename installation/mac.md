@@ -227,131 +227,126 @@ Toolbox 将 Docker Engine 的可执行文件和 Docker 的可执行文件下载�
 ##Mac OS X 上 Docker 的实例
 通过了解本小节，您可以尝试在虚拟机上进行一些可行的 container 任务。现在，您应该有一台运行着的虚拟机，且通过 shell 脚本可以连接到该虚拟机。为了验证上面所说的，可以执行如下命令来验证:
 
-```
-$ docker-machine ls
-NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-default             *        virtualbox   Running   tcp://192.168.99.100:2376   
-```
+
+    $ docker-machine ls
+    NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
+    default             *        virtualbox   Running   tcp://192.168.99.100:2376   
+
 该台处于 `ACTIVE` 状态的虚拟机，即本例中的 default 虚拟机，就是您的环境所指向的虚拟机。
 
 ###访问 container 的端口
+
 1. 在 DOCKER_HOST 上开启一个NGINX container。
 
-```
-$ docker run -d -P --name web nginx
-```
+		$ docker run -d -P --name web nginx
 一般来说，`docker run` 命令会开启一个 container，并运行它，最后关闭它。加上 `-d` 这个参数，container 就可以在您执行了 `docker run` 这条命令后继续在后台运行了。加上 `-P` 这个参数就可以将 container 监听的那个端口告知给 Docker Host；这样您就可以在您的 Mac 机上访问 container 了。
+
 2. 执行 `docker ps` 命令，查看运行着的 container
 
-```
-CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
-5fb65ff765e9        nginx:latest  
-```
+        CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
+        5fb65ff765e9        nginx:latest  
 此时，您会发现 `nginx` 依然在后台运行。
+
 3. 查看 container 的端口
 
-```
-$ docker port web
-443/tcp -> 0.0.0.0:49156
-80/tcp -> 0.0.0.0:49157
-```
+        $ docker port web
+        443/tcp -> 0.0.0.0:49156
+        80/tcp -> 0.0.0.0:49157
 该命令显示出的内容会告诉你 `web` container 的 `80` 端口已经映射到了 Docker Host 上的 `49157` 端口上。
+
 4. 在您的浏览器中输入地址 ```http://localhost:49157```（localhost 就是 0.0.0.0）。
-![bad_host1](../images/bad_host1.png)
 
+	![bad_host1](../images/bad_host1.png)
 并没有生效，其原因就是 `DOCKER_HOST` 的地址并不是你本地的机器的地址（0.0.0.0），而是您的 Docker 虚拟机的地址。
-5. 获取 Docker 虚拟机（即 `default`）的地址。
-```
-$ docker-machine ip default
-192.168.59.103
-```
-6. 在您的浏览器中输入地址 `http://192.168.59.103:49157`
-![good_host1](../images/good_host1.png)
-成功了！
-7. 如果您想停止并删除正在运行的 `nginx` container 的话，请执行如下操作：
-```
-$ docker stop web
-$ docker rm web
-```
 
+5. 获取 Docker 虚拟机（即 `default`）的地址。
+
+        $ docker-machine ip default
+        192.168.59.103
+
+6. 在您的浏览器中输入地址 `http://192.168.59.103:49157`
+
+	![good_host1](../images/good_host1.png)
+成功了！
+
+7. 如果您想停止并删除正在运行的 `nginx` container 的话，请执行如下操作：
+
+        $ docker stop web
+        $ docker rm web
+	
+	
 ###为容器挂载一个卷
+
 当您开启一个 container 的时候，系统会自动将您本机中的 `/Users/username` 目录共享给 Docker 虚拟机。通过本次共享，您可以将该目录挂载到您的 container 上。下面的内容将会介绍如何做到这些。
+
 1. 跳转到您的用户 `$HOME` 目录下。
 
-```
-$ cd $HOME
-```
+		$ cd $HOME
+
 2. 创建一个新的 `site` 目录。
 
-```
-$ mkdir site
-```
+		$ mkdir site
+
 3. 跳转到 `site` 目录中。
 
-```
-$ cd site
-```
+		$ cd site
+
 4. 创建一个新的 `index.html` 文件。
 
-```
-$ echo "my new site" > index.html
-```
+		$ echo "my new site" > index.html
+
 5. 开启一个新 `nginx` container 并将 `html` 目录替换为 `site` 目录。
 
-```
-$ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
-```
+		$ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
+
 6. 获取到 `mysite` 这个 container 的端口。
 
-```
-$ docker port mysite
-80/tcp -> 0.0.0.0:49166
-443/tcp -> 0.0.0.0:49165
-```
+		$ docker port mysite
+		80/tcp -> 0.0.0.0:49166
+		443/tcp -> 0.0.0.0:49165
+
 7. 在浏览器中输入地址：
-![newsite_view1](../images/newsite_view1.png)
+
+	![newsite_view1](../images/newsite_view1.png)
 
 8. 立即添加一个文件到 `$HOME/siet` 目录下。
 
-```
-$ echo "This is cool" > cool.html
-``` 
+		$ echo "This is cool" > cool.html
+ 
 9. 在浏览器中输入地址：
-![cool_view1](../images/cool_view1.png)
+
+	![cool_view1](../images/cool_view1.png)
+
 10. 停止然后删除正在运行的 `mysite` container。
 
-```
-$ docker stop mysite
-$ docker rm mysite
-```
+        $ docker stop mysite
+        $ docker rm mysite
+
 ##更新 Docker Toolbox
+
 为更新Docker Toolbox, 需要下载并重新运行[Docker Toolbox安装器](https://docker.com/toolbox/).
+
 ##卸载 Docker Toolbox
+
 按照以下步骤卸载Toolbox：
 
 1. 列出所有的虚拟机
-
-```
-    $ docker-machine ls
-    NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
-    dev                 *        virtualbox   Running   tcp://192.168.99.100:2376   
-    my-docker-machine            virtualbox   Stopped                               
-    default                      virtualbox   Stopped  
-```
+        $ docker-machine ls
+        NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
+        dev                 *        virtualbox   Running   tcp://192.168.99.100:2376   
+        my-docker-machine            virtualbox   Stopped                               
+        default                      virtualbox   Stopped  
 2. 删除（列出的）每一台虚拟机.
-
-```
-    $ docker-machine rm dev
-    Successfully removed dev
-```
-    删除一台虚拟机，意味着从VirtualBox和~/.docker/machine/machines目录中同时删除虚拟机文件。 
+        $ docker-machine rm dev
+        Successfully removed dev
+删除一台虚拟机，意味着从VirtualBox和~/.docker/machine/machines目录中同时删除虚拟机文件。 
 3. 从“应用程序“文件夹中删除Docker快捷终端（Quickstart Terminal）和Kitematic.
 
-4.从/usr/local/bin文件夹中删除docker, docker-compose和 docker-machine命令文件.
+4. 从/usr/local/bin文件夹中删除docker, docker-compose和 docker-machine命令文件.
 
-    $ rm /usr/local/bin/docker
+       $ rm /usr/local/bin/docker
 
-5.从系统中删除 ~/.docker 文件夹.
+5.       从系统中删除 ~/.docker 文件夹.
 
 ##学习更多
 
