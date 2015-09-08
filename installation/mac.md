@@ -348,7 +348,7 @@ Toolbox 将 Docker Engine 的可执行文件和 Docker 的可执行文件下载�
 
 4. 从/usr/local/bin文件夹中删除docker, docker-compose和 docker-machine命令文件.
 
-       $ rm /usr/local/bin/docker
+        $ rm /usr/local/bin/docker
 
 5. 从系统中删除 `~/.docker` 文件夹.
 
