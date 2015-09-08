@@ -331,22 +331,26 @@ Toolbox 将 Docker Engine 的可执行文件和 Docker 的可执行文件下载�
 按照以下步骤卸载Toolbox：
 
 1. 列出所有的虚拟机
+
         $ docker-machine ls
         NAME                ACTIVE   DRIVER       STATE     URL                         SWARM
         dev                 *        virtualbox   Running   tcp://192.168.99.100:2376   
         my-docker-machine            virtualbox   Stopped                               
         default                      virtualbox   Stopped  
+        
 2. 删除（列出的）每一台虚拟机.
+
         $ docker-machine rm dev
         Successfully removed dev
-删除一台虚拟机，意味着从VirtualBox和~/.docker/machine/machines目录中同时删除虚拟机文件。 
+删除一台虚拟机，意味着从`VirtualBox`和`~/.docker/machine/machines`目录中同时删除虚拟机文件。 
+
 3. 从“应用程序“文件夹中删除Docker快捷终端（Quickstart Terminal）和Kitematic.
 
 4. 从/usr/local/bin文件夹中删除docker, docker-compose和 docker-machine命令文件.
 
        $ rm /usr/local/bin/docker
 
-5.       从系统中删除 ~/.docker 文件夹.
+5. 从系统中删除 `~/.docker` 文件夹.
 
 ##学习更多
 
