@@ -3,24 +3,24 @@ Docker 中文指南
 
 [文章目录](./SUMMARY.md)
 
->Docker 已经出到1.7了，很多文章翻译的不对或者是已经过时，需要重新翻译和核对。从现在开始每天抽一点额外的时间来翻译文章。
+
+>Docker 已经出到1.8了，很多文章翻译的不对或者是已经过时，需要重新翻译和核对。从现在开始每天抽一点额外的时间来翻译文章。
+
+演示站点:[http://docker.widuu.com](http://docker.widuu.com)
+
+##鸣谢
+
+感谢灵雀云提供的提供的 Docker 云容器平台，网站部署在灵雀云。
+
+![Docker friend](./images/alauda.png)
 
 ##进度
 
->现在 Docker 的安装篇基本完成，但是也是会随时更新和修改，请大家注意。其它篇正在更新中...
+>现在 Docker 的安装篇基本完成，但是也是会随时更新和修改，请大家注意。其它篇正在更新中...，灰色的代表未翻译～～
 
 ##联系方式
 
-- 翻译讨论，点击 [https://docker.bearychat.com](https://docker.bearychat.com)申请加入。
 - 邮箱联系  admin#widuu.com(#换成@)
-
-##参与详细
-
-1. 请发送邮件到 admin#widuu.com(#换成@)，说明参与 Docker 翻译。
-2. 您会收到 Worktile 和 Breaychat 的 邀请链接，点击加入。
-3. 在 Worktile 上领取自己要翻译的文章，开始翻译，使用 Worktile 是为了避免翻译冲突。 
-4. 在 Breaychat 上会提示大家每个人提交翻译的细节，并且作为团队沟通工具。
- 
 
 ## Contributing
 
