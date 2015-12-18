@@ -29,23 +29,27 @@ Docker 需要在64位版本的Ubuntu上安装。此外，你还需要保证你�
 
 对于Ubuntu Precise版本, 安装Docker需要内核在3.13及以上版本。如果你的内核版本低于3.13你需要升级你的内核。 通过下边的表，请查阅下边的表来确认你的环境需要哪些包。
 
- <table class="tg"> <tr> <td
-class="tg-031">linux-image-generic-lts-trusty</td> <td class="tg-031e">Generic
-Linux kernel image. This kernel has AUFS built in. This is required to run
-Docker.</td> </tr> <tr> <td class="tg-031">linux-headers-generic-lts-trusty</td>
-<td class="tg-031e">Allows packages such as ZFS and VirtualBox guest additions
-which depend on them. If you didn't install the headers for your existing
-kernel, then you can skip these headers for the"trusty" kernel. If you're
-unsure, you should include this package for safety.</td> </tr> <tr> <td
-class="tg-031">xserver-xorg-lts-trusty</td> <td class="tg-031e"
-rowspan="2">Optional in non-graphical environments without Unity/Xorg.
-<i>Required</i> when running Docker on machine with a graphical environment.
-
-<p>To learn more about the reasons for these packages, read the installation
-instructions for backported kernels, specifically the <a
+ <table class="tg"> 
+ <tr> 
+	<td class="tg-031">linux-image-generic-lts-trusty</td> 
+	<td class="tg-031e">基本Linux 内核镜像。这个内核内置了AUFS。这是运行Docker必备的软件。</td> 
+ </tr> 
+ <tr> 
+	<td class="tg-031">linux-headers-generic-lts-trusty</td>
+	<td class="tg-031e">允许ZFS和VirtualBox客户机额外的包。如果你不安装已存在内核的头文件，那么你可以跳过"trusty"内核的这些头文件。如果你不确定，为安全起见，你应该包含这些包。</td> 
+ </tr> 
+ <tr> 
+	<td class="tg-031">xserver-xorg-lts-trusty</td> 
+	<td class="tg-031e" rowspan="2">在没有Unity/Xorg的非图形环境中可选。<i>必选</i> 当在图形环境的机器中运行Doker时。
+	<p>学习使用这些包的原因，请参考内核安装教程。详情 <a
 href="https://wiki.ubuntu.com/Kernel/LTSEnablementStack" target="_blank">LTS
-Enablement Stack</a> &mdash; refer to note 5 under each version.</p></td> </tr>
-<tr> <td class="tg-031">libgl1-mesa-glx-lts-trusty</td> </tr> </table> &nbsp;
+实现栈 Stack</a> &mdash; 参考每个版本下的标记5。</p></td> 
+</tr>
+ <tr> 
+	<td class="tg-031">libgl1-mesa-glx-lts-trusty</td> 
+	<td class="tg-031e" rowspan="2"></td>
+</tr> 
+</table> &nbsp;
 
 通过下边的操作来升级你的内核和安装额外的包
 
