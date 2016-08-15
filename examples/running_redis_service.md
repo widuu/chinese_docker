@@ -25,7 +25,7 @@
 
 重要的是我们没有开放容器端口，相反，我们将使用一个容器来连接redis容器数据库
 
-	sudo docker run -name redis -d <your username>/redis
+	sudo docker run --name redis -d <your username>/redis
 
 ##创建你的web应用容器
 
