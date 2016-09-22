@@ -4,23 +4,16 @@ Docker 中文指南
 [文章目录](./SUMMARY.md)
 
 
->Docker 已经出到1.8了，很多文章翻译的不对或者是已经过时，需要重新翻译和核对。从现在开始每天抽一点额外的时间来翻译文章。
 
 演示站点:[http://docker.widuu.com](http://docker.widuu.com)
 
-##鸣谢
-
-感谢灵雀云提供的提供的 Docker 云容器平台，网站部署在灵雀云。
-
-![Docker friend](./images/alauda.png)
-
 ##进度
 
->现在 Docker 的安装篇基本完成，但是也是会随时更新和修改，请大家注意。其它篇正在更新中...，灰色的代表未翻译～～
+>新版本 Docker 1.2.0 版本的翻译,刚刚开始
 
 ##联系方式
 
-- 邮箱联系  admin#widuu.com(#换成@)
+- 邮箱联系  service#widuu.com(#换成@)
 
 ## Contributing
 
@@ -37,9 +30,8 @@ Docker 中文指南
 
 ##TODO
 
-- 修改以前的翻译错误
-- 增加官方新的文章
-- 修改过时的信息或者说官方文档已经改变的
+- 开始新的版本的翻译
+
 
 ##其他信息
 
