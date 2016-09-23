@@ -40,7 +40,7 @@
 
 	$ sudo docker info
 
->8. 可选，添加你的用户到 `docker` 用户组，这样你就可以不适用 `sudo` 来访问 `Docker Socket` ：
+>8. 可选，添加你的用户到 `docker` 用户组，这样你就可以不使用 `sudo` 来访问 `Docker Socket` ：
 
 	$ sudo usermod -a -G docker $USER
 
