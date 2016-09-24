@@ -20,7 +20,7 @@ Docker 容器( Container )提供了封装能力和在宽松的隔离环境中来
 - `REST API` 是程序通过指定的接口来告诉守护进程( `daemon` ) 这些指令能做什么
 - 命令行接口( `CLI` )客户端
 
-![官方架构图](./images/engine-components-flow.png)
+![官方架构图](../images/engine-components-flow.png)
 
 `CLI` (命令行接口) 通过运行脚本或者使用指定的 `CLI` 命令来实现控制 `Docker` 守护进程和完成交互。有许多的 `Docker` 应用就是使用的底层 `API` 和 `CLI`。
 
