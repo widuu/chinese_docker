@@ -1,18 +1,16 @@
 Docker 中文指南
 ===
 
+
+## 注意
+
+> 现在已经开始v1.12版本的翻译，因为现在的版本中很多都已经不适用了，如果您想参加或者查看进度 [https://github.com/widuu/chinese_docker/tree/v1.12.0](https://github.com/widuu/chinese_docker/tree/v1.12.0)
 [文章目录](./SUMMARY.md)
 
 
 >Docker 已经出到1.8了，很多文章翻译的不对或者是已经过时，需要重新翻译和核对。从现在开始每天抽一点额外的时间来翻译文章。
 
 演示站点:[http://docker.widuu.com](http://docker.widuu.com)
-
-##鸣谢
-
-感谢灵雀云提供的提供的 Docker 云容器平台，网站部署在灵雀云。
-
-![Docker friend](./images/alauda.png)
 
 ##进度
 
@@ -26,8 +24,8 @@ Docker 中文指南
 
 1. 登录 <https://coding.net> 或 <https://github.com>
 2. 仓库地址分布： 
-	1.  Coding仓库：<https://coding.net/u/widuu/p/chinese_docker/git> 
-	1.  github仓库：<http://github.com/widuu/chinese_docker>
+	1. Coding仓库：<https://coding.net/u/widuu/p/chinese_docker/git> 
+	1. github仓库：<http://github.com/widuu/chinese_docker>
 	1. oschina仓库：<http://git.oschina.net/widuu/chinese_docker>
 3. 创建您的特性分支 (`git checkout -b my-new-feature`)
 4. 提交您的改动 (`git commit -am 'Added some feature'`)
